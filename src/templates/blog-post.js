@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
-import { DiscussionEmbed } from "disqus-react";
 
 export const BlogPostTemplate = ({
   content,
@@ -16,14 +15,6 @@ export const BlogPostTemplate = ({
   helmet,
 }) => {
   const PostContent = contentComponent || Content
-  const post = this.props.data.markdownRemark;
-  // const siteTitle = get(this.props, "data.site.siteMetadata.title");
-  const { next } = this.props.pathContext;
-  const disqusShortname = "tech-connect";
-  const disqusConfig = {
-    identifier: post.id,
-    title: post.frontmatter.title,
-  };
 
   return (
     <section className="section">
@@ -45,16 +36,7 @@ export const BlogPostTemplate = ({
                       <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
                     </li>
                   ))}
-                  {/* Below is the code for Disqus. */}
-                  {next && (
-                    <li>
-                      <Link to={next.fields.slug} rel="next">
-                      {next.frontmatter.title} →
-                      </Link>
-                    </li>
-                  )}
                 </ul>
-                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
               </div>
             ) : null}
           </div>
