@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import Disqus from 'disqus-react'
 
 export const BlogPostTemplate = ({
   content,
@@ -37,6 +38,7 @@ export const BlogPostTemplate = ({
                     </li>
                   ))}
                 </ul>
+                <Disqus.DiscussionEmbed shortname="tech-connect" />  
               </div>
             ) : null}
           </div>
@@ -56,6 +58,10 @@ BlogPostTemplate.propTypes = {
 
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
+  const disqusConfig = {
+    identifier: post.id,
+    title: post.frontmatter.title,
+  };
 
   return (
     <Layout>
@@ -74,6 +80,7 @@ const BlogPost = ({ data }) => {
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
+      <Disqus.DiscussionEmbed shortname="tech-connect" config={disqusConfig} />
     </Layout>
   )
 }
