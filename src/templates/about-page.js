@@ -2,10 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
 
-export const AboutPageTemplate = ({ title, content, contentComponent }) => {
-  const PageContent = contentComponent || Content
+export const AboutPageTemplate = ({
+  title,
+  image,
+  heading,
+  mission,
+  quote,
+  description,
+}) => {
 
   return (
     <section className="section section--gradient">
@@ -13,11 +18,65 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
         <div className="columns">
           <div className="column is-10 is-offset-1">
             <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
-              </h2>
-              <PageContent className="content" content={content} />
+              <div
+                className="full-width-image-container margin-top-0"
+                style={{
+                  backgroundImage: `url(${
+                    !!image && !!image.childImageSharp
+                      ? image.childImageSharp.fluid.src
+                      : image
+                  })`,
+                }}
+              >
+                <h2
+                  className="is-size-1"
+                  style={{
+                    boxShadow: '0.5rem 0 0 #1C2833, -0.5rem 0 0 #1C2833',
+                    backgroundColor: '#1C2833',
+                    color: 'white',
+                    padding: '1rem',
+                    borderRadius: '10px'
+                  }}
+                >
+                  {title}
+                </h2>
+              </div>
+
+              <h4 className="is-size-4"
+              style={{
+                width: '60%',
+                marginLeft: '20%',
+                paddingBottom: '3%',
+                fontFamily: 'calibri',
+                textAlign: 'center'
+              }}>
+                {mission}
+              </h4>
+              <div style={{
+                width: '80%',
+                marginLeft: '10%',
+              }}>
+                <h2 className="is-size-3">{heading}</h2>
+                <hr style={{
+                  color:'#1C2833',
+                  backgroundColor: '#1C2833',
+                  height: 5
+                }}/>
+                <p >{description}</p>
+              </div>
             </div>
+            <div className="full-width-image-container"
+            style={{
+              background:'#1C2833',
+              color: 'white',
+              marginTop: '3%',
+            }}><h2 className="is-size-4"
+            style={{
+              width: '60%',
+              fontFamily: 'calibri',
+              textAlign: 'center'
+            }}
+            >{quote}</h2></div>
           </div>
         </div>
       </div>
@@ -27,8 +86,11 @@ export const AboutPageTemplate = ({ title, content, contentComponent }) => {
 
 AboutPageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
+  mission: PropTypes.string,
+  heading: PropTypes.string,
+  quote: PropTypes.string,
+  description:PropTypes.string,
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 const AboutPage = ({ data }) => {
@@ -37,9 +99,12 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <AboutPageTemplate
-        contentComponent={HTMLContent}
         title={post.frontmatter.title}
-        content={post.html}
+        image={post.frontmatter.image}
+        heading={post.frontmatter.heading}
+        mission={post.frontmatter.mission}
+        description={post.frontmatter.description}
+        quote={post.frontmatter.quote}
       />
     </Layout>
   )
@@ -54,9 +119,19 @@ export default AboutPage
 export const aboutPageQuery = graphql`
   query AboutPage($id: String!) {
     markdownRemark(id: { eq: $id }) {
-      html
       frontmatter {
         title
+        image {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        mission
+        heading
+        description
+        quote
       }
     }
   }

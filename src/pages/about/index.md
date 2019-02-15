@@ -1,19 +1,12 @@
 ---
 templateKey: 'about-page'
 path: /about
-title: About our values
+title: About Tech Connect
+image: /img/about-page.png
+
+mission: Tech Connect is looking for people with a faith in Jesus Christ and the desire to share their time and talents to partner with this ministry.
+heading: About
+description: Tech Connect is a webservice meant for connecting developers and the minds behind projects, run by Mission Aviation Fellowship (MAF). MAF is all about making connections -- and technology plays a key roles. We want to introduce isolated people to Jesus Christ through a network of technology and discipleship strategies. Technology constantly changes, so MAF Tech Resources is always adapting to create opportunities to connect people to Jesus. We use technology in a variety of ways in order to bring God's Word into the most remote parts of the world; providing connectivity through email and VPN services, and VSAT and HF/VHF radio installations; digital solutions for missions like mobile apps with the Bible and Christian materials; and business services that support our flight programs around the world. Tech Connect is a webservice meant for connecting developers and the minds behind projects, run by Mission Aviation Fellowship (MAF). MAF is all about making connections -- and technology plays a key roles. We want to introduce isolated people to Jesus Christ through a network of technology and discipleship strategies. Technology constantly changes, so MAF Tech Resources is always adapting to create opportunities to connect people to Jesus. We use technology in a variety of ways in order to bring God's Word into the most remote parts of the world; providing connectivity through email and VPN services, and VSAT and HF/VHF radio installations; digital solutions for missions like mobile apps with the Bible and Christian materials; and business services that support our flight programs around the world.
+
+quote: "It's the best way to connect with people who can truly help you. There's a class of people called 'early adopters', but Tech Connect sponsors are so much earlier than that!"
 ---
-### Shade-grown coffee
-Coffee is a small tree or shrub that grows in the forest understory in its wild form, and traditionally was grown commercially under other trees that provided shade. The forest-like structure of shade coffee farms provides habitat for a great number of migratory and resident species.
-
-### Single origin
-Single-origin coffee is coffee grown within a single known geographic origin. Sometimes, this is a single farm or a specific collection of beans from a single country. The name of the coffee is then usually the place it was grown to whatever degree available.
-
-### Sustainable farming
-Sustainable agriculture is farming in sustainable ways based on an understanding of ecosystem services, the study of relationships between organisms and their environment. What grows where and how it is grown are a matter of choice and careful consideration for nature and communities.
-
-### Direct sourcing
-Direct trade is a form of sourcing practiced by some coffee roasters. Advocates of direct trade practices promote direct communication and price negotiation between buyer and farmer, along with systems that encourage and incentivize quality.
-
-### Reinvest profits
-We want to truly empower the communities that bring amazing coffee to you. That’s why we reinvest 20% of our profits into farms, local businesses and schools everywhere our coffee is grown. You can see the communities grow and learn more about coffee farming on our blog.
