@@ -28,7 +28,12 @@ collections:
         fields:
           - {label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page"}
           - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "image", name: "image", widget: "image"}
+          - {label: "Mission", name: "mission", widget: "string"}
+          - {label: "Heading", name: "heading", widget: "string"}
+          - {label: "Description", name: "description", widget: "string"}
+          - {label: "Quote", name: "quote", widget: "string"}
+          
       - file: "src/pages/products/index.md"
         label: "Products Page"
         name: "products"
