@@ -14,7 +14,7 @@ export default class IndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              <h1 className="has-text-weight-bold is-size-2">
+              <h1 className="has-text-weight-bold is-size-2" style={{color: '#1C2833'}}>
                 Tech Connect is looking for people with a faith in Jesus Christ and the desire to 
                 share their time and talents to partner with this ministry.
               </h1>
@@ -43,11 +43,17 @@ export default class IndexPage extends React.Component {
                   </p>
                 </div>
               ))}
-            <hr />  
-            <h1 className="has-text-weight-bold is-size-2">Success Stories</h1>
-            <hr />
-            <h1 className="has-text-weight-bold is-size-2">Testimonies</h1>
-            <hr />
+            <hr style={{
+                  color:'#1C2833',
+                  backgroundColor: '#1C2833',
+                  height: 5
+                }}/> 
+            <h1 className="has-text-weight-bold is-size-2" style={{color: '#1C2833'}}>Success Stories</h1>
+            <hr style={{
+                  color:'#1C2833',
+                  backgroundColor: '#1C2833',
+                  height: 5
+                }}/>
             <Navbar />
           </div>
         </section>
