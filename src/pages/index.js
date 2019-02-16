@@ -13,7 +13,10 @@ export default class IndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
+              <h1 className="has-text-weight-bold is-size-2">
+                Tech Connect is looking for people with a faith in Jesus Christ and the desire to 
+                share their time and talents to partner with this ministry.
+              </h1>
             </div>
             {posts
               .map(({ node: post }) => (
@@ -39,6 +42,12 @@ export default class IndexPage extends React.Component {
                   </p>
                 </div>
               ))}
+            <hr />  
+            <h1 className="has-text-centered is-size-2">Success Stories</h1>
+            <hr />
+            <h1 className="has-text-weight-bold is-size-2">Testimonies</h1>
+            <hr />
+            <Link ></Link>
           </div>
         </section>
       </Layout>
