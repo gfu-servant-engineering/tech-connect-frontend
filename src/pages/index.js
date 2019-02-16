@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import Navbar from '../components/Navbar'
 
 export default class IndexPage extends React.Component {
   render() {
@@ -43,11 +44,11 @@ export default class IndexPage extends React.Component {
                 </div>
               ))}
             <hr />  
-            <h1 className="has-text-centered is-size-2">Success Stories</h1>
+            <h1 className="has-text-weight-bold is-size-2">Success Stories</h1>
             <hr />
             <h1 className="has-text-weight-bold is-size-2">Testimonies</h1>
             <hr />
-            <Link ></Link>
+            <Navbar />
           </div>
         </section>
       </Layout>
