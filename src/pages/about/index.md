@@ -1,6 +1,6 @@
 ---
 templateKey: about-page
-title: About Tech Connect
+title: About Us
 image: /img/about-page.png
 mission: >-
   Tech Connect is looking for people with a faith in Jesus Christ and the desire
