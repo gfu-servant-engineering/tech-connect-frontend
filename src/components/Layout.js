@@ -21,7 +21,7 @@ const TemplateWrapper = ({ children }) => (
       <div>
         <Helmet>
           <html lang="en" />
-          <title>{data.site.siteMetadata.title}</title>
+          <title>Tech Connect</title>
           <meta name="description" content={data.site.siteMetadata.description} />
           
           <link rel="apple-touch-icon" sizes="180x180" href="/img/atom.png" />
