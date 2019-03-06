@@ -33,5 +33,6 @@ quote: >-
   It's the best way to connect with people who can truly help you. There's a
   class of people called 'early adopters', but Tech Connect sponsors are so much
   earlier than that!
+image2: /img/chemex.jpg
 ---
 
