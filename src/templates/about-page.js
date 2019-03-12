@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import { Button } from 'antd'
 import Layout from '../components/Layout'
 
 export const AboutPageTemplate = ({
@@ -41,7 +42,6 @@ export const AboutPageTemplate = ({
                   {title}
                 </h2>
               </div>
-
               <h4 className="is-size-4"
               style={{
                 width: '60%',
@@ -77,6 +77,10 @@ export const AboutPageTemplate = ({
               textAlign: 'center'
             }}
             >{quote}</h2></div>
+            <div>
+              <Button size="large" href="/" style={{marginLeft: '17vw'}}>Create a Project</Button>
+              <Button size="large" href="/" style={{marginLeft: '13vw'}}>Join an Existing Project</Button>
+            </div>
           </div>
         </div>
       </div>
