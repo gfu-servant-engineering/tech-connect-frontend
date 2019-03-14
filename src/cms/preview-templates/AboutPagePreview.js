@@ -11,8 +11,10 @@ return (
     title={entry.getIn(['data', 'title'])}
     mission={entry.getIn(['data', 'mission'])}
     quote={entry.getIn(['data', 'quote'])}
-    heading={entry.getIn(['data', 'heading'])}
-    description={entry.getIn(['data', 'description'])}
+    headingAboutTechConnect={entry.getIn(['data', 'headingAboutTechConnect'])}
+    aboutTechConnect={entry.getIn(['data', 'aboutTechConnect'])}
+    headingAboutMAF={entry.getIn(['data', 'headingAboutMAF'])}
+    aboutMAF={entry.getIn(['data', 'aboutMAF'])}
   />
 )
 }
