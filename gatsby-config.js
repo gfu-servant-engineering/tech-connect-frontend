@@ -12,7 +12,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/static/img`,
-        name: 'uploads',
+        name: 'images',
       },
     },
     {
@@ -22,18 +22,12 @@ module.exports = {
         name: 'pages',
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/src/img`,
-        name: 'images',
-      },
-    },
+
     {
       resolve: 'gatsby-source-strapi',
       options: {
         //apiURL: 'http://localhost:1337',
-	apiURL: 'http://techconnect-api.ddns.net:1337',
+        apiURL: 'http://techconnect-api.ddns.net:1337',
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
           'user'

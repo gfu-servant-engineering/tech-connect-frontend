@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import atom from '../img/atom.svg'
+import { Link, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Navbar = class extends React.Component {
 
@@ -34,7 +34,7 @@ const Navbar = class extends React.Component {
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item" title="Logo">
-          <img src={atom} alt="atom" style={{ width: '35px' }} />
+          <Img fixed={this.props.data.file.childImageSharp.fixed} alt="atom"/>
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
@@ -70,3 +70,17 @@ const Navbar = class extends React.Component {
 }
 
 export default Navbar
+
+export const navbarQuery = graphql`
+  query {
+    file(relativePath: { eq: "../../static/img/atom.svg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fixed(width: 35) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`
