@@ -75,15 +75,15 @@ const ProjectPage = ({ data }) => (
                 <Link style={{display:'inline-block', color: '#1C2833', marginRight: '5%'}} to={`/${document.node.id}`}>{document.node.project_name}</Link>
                 </h3>
                 <h4 className="has-text-weight-normal is-size-5 is-size-6" style={{color: '#1C2833'}}>
-                <Link style={{color: '#1C2833'}} to={`/${document.node.id}`}><i>Sponsored by </i></Link>
+                <Link style={{color: '#1C2833'}} to={`/${document.node.profiles.profile_name}`}><i>Sponsored by {document.node.profiles.profile_name}</i></Link>
                 </h4>
-                <LinesEllipsis
+                <Link style={{color: '#1C2833'}} to={`/${document.node.id}`}><LinesEllipsis
                     text={document.node.project_description}
-                    maxLine='2'
+                    maxLine='3'
                     ellipsis='...'
                     trimRight
                     basedOn='letters'
-                />
+                /></Link>
                 <br></br>
                 <br></br>
               </li>
@@ -156,6 +156,9 @@ export const pageQuery = graphql`
           id
           project_name
           project_description
+          project_goals
+          project_holy_goals
+          project_timeline
   	      project_image {
   	         childImageSharp {
   	            fixed(width:300, height:200) {
@@ -163,6 +166,9 @@ export const pageQuery = graphql`
   	            }
   	          }
   	        }
+          profiles {
+            profile_name
+          }
         }
       }
     }
