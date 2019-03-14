@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import { Link, withPrefix } from 'gatsby'
 
 const Navbar = class extends React.Component {
 
@@ -34,7 +33,7 @@ const Navbar = class extends React.Component {
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item" title="Logo">
-          <Img fixed={this.props.data.file.childImageSharp.fixed} alt="atom"/>
+          <img src={withPrefix('img/atom.svg')} alt="atom" style={{ width: '35px' }} />
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
@@ -70,15 +69,3 @@ const Navbar = class extends React.Component {
 }
 
 export default Navbar
-
-export const navbarQuery = graphql`
-  query {
-    file(relativePath: { eq: "../../static/img/atom.svg" }) {
-      childImageSharp {
-        fixed(width: 35) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-  }
-`
