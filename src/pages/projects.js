@@ -75,7 +75,7 @@ const ProjectPage = ({ data }) => (
                 <Link style={{display:'inline-block', color: '#1C2833', marginRight: '5%'}} to={`/${document.node.id}`}>{document.node.project_name}</Link>
                 </h3>
                 <h4 className="has-text-weight-normal is-size-5 is-size-6" style={{color: '#1C2833'}}>
-                <Link to={document.node.profile.profile_name}><i>Sponsored by {document.node.profile.profile_name}</i></Link>
+                <Link style={{color: '#1C2833'}} to={`/${document.node.id}`}><i>Sponsored by </i></Link>
                 </h4>
                 <LinesEllipsis
                     text={document.node.project_description}
@@ -163,9 +163,6 @@ export const pageQuery = graphql`
   	            }
   	          }
   	        }
-          profile {
-              profile_name
-          }
         }
       }
     }
