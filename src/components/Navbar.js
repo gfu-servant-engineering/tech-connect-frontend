@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import atom from '../img/atom.svg'
+import { Link, withPrefix } from 'gatsby'
 
 const Navbar = class extends React.Component {
 
@@ -34,7 +33,7 @@ const Navbar = class extends React.Component {
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item" title="Logo">
-          <img src={atom} alt="atom" style={{ width: '35px' }} />
+          <img src={withPrefix('img/atom.svg')} alt="atom" style={{ width: '35px' }} />
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
