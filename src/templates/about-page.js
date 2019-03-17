@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import { Button } from 'antd'
+import { Button, Row, Col } from 'antd'
 import Layout from '../components/Layout'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import Navbar from '../components/Navbar';
+
 
 export const AboutPageTemplate = ({
   title,
@@ -12,14 +15,16 @@ export const AboutPageTemplate = ({
   mission,
   quote,
   aboutTechConnect,
-  aboutMAF
+  aboutMAF,
+  image2,
+  image3
 }) => {
 
   return (
     <section className="section section--gradient">
       <div className="container">
         <div className="columns">
-          <div className="column is-10 is-offset-1">
+          <div className="column is-12 is-offset-2">
             <div className="section">
               <div
                 className="full-width-image-container margin-top-0"
@@ -47,7 +52,7 @@ export const AboutPageTemplate = ({
               <h4 className="is-size-3"
               style={{
                 width: '100%',
-                paddingBottom: '10%',
+                paddingBottom: '5%',
                 textAlign: 'center'
               }}>
                 {mission}
@@ -62,14 +67,33 @@ export const AboutPageTemplate = ({
                   backgroundColor: '#1C2833',
                   height: 5
                 }}/>
-                <h3 className="is-size-5">{aboutTechConnect}</h3>
+                <Row gutter={40}>
+                  <Col span={12}><p className="is-size-5">{aboutTechConnect}</p></Col>
+                  <Col span={12}><PreviewCompatibleImage imageInfo={image2} /></Col>
+                </Row>
               </div>
+              <div style={{
+                width: '80%',
+                marginLeft: '10%',
+                paddingTop: '5%'
+              }}>
+                <h2 className="is-size-4">{headingAboutMAF}</h2>
+                <hr style={{
+                  color:'#1C2833',
+                  backgroundColor: '#1C2833',
+                  height: 5,
+                }}/>
+                <Row gutter={40}>
+                  <Col span={12}><PreviewCompatibleImage imageInfo={image3} /></Col>
+                  <Col span={12}><p className="is-size-5">{aboutMAF}</p></Col>
+                </Row>
+            </div>
             </div>
             <div className="full-width-image-container"
             style={{
               background:'#1C2833',
               color: 'white',
-              marginTop: '3%',
+              marginTop: '1%',
             }}><h2 className="is-size-3"
             style={{
               width: '80%',
@@ -80,20 +104,9 @@ export const AboutPageTemplate = ({
             >{quote}
             <br /><br /><Button size="large" href="/">Share a Project</Button>
             </h2></div>
-            <div style={{
-                width: '80%',
-                marginLeft: '10%',
-              }}>
-                <h2 className="is-size-4">{headingAboutMAF}</h2>
-                <hr style={{
-                  color:'#1C2833',
-                  backgroundColor: '#1C2833',
-                  height: 5
-                }}/>
-                <p className="is-size-5">{aboutMAF}</p>
-              </div>
           </div>
         </div>
+        <Navbar />
       </div>
     </section>
   )
@@ -107,7 +120,8 @@ AboutPageTemplate.propTypes = {
   quote: PropTypes.string,
   aboutTechConnect:PropTypes.string,
   aboutMAF: PropTypes.string,
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 const AboutPage = ({ data }) => {
@@ -124,6 +138,8 @@ const AboutPage = ({ data }) => {
         aboutTechConnect={post.frontmatter.aboutTechConnect}
         aboutMAF={post.frontmatter.aboutMAF}
         quote={post.frontmatter.quote}
+        image2={post.frontmatter.image2}
+        image3={post.frontmatter.image3}
       />
     </Layout>
   )
@@ -150,9 +166,29 @@ export const aboutPageQuery = graphql`
         mission
         headingAboutTechConnect
         aboutTechConnect
-        quote
+        image2 {
+          alt
+          image {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }  
+        }
         headingAboutMAF
         aboutMAF
+        image3 {
+          alt
+          image {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }  
+        }
+        quote
       }
     }
   }

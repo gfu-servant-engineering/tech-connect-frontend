@@ -13,8 +13,16 @@ return (
     quote={entry.getIn(['data', 'quote'])}
     headingAboutTechConnect={entry.getIn(['data', 'headingAboutTechConnect'])}
     aboutTechConnect={entry.getIn(['data', 'aboutTechConnect'])}
+    image2={{
+      image: entry.getIn(['data', 'main', 'image2', 'image']),
+      alt: entry.getIn(['data', 'main', 'image2', 'alt']),
+    }}
     headingAboutMAF={entry.getIn(['data', 'headingAboutMAF'])}
     aboutMAF={entry.getIn(['data', 'aboutMAF'])}
+    image3={{
+      image: entry.getIn(['data', 'main', 'image2', 'image']),
+      alt: entry.getIn(['data', 'main', 'image2', 'alt']),
+    }}
   />
 )
 }

@@ -13,10 +13,9 @@ aboutTechConnect: >-
   and that no mission minded person feels unequipped to accomplish their goals
   of furthering the Kingdom of God. MAF believes that both of these goals can
   be met through Tech Connect!
-quote: >-
-  "It's the best way to connect with people who can truly help you. There's a
-  class of people called 'early adopters', but Tech Connect sponsors are so much
-  earlier than that!"
+image2:
+  alt: Coffee beans
+  image: /img/AboutTechConnect.jpg
 headingAboutMAF: About MAF
 aboutMAF: >-
   MAF is all about making connections -- and technology plays a key roles. We 
@@ -28,6 +27,12 @@ aboutMAF: >-
   services, and VSAT and HF/VHF radio installations; digital solutions for
   missions like mobile apps with the Bible and Christian materials; and business
   services that support our flight programs around the world.
-image2: /img/chemex.jpg
+quote: >-
+  "It's the best way to connect with people who can truly help you. There's a
+  class of people called 'early adopters', but Tech Connect sponsors are so much
+  earlier than that!"
+image3:
+  alt: Coffee beans
+  image: /img/MAFLogo.png
 ---
 
