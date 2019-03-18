@@ -3,8 +3,47 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
+  // Query for nodes to use in creating pages.
+  resolve(
+    graphql(request).then(result => {
+      if (result.errors) {
+        reject(result.errors)
+      }
+
+      return result;
+    })
+  )
+});
+
+// Implement the Gatsby API "createPages". This is called once the
+// data layer is bootstrapped to let plugins create pages from data.
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  const { createPage } = boundActionCreators;
+
+  const getArticles = makeRequest(graphql, `
+    {
+      allStrapiProject {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiProject.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/specific-project.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+
 
   return graphql(`
     {
@@ -69,8 +108,11 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
-  })
-}
+})
+
+  // Query for articles nodes to use in creating pages.
+  return getArticles;
+};
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
