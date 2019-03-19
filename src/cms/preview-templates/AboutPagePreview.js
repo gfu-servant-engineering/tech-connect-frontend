@@ -23,6 +23,7 @@ return (
       image: entry.getIn(['data', 'main', 'image2', 'image']),
       alt: entry.getIn(['data', 'main', 'image2', 'alt']),
     }}
+    button={entry.getIn(['data', 'button'])}
   />
 )
 }

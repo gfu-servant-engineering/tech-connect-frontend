@@ -17,14 +17,15 @@ export const AboutPageTemplate = ({
   aboutTechConnect,
   aboutMAF,
   image2,
-  image3
+  image3,
+  button,
 }) => {
 
   return (
     <section className="section section--gradient">
       <div className="container">
         <div className="columns">
-          <div className="column is-12 is-offset-2">
+          <div className="column is-12 is-offset-0">
             <div className="section">
               <div
                 className="full-width-image-container margin-top-0"
@@ -94,16 +95,30 @@ export const AboutPageTemplate = ({
               background:'#1C2833',
               color: 'white',
               marginTop: '1%',
-            }}><h2 className="is-size-3"
+            }}>
+            {/* <Row><Col><h2 className="is-size-3"
             style={{
               width: '80%',
               color: 'white',
               textAlign: 'center',
-              fontStyle: 'italic'
+              fontStyle: 'italic',
+              fontWeight: 'bold'
             }}
-            >{quote}
-            <br /><br /><Button size="large" href="/">Share a Project</Button>
-            </h2></div>
+            >{quote}</h2></Col></Row>
+            <Row><Col><Button style={{fontWeight: 'bold', fontSize: '20px'}} 
+            size="large" href="/">{button}</Button></Col></Row> */}
+            <div>
+              <Row style={{textAlign: 'center'}}>
+                <Col><h2 className="is-size-3" 
+                style={{
+                  color: 'white',
+                  fontStyle: 'italic',
+                   }}>
+                  {quote}</h2></Col>
+                <Col style={{textAlign: 'center', paddingTop:'5%'}}><Button style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">{button}</Button></Col>
+              </Row>
+            </div>
+            </div>
           </div>
         </div>
         <Navbar />
@@ -122,6 +137,7 @@ AboutPageTemplate.propTypes = {
   aboutMAF: PropTypes.string,
   image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  button: PropTypes.string
 }
 
 const AboutPage = ({ data }) => {
@@ -140,6 +156,7 @@ const AboutPage = ({ data }) => {
         quote={post.frontmatter.quote}
         image2={post.frontmatter.image2}
         image3={post.frontmatter.image3}
+        button={post.frontmatter.button}
       />
     </Layout>
   )
@@ -189,6 +206,7 @@ export const aboutPageQuery = graphql`
           }  
         }
         quote
+        button
       }
     }
   }

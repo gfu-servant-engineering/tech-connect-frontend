@@ -1,7 +1,7 @@
 ---
 templateKey: about-page
 title: About Us
-image: /img/about-page.png
+image: /img/about-page.jpg
 mission: >-
   Tech Connect is looking for people with a faith in Jesus Christ and the desire
   to share their time and talents to further the Kingdom of God.
@@ -14,7 +14,7 @@ aboutTechConnect: >-
   of furthering the Kingdom of God. MAF believes that both of these goals can
   be met through Tech Connect!
 image2:
-  alt: Coffee beans
+  alt: Plane near dock
   image: /img/AboutTechConnect.jpg
 headingAboutMAF: About MAF
 aboutMAF: >-
@@ -31,8 +31,9 @@ quote: >-
   "It's the best way to connect with people who can truly help you. There's a
   class of people called 'early adopters', but Tech Connect sponsors are so much
   earlier than that!"
+button: Share a Project
 image3:
-  alt: Coffee beans
-  image: /img/MAFLogo.png
+  alt: MAF Logo
+  image: /img/MAFLogo.jpg
 ---
 
