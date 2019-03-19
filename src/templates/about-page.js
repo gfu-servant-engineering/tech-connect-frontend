@@ -5,6 +5,7 @@ import { Button, Row, Col } from 'antd'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Navbar from '../components/Navbar';
+import SectionHeader from '../components/sectionHeader';
 
 
 export const AboutPageTemplate = ({
@@ -51,73 +52,41 @@ export const AboutPageTemplate = ({
                 </h2>
               </div>
               <h4 className="is-size-3"
-              style={{
-                width: '100%',
-                paddingBottom: '5%',
-                textAlign: 'center'
-              }}>
+                style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
                 {mission}
               </h4>
-              <div style={{
-                width: '80%',
-                marginLeft: '10%',
-              }}>
-                <h2 className="is-size-4">{headingAboutTechConnect}</h2>
-                <hr style={{
-                  color:'#1C2833',
-                  backgroundColor: '#1C2833',
-                  height: 5
-                }}/>
+              <SectionHeader SectionHeader={headingAboutTechConnect}/>
+              <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
                 <Row gutter={40}>
                   <Col span={12}><p className="is-size-5">{aboutTechConnect}</p></Col>
                   <Col span={12}><PreviewCompatibleImage imageInfo={image2} /></Col>
                 </Row>
               </div>
-              <div style={{
-                width: '80%',
-                marginLeft: '10%',
-                paddingTop: '5%'
-              }}>
-                <h2 className="is-size-4">{headingAboutMAF}</h2>
-                <hr style={{
-                  color:'#1C2833',
-                  backgroundColor: '#1C2833',
-                  height: 5,
-                }}/>
+              <SectionHeader SectionHeader={headingAboutMAF} style={{paddingTop: '5%'}}/>
+              <div style={{width: '80%', marginLeft: '10%'}}>
                 <Row gutter={40}>
                   <Col span={12}><PreviewCompatibleImage imageInfo={image3} /></Col>
                   <Col span={12}><p className="is-size-5">{aboutMAF}</p></Col>
                 </Row>
             </div>
             </div>
-            <div className="full-width-image-container"
-            style={{
-              background:'#1C2833',
-              color: 'white',
-              marginTop: '1%',
-            }}>
-            {/* <Row><Col><h2 className="is-size-3"
-            style={{
-              width: '80%',
-              color: 'white',
-              textAlign: 'center',
-              fontStyle: 'italic',
-              fontWeight: 'bold'
-            }}
-            >{quote}</h2></Col></Row>
-            <Row><Col><Button style={{fontWeight: 'bold', fontSize: '20px'}} 
-            size="large" href="/">{button}</Button></Col></Row> */}
-            <div>
-              <Row style={{textAlign: 'center'}}>
-                <Col><h2 className="is-size-3" 
-                style={{
-                  color: 'white',
-                  fontStyle: 'italic',
-                   }}>
-                  {quote}</h2></Col>
-                <Col style={{textAlign: 'center', paddingTop:'5%'}}><Button style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">{button}</Button></Col>
-              </Row>
-            </div>
+            <div className="full-width-image-container" 
+              style={{background:'#1C2833', color: 'white', marginTop: '1%', paddingBottom: '0'}}>
+              <div>
+                <Row style={{textAlign: 'center'}}>
+                  <Col>
+                    <h2 className="is-size-3" 
+                      style={{color: 'white', fontStyle: 'italic', paddingLeft: '10%', paddingRight: '10%'}}>
+                      {quote}
+                    </h2>
+                  </Col>
+                  <Col style={{textAlign: 'center', paddingTop:'5%'}}>
+                    <Button style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">
+                      {button}
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
             </div>
           </div>
         </div>
