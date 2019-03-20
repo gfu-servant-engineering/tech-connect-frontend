@@ -1,23 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import { Button } from 'antd'
+import { Button, Row, Col } from 'antd'
 import Layout from '../components/Layout'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import Navbar from '../components/Navbar';
+import SectionHeader from '../components/SectionHeader';
+
 
 export const AboutPageTemplate = ({
   title,
   image,
-  heading,
+  headingAboutTechConnect,
+  headingAboutMAF,
   mission,
   quote,
-  description,
+  aboutTechConnect,
+  aboutMAF,
+  image2,
+  image3,
+  button,
 }) => {
 
   return (
     <section className="section section--gradient">
       <div className="container">
         <div className="columns">
-          <div className="column is-10 is-offset-1">
+          <div className="column is-12 is-offset-0">
             <div className="section">
               <div
                 className="full-width-image-container margin-top-0"
@@ -42,47 +51,46 @@ export const AboutPageTemplate = ({
                   {title}
                 </h2>
               </div>
-              <h4 className="is-size-4"
-              style={{
-                width: '60%',
-                marginLeft: '20%',
-                paddingBottom: '3%',
-                fontFamily: 'calibri',
-                textAlign: 'center'
-              }}>
+              <h4 className="is-size-3"
+                style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
                 {mission}
               </h4>
-              <div style={{
-                width: '80%',
-                marginLeft: '10%',
-              }}>
-                <h2 className="is-size-3">{heading}</h2>
-                <hr style={{
-                  color:'#1C2833',
-                  backgroundColor: '#1C2833',
-                  height: 5
-                }}/>
-                <p >{description}</p>
+              <SectionHeader SectionHeader={headingAboutTechConnect}/>
+              <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
+                <Row gutter={40}>
+                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutTechConnect}</p></Col>
+                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image2} /></Col>
+                </Row>
               </div>
+              <SectionHeader SectionHeader={headingAboutMAF} style={{paddingTop: '5%'}}/>
+              <div style={{width: '80%', marginLeft: '10%'}}>
+                <Row gutter={40}>
+                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image3} /></Col>
+                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutMAF}</p></Col>
+                </Row>
             </div>
-            <div className="full-width-image-container"
-            style={{
-              background:'#1C2833',
-              color: 'white',
-              marginTop: '3%',
-            }}><h2 className="is-size-4"
-            style={{
-              width: '60%',
-              fontFamily: 'calibri',
-              textAlign: 'center'
-            }}
-            >{quote}</h2></div>
-            <div>
-              <Button size="large" href="/" style={{marginLeft: '17vw'}}>Create a Project</Button>
-              <Button size="large" href="/" style={{marginLeft: '13vw'}}>Join an Existing Project</Button>
+            </div>
+            <div className="full-width-image-container" 
+              style={{background:'#1C2833', color: 'white', marginTop: '1%', paddingBottom: '0'}}>
+              <div>
+                <Row style={{textAlign: 'center'}}>
+                  <Col>
+                    <h2 className="is-size-3" 
+                      style={{color: 'white', fontStyle: 'italic', paddingLeft: '10%', paddingRight: '10%'}}>
+                      {quote}
+                    </h2>
+                  </Col>
+                  <Col style={{textAlign: 'center', paddingTop:'5%'}}>
+                    <Button style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">
+                      {button}
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
             </div>
           </div>
         </div>
+        <Navbar />
       </div>
     </section>
   )
@@ -91,10 +99,14 @@ export const AboutPageTemplate = ({
 AboutPageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
   mission: PropTypes.string,
-  heading: PropTypes.string,
+  headingAboutTechConnect: PropTypes.string,
+  headingAboutMAF: PropTypes.string,
   quote: PropTypes.string,
-  description:PropTypes.string,
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  aboutTechConnect:PropTypes.string,
+  aboutMAF: PropTypes.string,
+  image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  button: PropTypes.string
 }
 
 const AboutPage = ({ data }) => {
@@ -105,10 +117,15 @@ const AboutPage = ({ data }) => {
       <AboutPageTemplate
         title={post.frontmatter.title}
         image={post.frontmatter.image}
-        heading={post.frontmatter.heading}
+        headingAboutTechConnect={post.frontmatter.headingAboutTechConnect}
+        headingAboutMAF={post.frontmatter.headingAboutMAF}
         mission={post.frontmatter.mission}
-        description={post.frontmatter.description}
+        aboutTechConnect={post.frontmatter.aboutTechConnect}
+        aboutMAF={post.frontmatter.aboutMAF}
         quote={post.frontmatter.quote}
+        image2={post.frontmatter.image2}
+        image3={post.frontmatter.image3}
+        button={post.frontmatter.button}
       />
     </Layout>
   )
@@ -133,9 +150,32 @@ export const aboutPageQuery = graphql`
           }
         }
         mission
-        heading
-        description
+        headingAboutTechConnect
+        aboutTechConnect
+        image2 {
+          alt
+          image {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }  
+        }
+        headingAboutMAF
+        aboutMAF
+        image3 {
+          alt
+          image {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }  
+        }
         quote
+        button
       }
     }
   }
