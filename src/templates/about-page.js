@@ -58,15 +58,15 @@ export const AboutPageTemplate = ({
               <SectionHeader SectionHeader={headingAboutTechConnect}/>
               <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
                 <Row gutter={40}>
-                  <Col span={12}><p className="is-size-5">{aboutTechConnect}</p></Col>
-                  <Col span={12}><PreviewCompatibleImage imageInfo={image2} /></Col>
+                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutTechConnect}</p></Col>
+                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image2} /></Col>
                 </Row>
               </div>
               <SectionHeader SectionHeader={headingAboutMAF} style={{paddingTop: '5%'}}/>
               <div style={{width: '80%', marginLeft: '10%'}}>
                 <Row gutter={40}>
-                  <Col span={12}><PreviewCompatibleImage imageInfo={image3} /></Col>
-                  <Col span={12}><p className="is-size-5">{aboutMAF}</p></Col>
+                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image3} /></Col>
+                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutMAF}</p></Col>
                 </Row>
             </div>
             </div>
@@ -156,7 +156,7 @@ export const aboutPageQuery = graphql`
           alt
           image {
             childImageSharp {
-              fluid(maxWidth: 400, quality: 100) {
+              fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -168,7 +168,7 @@ export const aboutPageQuery = graphql`
           alt
           image {
             childImageSharp {
-              fluid(maxWidth: 400, quality: 100) {
+              fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
               }
             }
