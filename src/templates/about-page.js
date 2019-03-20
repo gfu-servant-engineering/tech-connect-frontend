@@ -5,7 +5,7 @@ import { Button, Row, Col } from 'antd'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Navbar from '../components/Navbar';
-import SectionHeader from '../components/sectionHeader';
+import SectionHeader from '../components/SectionHeader';
 
 
 export const AboutPageTemplate = ({
