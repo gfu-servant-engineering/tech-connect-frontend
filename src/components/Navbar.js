@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import atom from '../img/atom.svg'
+import { Link, withPrefix } from 'gatsby'
 
 const Navbar = class extends React.Component {
 
@@ -9,32 +8,32 @@ const Navbar = class extends React.Component {
    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     // Check if there are any navbar burgers
    if ($navbarBurgers.length > 0) {
- 
+
      // Add a click event on each of them
      $navbarBurgers.forEach( el => {
        el.addEventListener('click', () => {
- 
+
          // Get the target from the "data-target" attribute
          const target = el.dataset.target;
          const $target = document.getElementById(target);
- 
+
          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
          el.classList.toggle('is-active');
          $target.classList.toggle('is-active');
- 
+
        });
      });
    }
  }
- 
+
  render() {
    return (
-  
+
   <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">
     <div className="container">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item" title="Logo">
-          <img src={atom} alt="atom" style={{ width: '35px' }} />
+          <img src={withPrefix('img/atom.svg')} alt="atom" style={{ width: '35px' }} />
         </Link>
         {/* Hamburger menu */}
         <div className="navbar-burger burger" data-target="navMenu">
@@ -48,7 +47,7 @@ const Navbar = class extends React.Component {
         <Link className="navbar-item" to="/">
           Create a Project
         </Link>
-        <Link className="navbar-item" to="/">
+        <Link className="navbar-item" to="/projects">
           View All Projects
         </Link>
         <Link className="navbar-item" to="/about">
