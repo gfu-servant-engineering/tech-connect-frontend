@@ -5,8 +5,6 @@ import Img from 'gatsby-image'
 import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
 import ProjectTile from '../components/ProjectTile.js'
-import { Row, Col } from 'antd';
-
 
 const IndexPage = ({data}) => (
       <Layout>
@@ -24,16 +22,15 @@ const IndexPage = ({data}) => (
                   backgroundColor: '#1C2833',
                   height: 5
                 }}/>
-            <div>
-                <Row type="flex" justify="center" align="top" gutter={24}>
+                <div className="columns is-centered is-multiline is-flex">
                   {data.allStrapiProject.edges.map(document => (
-                      <Col xs={15} sm={12} md={10} lg={10} xl={6}>
+                        <div className="column is-half-tablet-only is-full-desktop">
                         <li style={{display:'inline-block'}} key={document.node.id}>
                           <ProjectTile data={document.node}></ProjectTile>
                         </li>
-                      </Col>
+                        </div>
                   ))}
-                </Row>
+                </div>
               </div>
             <h1 className="has-text-weight-bold is-size-3" style={{color: '#1C2833'}}>Success Stories</h1>
             <hr style={{
