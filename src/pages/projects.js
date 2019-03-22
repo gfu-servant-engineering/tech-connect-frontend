@@ -1,16 +1,90 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Layout from '../components/Layout.js'
+import ProjectTile from '../components/ProjectTile.js'
+import "antd/dist/antd.css";
+import { Row, Col } from 'antd';
+import LinesEllipsis from 'react-lines-ellipsis'
+
+const ProjectPage = ({ data }) => (
+  <Layout>
+  <section className="section">
+    <div className="container">
+      <h1 className="has-text-weight-bold is-size-1" style={{color: '#1C2833'}}>Explore Projects</h1>
+      <hr style={{
+            color:'#1C2833',
+            backgroundColor: '#1C2833',
+            height: 5
+          }}/>
+      <br></br>
+      <div>
+        <Row type="flex" justify="center" align="top" gutter={12}>
+          {data.allStrapiProject.edges.map(document => (
+              <Col xs={15} sm={12} md={10} lg={8} xl={6}>
+                <li style={{display:'inline-block'}} key={document.node.id}>
+                  <ProjectTile data={document.node}></ProjectTile>
+                </li>
+              </Col>
+          ))}
+        </Row>
+      </div>
+    </div>
+  </section>
+  </Layout>
+)
+
+export default ProjectPage
+
+export const pageQuery = graphql`
+  query ProjectPage {
+    allStrapiProject {
+      edges {
+        node {
+          id
+          project_name
+          project_description
+          project_goals
+          project_blurb
+          project_holy_goals
+          project_timeline
+  	      project_image {
+  	         childImageSharp {
+  	            fluid(maxWidth:300, maxHeight:200, quality:90, toFormat:JPG) {
+  		             ...GatsbyImageSharpFluid
+  	            }
+  	          }
+  	        }
+          profiles {
+            profile_name
+          }
+        }
+      }
+    }
+  }
+`
+
+
+
+/*
+
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import Img from 'gatsby-image'
+import Layout from '../components/Layout.js'
+import ProjectTile from '../components/ProjectTile.js'
+import "antd/dist/antd.css";
+import { Row, Col } from 'antd';
+import LinesEllipsis from 'react-lines-ellipsis'
+
+/*
 import Navbar from '../components/Navbar.js'
 import ReactDOM from "react-dom";
 import { version, Button } from 'antd';
-import "antd/dist/antd.css";
 import { Input } from 'antd';
-import { Row, Col } from 'antd';
 import { Menu, Dropdown, Icon, message} from 'antd';
 import { Pagination } from 'antd';
-import LinesEllipsis from 'react-lines-ellipsis'
 
 
 const ProjectPage = ({ data }) => (
@@ -30,7 +104,7 @@ const ProjectPage = ({ data }) => (
         The block of code below contains the frontent components for search
         and filtering. These features are not functioning so they've been
         commented out until the functionality can be completed
-      */}
+
 
       {/*}
       <Row type="flex" justify="start">
@@ -63,7 +137,7 @@ const ProjectPage = ({ data }) => (
 
       <br></br>
       <br></br>
-      */}
+
 
       <div className="projects">
         <Row type="flex" justify="center" align="top" gutter={24}>
@@ -99,7 +173,7 @@ const ProjectPage = ({ data }) => (
             <Pagination showQuickJumper defaultCurrent={1} total={200} onChange={onChange} />
         </Col>
       </Row>
-      */}
+
     </div>
   </section>
 
@@ -108,13 +182,13 @@ const ProjectPage = ({ data }) => (
 
 export default ProjectPage
 
-{/*
+
   The block of code below contains the frontent components for search
   and filtering. These features are not functioning so they've been
   commented out until the functionality can be completed
-*/}
 
-{/*
+
+
 const Search = Input.Search;
 
 const sort = (
@@ -146,7 +220,7 @@ function onChange(pageNumber) {
   console.log('Page: ', pageNumber);
 }
 
-*/}
+}
 
 export const pageQuery = graphql`
   query ProjectQuery {
@@ -174,3 +248,4 @@ export const pageQuery = graphql`
     }
   }
   `
+*/
