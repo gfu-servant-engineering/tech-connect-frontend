@@ -8,8 +8,7 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 const ProjectTile = ({ data }) => (
   <div className="columns">
       <div key={data.id} className="column">
-
-          <li style={{display:'inline-block', border:'1px', flex:'4', padding:'5%'}} key={data.id}>
+          <li style={{display:'inline-block', padding:'5%'}} key={data.id}>
             <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.project_image} /></Link>
             <h3 className="has-text-weight-bold is-size-5">
             <Link style={{display:'inline-block', color: '#1C2833'}} to={`/${data.id}`}>{data.project_name}</Link>
@@ -25,7 +24,6 @@ const ProjectTile = ({ data }) => (
                 basedOn='letters'
             /></Link>
           </li>
-
       </div>
   </div>
 )
