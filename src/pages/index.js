@@ -22,23 +22,19 @@ const IndexPage = ({data}) => (
                   backgroundColor: '#1C2833',
                   height: 5
                 }}/>
-                <div className="columns is-centered is-multiline is-flex">
+                <div className="tile is-ancestor is-multiline">
                   {data.allStrapiProject.edges.map(document => (
-                        <div className="column is-half-tablet-only is-full-desktop">
-                        <li style={{display:'inline-block'}} key={document.node.id}>
+                      <div className="tile is-parent is-vertical is-4">
                           <ProjectTile data={document.node}></ProjectTile>
-                        </li>
-                        </div>
+                      </div>
                   ))}
                 </div>
-              </div>
             <h1 className="has-text-weight-bold is-size-3" style={{color: '#1C2833'}}>Success Stories</h1>
             <hr style={{
                   color:'#1C2833',
                   backgroundColor: '#1C2833',
                   height: 5
                 }}/>
-            <Navbar />
           </div>
         </section>
       </Layout>
