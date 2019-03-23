@@ -1,12 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import ProjectTile from '../components/ProjectTile.js'
-import "antd/dist/antd.css";
-import { Row, Col } from 'antd';
-import LinesEllipsis from 'react-lines-ellipsis'
 
 const ProjectPage = ({ data }) => (
   <Layout>
@@ -20,15 +15,13 @@ const ProjectPage = ({ data }) => (
           }}/>
       <br></br>
       <div>
-        <Row type="flex" justify="center" align="top" gutter={12}>
+        <div className="columns is-multiline is-centered">
           {data.allStrapiProject.edges.map(document => (
-              <Col xs={15} sm={12} md={10} lg={8} xl={6}>
-                <li style={{display:'inline-block'}} key={document.node.id}>
+              <div className="column is-5-tablet is-4-desktop is-3-widescreen">
                   <ProjectTile data={document.node}></ProjectTile>
-                </li>
-              </Col>
+              </div>
           ))}
-        </Row>
+        </div>
       </div>
     </div>
   </section>

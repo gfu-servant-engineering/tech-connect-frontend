@@ -1,9 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
 import ProjectTile from '../components/ProjectTile.js'
 
 const IndexPage = ({data}) => (
@@ -22,9 +19,9 @@ const IndexPage = ({data}) => (
                   backgroundColor: '#1C2833',
                   height: 5
                 }}/>
-                <div className="tile is-ancestor is-multiline">
+                <div className="columns is-multiline is-centered">
                   {data.allStrapiProject.edges.map(document => (
-                      <div className="tile is-parent is-vertical is-4">
+                      <div className="column is-8-tablet is-6-desktop is-3-widescreen">
                           <ProjectTile data={document.node}></ProjectTile>
                       </div>
                   ))}
@@ -41,14 +38,6 @@ const IndexPage = ({data}) => (
     )
 
 export default IndexPage
-
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
-}
 
 export const pageQuery = graphql`
   query IndexQuery {
