@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import { Button, Row, Col } from 'antd'
+import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Navbar from '../components/Navbar';
@@ -57,35 +56,44 @@ export const AboutPageTemplate = ({
               </h4>
               <SectionHeader SectionHeader={headingAboutTechConnect}/>
               <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
-                <Row gutter={40}>
-                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutTechConnect}</p></Col>
-                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image2} /></Col>
-                </Row>
+                <div className="columns is-centered is-vcentered">
+                  <div className="column is-7">
+                    <p className="is-size-5">{aboutTechConnect}</p>
+                  </div>
+                  <div className="column is-5">
+                    <PreviewCompatibleImage imageInfo={image2} />
+                  </div>
+                </div>
               </div>
               <SectionHeader SectionHeader={headingAboutMAF} style={{paddingTop: '5%'}}/>
               <div style={{width: '80%', marginLeft: '10%'}}>
-                <Row gutter={40}>
-                  <Col xs={24} sm={24} m={10} l={10} xl={10}><PreviewCompatibleImage imageInfo={image3} /></Col>
-                  <Col xs={24} sm={24} m={14} l={14} xl={14}><p className="is-size-5">{aboutMAF}</p></Col>
-                </Row>
+                <div className="columns is-centered is-vcentered">
+                  <div className="column is-5">
+                    <PreviewCompatibleImage imageInfo={image3} />
+                  </div>
+                  <div className="column is-7">
+                    <p className="is-size-5">{aboutMAF}</p>
+                  </div>
+                </div>
             </div>
             </div>
             <div className="full-width-image-container" 
               style={{background:'#1C2833', color: 'white', marginTop: '1%', paddingBottom: '0'}}>
               <div>
-                <Row style={{textAlign: 'center'}}>
-                  <Col>
-                    <h2 className="is-size-3" 
+                <div className="columns is-centered has-text-centered is-multiline">
+                  <div className="column is-12">
+                    <h2 className="is-size-3 has-text-weight-normal" 
                       style={{color: 'white', fontStyle: 'italic', paddingLeft: '10%', paddingRight: '10%'}}>
                       {quote}
                     </h2>
-                  </Col>
-                  <Col style={{textAlign: 'center', paddingTop:'5%'}}>
-                    <Button style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">
+                  </div>
+                  <div className="column is-12">
+                    <Link className="button has-text-centered"
+                      style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">
                       {button}
-                    </Button>
-                  </Col>
-                </Row>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
