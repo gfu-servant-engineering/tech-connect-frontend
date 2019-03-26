@@ -1,20 +1,16 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
-import { Row, Col } from 'antd';
-import { Button } from 'antd';
 
 const ProjectTemplate = ({ data }) => (
     <Layout>
       <section className="section">
-        <Row type="flex" justify="center" align="middle" gutter={32}>
-
-            <Col xs={16} sm={10} m={10} l={12} xl={6}>
-              <PreviewCompatibleImage imageInfo={data.strapiProject.project_image} />
-            </Col>
-            <Col xs={20} sm={10} m={10} l={12} xl={6}>
+        <div className="columns is-centered">
+          <div className="column is-5">
+            <PreviewCompatibleImage imageInfo={data.strapiProject.project_image} />
+          </div>
+          <div className="column is-5">
               <div style={{display:'inline', padding: '5%'}}>
                 <h1 className="has-text-weight-bold is-size-2">{data.strapiProject.project_name}</h1>
                 <hr style={{
@@ -22,44 +18,42 @@ const ProjectTemplate = ({ data }) => (
                     backgroundColor: '#1C2833',
                     height: 2
                   }}/>
-                <Link style={{color: '#1C2833', paddingBottom: '20px'}} to={'${data.strapiProject.id}'}>Sponsored by ...</Link>
+                <Link style={{color: '#1C2833', paddingBottom: '20px'}} to={`/${data.strapiProject.profiles.profile_name}`}>Sponsored by {data.strapiProject.profiles.profile_name}</Link>
                 <br/>
                 <br/>
-                <Button href='/' type="default" block>Contact Sponsor</Button>
+                <Link className="button has-text-centered" href='/' type="default" block>
+                  Contact Sponsor
+                </Link>
               </div>
-            </Col>
-        </Row>
-        <Row type="flex" justify="center" align="middle"  gutter={24}>
-          <Col xs={20} sm={20} m={20} l={20} xl={12}>
+            </div>
+        </div>
+        <div className="columns is-centered is-multiline">
+          <div className="column is-10">
             <br/>
             <h4 className="has-text-weight-bold is-size-4">Describe your project ...</h4>
               {data.strapiProject.project_description}
-          </Col>
-        </Row>
-        <Row type="flex" justify="center" align="center" gutter={24}>
-            <Col xs={20} sm={20} m={10} l={10} xl={6}>
-                <br/>
-                <h4 className="has-text-weight-bold is-size-4">What are your goals?</h4>
-                <p>{data.strapiProject.project_goals}</p>
-            </Col>
-            <Col xs={20} sm={20} m={10} l={10} xl={6}>
-                <br/>
-                <h4 className="has-text-weight-bold is-size-4">This project exemplifies the Kingdom of God by ...</h4>
-                <p>{data.strapiProject.project_holy_goals}</p>
-            </Col>
-        </Row>
-        <Row type="flex" justify="center" align="center" gutter={24}>
-            <Col xs={20} sm={20} m={10} l={10} xl={6}>
-                <br/>
-                <h4 className="has-text-weight-bold is-size-4">What do you need?</h4>
-                <p>{data.strapiProject.project_goals}</p>
-            </Col>
-            <Col xs={20} sm={20} m={10} l={10} xl={6}>
-                <br/>
-                <h4 className="has-text-weight-bold is-size-4">Our timeline looks like ...</h4>
-                <p>{data.strapiProject.project_holy_goals}</p>
-            </Col>
-        </Row>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4">What are your goals?</h4>
+              <p>{data.strapiProject.project_goals}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4">This project exemplifies the Kingdom of God by ...</h4>
+              <p>{data.strapiProject.project_holy_goals}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4">What do you need?</h4>
+              <p>{data.strapiProject.project_goals}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4">Our timeline looks like ...</h4>
+              <p>{data.strapiProject.project_holy_goals}</p>
+          </div>
+        </div>
       </section>
     </Layout>
 )
@@ -71,12 +65,15 @@ export const pageQuery = graphql`
     strapiProject(id: {eq: $id}) {
       project_name
       project_description
+      profiles {
+        profile_name
+      }
       project_goals
       project_holy_goals
       project_timeline
       project_image {
          childImageSharp {
-            fluid(maxWidth:350, maxHeight:400, quality:90, toFormat:JPG) {
+            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
 	             ...GatsbyImageSharpFluid
             }
           }
