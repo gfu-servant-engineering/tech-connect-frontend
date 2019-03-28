@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
-import Navbar from '../components/Navbar';
 import SectionHeader from '../components/SectionHeader';
 
 
@@ -98,7 +97,6 @@ export const AboutPageTemplate = ({
             </div>
           </div>
         </div>
-        <Navbar />
       </div>
     </section>
   )
