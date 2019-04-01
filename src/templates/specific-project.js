@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
+import Disqus from 'disqus-react'
 
 const ProjectTemplate = ({ data }) => (
     <Layout>
@@ -52,6 +53,10 @@ const ProjectTemplate = ({ data }) => (
               <br/>
               <h4 className="has-text-weight-bold is-size-4">Our timeline looks like ...</h4>
               <p>{data.strapiProject.project_holy_goals}</p>
+          </div>
+          <div className="column is-10">
+            <br />
+            <Disqus.DiscussionEmbed shortname="tech-connect" />  
           </div>
         </div>
       </section>
