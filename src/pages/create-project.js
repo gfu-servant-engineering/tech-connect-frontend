@@ -40,8 +40,8 @@ const ProjectFormTemplate = ({ data }) => (
 
 
 
-      <div class="field is-centered">
-        <div class="label is-normal">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
           <label class="label">Describe your project</label>
         </div>
         <div class="field-body">
@@ -108,7 +108,7 @@ const ProjectFormTemplate = ({ data }) => (
           <div class="field">
             <div class="control">
               <button class="button is-primary">
-                Send message
+                Submit Project
               </button>
             </div>
           </div>
