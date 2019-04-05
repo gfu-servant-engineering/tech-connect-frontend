@@ -4,7 +4,7 @@ import Layout from '../components/Layout.js'
 const ProjectFormTemplate = ({ data }) => (
   <Layout>
     <section className="section">
-      <section class="hero">
+      <div class="hero">
         <div class="hero-body">
           <div class="container has-text-centered">
             <h1 class="title" className="has-text-weight-bold is-size-1" style={{color: '#1C2833'}}>
@@ -15,7 +15,7 @@ const ProjectFormTemplate = ({ data }) => (
             </h2>
           </div>
         </div>
-      </section>
+      </div>
       <div className="column is-multiline is-centered is-12-tablet is-12-desktop is-12-widescreen">
         <div class="field is-horizontal">
           <div class="field-label is-normal">
