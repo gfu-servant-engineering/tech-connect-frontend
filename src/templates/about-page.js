@@ -87,10 +87,9 @@ export const AboutPageTemplate = ({
                     </h2>
                   </div>
                   <div className="column is-12">
-                    <Link className="button has-text-centered"
-                      style={{fontWeight: 'bold', fontSize: '20px'}} size="large" href="/">
+                    <button class="button is-primary-invert is-large">
                       {button}
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
