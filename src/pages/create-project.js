@@ -112,7 +112,7 @@ const ProjectFormTemplate = ({ data }) => (
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <button class="button is-primary">
+                <button class="button is-primary is-medium">
                   Submit Project for Review
                 </button>
               </div>
