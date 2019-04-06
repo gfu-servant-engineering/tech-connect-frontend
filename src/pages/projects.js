@@ -7,12 +7,8 @@ const ProjectPage = ({ data }) => (
   <Layout>
   <section className="section">
     <div className="container">
-      <h1 className="has-text-weight-bold is-size-1" style={{color: '#1C2833'}}>Explore Projects</h1>
-      <hr style={{
-            color:'#1C2833',
-            backgroundColor: '#1C2833',
-            height: 5
-          }}/>
+      <h1 className="has-text-weight-bold is-size-1 blue-text">Explore Projects</h1>
+      <hr className="horizontal-rule" />
       <br></br>
       <div>
         <div className="columns is-multiline is-centered">
