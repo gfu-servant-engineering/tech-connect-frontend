@@ -77,7 +77,7 @@ export const AboutPageTemplate = ({
             </div>
             </div>
             <div className="full-width-image-container" 
-              style={{background:'#1C2833', color: 'white', marginTop: '1%', paddingBottom: '0'}}>
+              style={{color: 'white', marginTop: '1%', paddingBottom: '0'}}>
               <div>
                 <div className="columns is-centered has-text-centered is-multiline">
                   <div className="column is-12">
