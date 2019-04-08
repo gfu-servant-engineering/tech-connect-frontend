@@ -108,7 +108,7 @@ const ProjectFormTemplate = ({ data }) => (
             </div>
           </div>          
         </div>
-        <div class="field is-horizontal">
+        <div class="field is-horizontal column is-10">
           <div class="field-body">
             <div class="field">
               <div class="control">
