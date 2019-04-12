@@ -24,11 +24,27 @@ const ProjectTemplate = ({ data }) => (
                 <Link style={{color: '#1C2833', paddingBottom: '20px'}} to={`/${data.strapiProject.profiles.profile_name}`}>Sponsored by {data.strapiProject.profiles.profile_name}</Link>
                 <br/>
                 <br/>
-                <Link className="button has-text-centered" href='/' type="default" block>
-                  Contact Sponsor
-                </Link>
+                <br/>
+              <div className="columns is-centered is-flex" >
+                <div className="column is-one-quarter is-flex">
+                </div>
+                  {data.strapiProject.project_github !== "" &&
+                   <div className="column is-centered is-flex">                   
+                    <a href={data.strapiProject.project_github}><FaGithub size={"4.5em"}/></a></div>}
+                  {data.strapiProject.project_trello !== "" &&
+                   <div className="column is-centered is-flex">
+                   <a href={data.strapiProject.project_trello}><FaTrello size={"4.5em"}/></a></div>}
+                  {data.strapiProject.project_slack !== "" &&
+                   <div className="column is-centered is-flex">
+                   <a href={data.strapiProject.project_slack}><FaSlack size={"4.5em"}/></a></div>}
+                  {data.strapiProject.project_email !== "" &&
+                   <div className="column is-centered is-flex">
+                   <a href={"mailto:" + data.strapiProject.project_email}><FaRegEnvelope size={"4.5em"}/></a></div>}
+                <div className="column is-one-quarter">
+                </div>
               </div>
-            </div>
+              </div>
+         </div>
         </div>
         <div className="columns is-centered is-multiline">
           <div className="column is-10">
@@ -55,18 +71,6 @@ const ProjectTemplate = ({ data }) => (
               <br/>
               <h4 className="has-text-weight-bold is-size-4">Our timeline looks like ...</h4>
               <p>{data.strapiProject.project_holy_goals}</p>
-        </div>
-        <div className=" is-centered column is-10">
-        
-         <p>
-        {data.strapiProject.project_github !== "" &&
-         <a href={data.strapiProject.project_github}><FaGithub size={"6em"}/></a>}
-        {data.strapiProject.project_trello !== "" &&
-         <a href={data.strapiProject.project_trello}><FaTrello size={"6em"}/></a>}
-        {data.strapiProject.project_slack !== "" &&
-         <a href={data.strapiProject.project_slack}><FaSlack size={"6em"}/></a>}
-        {data.strapiProject.project_email !== "" &&
-         <a href={"mailto:" + data.strapiProject.project_email}><FaRegEnvelope size={"6em"}/></a>}</p>
         </div>
           <div className="column is-10">
             <br />
