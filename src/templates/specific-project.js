@@ -3,6 +3,8 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
+import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
+
 
 const ProjectTemplate = ({ data }) => (
     <Layout>
@@ -53,7 +55,13 @@ const ProjectTemplate = ({ data }) => (
               <br/>
               <h4 className="has-text-weight-bold is-size-4">Our timeline looks like ...</h4>
               <p>{data.strapiProject.project_holy_goals}</p>
-          </div>
+        </div>
+          <div className=" is-centered column is-10">
+        <p><a href={data.strapiProject.project_github}><FaGithub size={"6em"}/></a>
+        <a href={data.strapiProject.project_trello}><FaTrello size={"6em"}/></a>
+        <a href={data.strapiProject.project_slack}><FaSlack size={"6em"}/></a>
+        <a href={data.strapiProject.project_email}><FaRegEnvelope size={"6em"}/></a></p>
+        </div>
           <div className="column is-10">
             <br />
             <Disqus.DiscussionEmbed shortname="tech-connect" />  
@@ -76,6 +84,10 @@ export const pageQuery = graphql`
       project_goals
       project_holy_goals
       project_timeline
+      project_github
+      project_trello
+      project_slack
+      project_email
       project_image {
          childImageSharp {
             fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
