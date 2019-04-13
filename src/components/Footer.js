@@ -5,7 +5,7 @@ import { Link, withPrefix } from 'gatsby'
 const Footer = class extends React.Component {
   render() {
     return (
-      <footer className="footer has-background-black has-text-white-ter">
+      <footer className="footer has-background-white has-text-black-ter">
         <div className="content has-text-centered">
           <Link to="/">
             <img
@@ -15,29 +15,17 @@ const Footer = class extends React.Component {
             />
           </Link>
         </div>
-        <div className="content has-text-centered has-background-black has-text-white-ter">
-          <div className="container has-background-black has-text-white-ter">
-            <div className="columns is-centered">
-              <div className="column is-4">
-                <section className="menu">
-                    <Link to="/" className="navbar-item">
-                      Create a Project
-                    </Link>
-                </section>
+        <div className="content has-text-centered has-text-black-ter">
+          <div className="container has-text-black-ter" >
+            <div className="columns">
+              <div className="column is-one-third">
+                <Link to="/create-project"><button className="button is-white">Create A Project</button></Link>
               </div>
-              <div className="column is-4">
-                <section>
-                    <Link className="navbar-item" to="/projects" style={{textAlign:'centered'}}>
-                      View All Projects
-                    </Link>
-                </section>
+              <div className="column is-one-third">
+              <Link to="/projects"><button className="button is-white">View All Projects</button></Link>
               </div>
-              <div className="column is-4">
-                <section>
-                    <Link className="navbar-item" to="/about">
-                      About Us
-                    </Link>
-                </section>
+              <div className="column is-one-third">
+              <Link to="/about"><button className="button is-white">About Us</button></Link>
               </div>
             </div>
           </div>
