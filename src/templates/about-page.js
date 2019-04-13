@@ -76,10 +76,9 @@ export const AboutPageTemplate = ({
                 </div>
             </div>
             </div>
-            <div className="full-width-image-container" 
-              style={{color: 'white', marginTop: '1%', paddingBottom: '0'}}>
+            <div className="full-width-image-container" style={{height: '40em'}}>
               <div>
-                <div className="columns is-centered has-text-centered is-multiline">
+                <div className="columns is-centered is v-centered has-text-centered is-multiline">
                   <div className="column is-12">
                     <h2 className="is-size-3 has-text-weight-normal" 
                       style={{color: 'white', fontStyle: 'italic', paddingLeft: '10%', paddingRight: '10%'}}>
@@ -87,9 +86,11 @@ export const AboutPageTemplate = ({
                     </h2>
                   </div>
                   <div className="column is-12">
-                    <button class="button is-primary-invert is-large">
-                      {button}
-                    </button>
+                    <Link to="/create-project">
+                      <button class="button is-primary-invert is-large">
+                        {button}
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

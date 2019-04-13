@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const SectionHeader = ({ SectionHeader }) => (
     <div style={{width: '80%', marginLeft: '10%'}}>
-        <h2 className="is-size-4 blue-text">{SectionHeader}</h2>
+        <h2 className="is-size-4 has-text-primary">{SectionHeader}</h2>
         <hr className="horizontal-rule"/>
     </div>
 )

@@ -7,7 +7,7 @@ const ProjectPage = ({ data }) => (
   <Layout>
   <section className="section">
     <div className="container">
-      <h1 className="has-text-weight-bold is-size-1 blue-text">Explore Projects</h1>
+      <h1 className="has-text-weight-bold is-size-1 has-text-primary">Explore Projects</h1>
       <hr className="horizontal-rule" />
       <br></br>
       <div>

@@ -8,12 +8,12 @@ const IndexPage = ({data}) => (
         <section className="section">
           <div className="container">
             <div className="content">
-              <h1 className="has-text-weight-bold is-size-2 blue-text">
+              <h1 className="has-text-weight-bold is-size-2 has-text-primary">
                 Tech Connect is looking for people with a faith in Jesus Christ and the desire to
                 share their time and talents to partner with this ministry.
               </h1>
             </div>
-            <h1 className="has-text-weight-bold is-size-3 blue-text">Featured Projects</h1>
+            <h1 className="has-text-weight-bold is-size-3 has-text-primary">Featured Projects</h1>
             <hr className="horizontal-rule" />
                 <div className="columns is-multiline is-centered">
                   {data.allStrapiProject.edges.map(document => (
@@ -22,7 +22,7 @@ const IndexPage = ({data}) => (
                       </div>
                   ))}
                 </div>
-            <h1 className="has-text-weight-bold is-size-3 blue-text">Success Stories</h1>
+            <h1 className="has-text-weight-bold is-size-3 has-text-primary">Success Stories</h1>
             <hr className="horizontal-rule" />
           </div>
         </section>

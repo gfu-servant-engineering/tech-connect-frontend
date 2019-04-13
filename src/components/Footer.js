@@ -19,13 +19,13 @@ const Footer = class extends React.Component {
           <div className="container has-text-black-ter" >
             <div className="columns">
               <div className="column is-one-third">
-                <a href="/create-project"><button class="button is-white">Create A Project</button></a>
+                <Link to="/create-project"><button className="button is-white">Create A Project</button></Link>
               </div>
               <div className="column is-one-third">
-              <a href="/projects"><button class="button is-white">View All Projects</button></a>
+              <Link to="/projects"><button className="button is-white">View All Projects</button></Link>
               </div>
               <div className="column is-one-third">
-                <a href="/about"><button class="button is-white">About Us</button></a>
+              <Link to="/about"><button className="button is-white">About Us</button></Link>
               </div>
             </div>
           </div>
