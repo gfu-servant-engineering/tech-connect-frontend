@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { kebabCase } from 'lodash'
 import Helmet from 'react-helmet'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Disqus from 'disqus-react'
 
 export const BlogPostTemplate = ({
   content,
   contentComponent,
   description,
-  tags,
   title,
   helmet,
+  image
 }) => {
   const PostContent = contentComponent || Content
 
@@ -26,21 +26,13 @@ export const BlogPostTemplate = ({
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title}
             </h1>
+            <PreviewCompatibleImage imageInfo={image} />
             <p>{description}</p>
             <PostContent content={content} />
-            {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
-                <Disqus.DiscussionEmbed shortname="tech-connect" />  
+
+                <Disqus.DiscussionEmbed shortname="tech-connect" />
               </div>
-            ) : null}
           </div>
         </div>
       </div>
@@ -54,6 +46,7 @@ BlogPostTemplate.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 const BlogPost = ({ data }) => {
@@ -68,6 +61,7 @@ const BlogPost = ({ data }) => {
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
+        image={post.frontmatter.image}
         description={post.frontmatter.description}
         helmet={
           <Helmet
@@ -77,7 +71,6 @@ const BlogPost = ({ data }) => {
             <meta name="description" content={`${post.frontmatter.description}`} />
           </Helmet>
         }
-        tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
       <Disqus.DiscussionEmbed shortname="tech-connect" config={disqusConfig} />
@@ -101,8 +94,14 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        image {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 100, toFormat:JPG) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         description
-        tags
       }
     }
   }
