@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import FormData from 'form-data'
 import axios from 'axios';
-{/*import ImageUpload from '../components/ImageUpload.js'*/}
 
     class ProjectForm extends Component {
       constructor() {
@@ -17,7 +16,6 @@ import axios from 'axios';
           project_status: '',
           project_org_description: '',
           project_holy_goals: '',
-          project_timeline: '',
           project_video: '',
           project_github: '',
           project_slack: '',
@@ -25,7 +23,6 @@ import axios from 'axios';
           project_email: '',
         };
       }
-
 
 
       onChange = (e) => {
@@ -51,7 +48,6 @@ import axios from 'axios';
           project_status,
           project_org_description,
           project_holy_goals,
-          project_timeline,
           project_video,
           project_github,
           project_slack,
@@ -73,7 +69,6 @@ import axios from 'axios';
             project_status: project_status,
             project_org_description: project_org_description,
             project_holy_goals: project_holy_goals,
-            project_timeline: project_timeline,
             project_video: project_video,
             project_github: project_github,
             project_slack: project_slack,
@@ -91,6 +86,10 @@ import axios from 'axios';
             console.log(progressEvent.loaded / progressEvent.total)
           }
         })
+        .then((result) => {
+            //access the results here....
+            alert('Your project creation was successful!')
+          });
 
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
@@ -101,8 +100,14 @@ import axios from 'axios';
         this.setState({'project_status': ''});
         this.setState({'project_org_description': ''});
         this.setState({'project_holy_goals': ''});
-
+        this.setState({'project_github': ''});
+        this.setState({'project_slack': ''});
+        this.setState({'project_trello': ''});
+        this.setState({'project_email': ''});
+        this.setState({'project_video': ''});
       }
+
+
 
       render() {
         const {
@@ -115,13 +120,22 @@ import axios from 'axios';
           project_status,
           project_org_description,
           project_holy_goals,
-          project_timeline,
           project_video,
           project_github,
           project_slack,
           project_trello,
           project_email
                 } = this.state;
+        const isEnabled = project_name.length > 0
+                && project_image.length > 0
+                && project_description.length > 0
+                && project_goals.length > 0
+                && project_needs.length > 0
+                && project_origins.length > 0
+                && project_status.length > 0
+                && project_org_description.length > 0
+                && project_holy_goals.length > 0;
+
         return (
 
           <form onSubmit={this.onSubmit.bind(this)}>
@@ -130,18 +144,18 @@ import axios from 'axios';
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label class="label is-medium">Project Name</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
-                      class="input"
+            <label className="label is-medium">Project Name</label>
+            <div className="field is-horizontal required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="project_name"
                       value={project_name}
                       onChange={this.onChange}
                       placeholder="What is the name of your project?" />
+                      <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -153,33 +167,40 @@ import axios from 'axios';
           <div className="column is-2 is-centered">
             <br/>
             <label class="label is-medium">Upload an image...</label>
-            <div class="field is-horizontal is-centered">
-              <div class="file is-centered">
-                  <input class="file-input" type="file" name="image" value={project_image} onChange={this.onChange} />
-                  <span class="file-cta">
-                    <span class="file-icon"><i class="fas fa-upload"></i></span>
-                    <span class="file-label">Choose a file…</span>
-                  </span>
-              </div>
+            <div className='buttons fadein'>
+            <div className='button'>
+              <label htmlFor='single'></label>
+              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
             </div>
+            <p className="help">This field is required</p>
+          </div>
           </div>
 
-          {/* VIDEO UPLOAD */}
-          <div className="column is-2">
+
+          {/* VIDEO LINK */}
+          <div className="column is-3">
             <br/>
-            <label class="label is-medium">Upload a video...</label>
-            <div class="field is-horizontal">
-              <div class="file is-centered">
-                  <input class="file-input" type="file" name="image" value={project_video} onChange={this.onChange} />
-                  <span class="file-cta">
-                    <span class="file-icon"><i class="fas fa-upload"></i></span>
-                    <span class="file-label">Choose a file…</span>
-                  </span>
+            <label class="label is-medium">A link to a video</label>
+            <div class="field is-horizontal required">
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input"
+                      type="text"
+                      name="project_video"
+                      value={project_video}
+                      onChange={this.onChange}
+                      placeholder="youtube.com/your/video/link" />
+                      <p className="help">If you have a video thats explains more about your project, link it here!</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          </div>
 
-
+          <div className="columns is-centered is-multiline">
+          {/* ACCTS HEADER */}
           <div className="column is-10 is-centered">
             <hr />
             <center>
@@ -188,9 +209,32 @@ import axios from 'axios';
             </h4>
             </center>
           </div>
-          <div className="column is-1 is-centered">
-            {/*this makes me very angry*/}
           </div>
+
+          <div className="columns is-centered is-multiline">
+
+            {/* EMAIL */}
+            <div className="column is-2">
+              <br/>
+              <label class="label is-medium">Email</label>
+              <div class="field is-horizontal is-required">
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input class="input"
+                        type="text"
+                        name="project_email"
+                        value={project_email}
+                        onChange={this.onChange}
+                        placeholder="youremail@example.com" />
+
+                        <p className="help">This field is required</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
           {/* GITHUB */}
           <div className="column is-2">
@@ -201,12 +245,11 @@ import axios from 'axios';
                 <div class="field">
                   <div class="control">
                     <input class="input"
-                      class="input"
                       type="text"
                       name="project_github"
                       value={project_github}
                       onChange={this.onChange}
-                      placeholder="github/repository" />
+                      placeholder="github.com/repository" />
                   </div>
                 </div>
               </div>
@@ -222,12 +265,11 @@ import axios from 'axios';
                 <div class="field">
                   <div class="control">
                     <input class="input"
-                      class="input"
                       type="text"
                       name="project_slack"
                       value={project_slack}
                       onChange={this.onChange}
-                      placeholder="slack@slack.com" />
+                      placeholder="workspace.slack.com" />
                   </div>
                 </div>
               </div>
@@ -243,33 +285,11 @@ import axios from 'axios';
                 <div class="field">
                   <div class="control">
                     <input class="input"
-                      class="input"
                       type="text"
                       name="project_trello"
                       value={project_trello}
                       onChange={this.onChange}
-                      placeholder="slack@slack.com" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* EMAIL */}
-          <div className="column is-2">
-            <br/>
-            <label class="label is-medium">Email</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
-                      class="input"
-                      type="text"
-                      name="project_email"
-                      value={project_email}
-                      onChange={this.onChange}
-                      placeholder="slack@slack.com" />
+                      placeholder="trello.com/your/trellolink" />
                   </div>
                 </div>
               </div>
@@ -296,6 +316,7 @@ import axios from 'axios';
                       If not, have others attempted to solve it in the past?
                       What is the cause of the problem? How are you aiming to solve it?">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -319,6 +340,7 @@ import axios from 'axios';
                       placeholder="Describe both long term and short term goals.
                       Be specific about the kind of help you need.">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -341,6 +363,7 @@ import axios from 'axios';
                       onChange={this.onChange}
                       placeholder="Tell us about the type of person you think would be most helpful to you">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -351,13 +374,13 @@ import axios from 'axios';
           {/* ORIGIN */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">How did this project come about?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">How did this project come about?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_origins"
                       value={project_origins}
@@ -365,6 +388,7 @@ import axios from 'axios';
                       placeholder="Give us a backstory. What inspired you to start this project?
                       This information helps people determine whether or not they'd be a good fit for this project.">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -391,6 +415,7 @@ import axios from 'axios';
                       Don't worry, a large foundation isn't required to submit a project.
                       Just let us know where you're at.">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -413,6 +438,7 @@ import axios from 'axios';
                       onChange={this.onChange}
                       placeholder="What organization do you work for if any?">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -436,6 +462,7 @@ import axios from 'axios';
                       placeholder="Furthering the Kingdom of God is Tech Connect's main mission.
                       It is imperative that your project's main mission is the same in one way or another.">
                     </textarea>
+                    <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -447,7 +474,7 @@ import axios from 'axios';
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <button type="submit" class="button is-primary is-medium">
+                  <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
                     Submit Project for Review
                   </button>
                 </div>
