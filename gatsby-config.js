@@ -29,7 +29,9 @@ module.exports = {
         apiURL: 'http://techconnect-api.ddns.net:1337',
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
-          'user'
+          'profile',
+		      'skill',
+		      'experience'
         ],
         queryLimit: 1000,
       },
