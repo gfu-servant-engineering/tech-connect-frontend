@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
-import { v4 } from 'uuid'
 
 const ProfileTemplate = ({ data }) => (
     <Layout>
