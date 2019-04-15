@@ -52,7 +52,7 @@ const ProjectTemplate = ({ data }) => (
           </div>
           <div className="column is-10">
             <br />
-            <Disqus.DiscussionEmbed shortname="tech-connect" />  
+            <Disqus.DiscussionEmbed shortname="tech-connect" />
           </div>
         </div>
       </section>
@@ -65,20 +65,24 @@ export const pageQuery = graphql`
   query ProjectTemplate ($id: String!) {
     strapiProject(id: {eq: $id}) {
       project_name
+      project_image {
+        childImageSharp {
+          fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
+             ...GatsbyImageSharpFluid
+          }
+        }
+      }
       project_description
+      project_goals
+      project_needs
+      project_origins
+      project_status
+      project_org_description
+      project_holy_goals
+      project_timeline
       profiles {
         profile_name
       }
-      project_goals
-      project_holy_goals
-      project_timeline
-      project_image {
-         childImageSharp {
-            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
-	             ...GatsbyImageSharpFluid
-            }
-          }
-        }
-     }
+    }
   }
   `
