@@ -25,23 +25,21 @@ const ProjectTemplate = ({ data }) => (
                 <br/>
                 <br/>
                 <br/>
-              <div className="columns is-centered is-flex" >
-                <div className="column is-one-quarter is-flex">
-                </div>
+              <div className="columns is-flex" >
                   {data.strapiProject.project_github !== "" &&
-                   <div className="column is-centered is-flex">                   
-                    <a href={data.strapiProject.project_github}><FaGithub size={"4.5em"}/></a></div>}
+                   <div className="column is-2 is-flex">
+                    <a href={data.strapiProject.project_github}><FaGithub size={"3em"}/></a></div>}
                   {data.strapiProject.project_trello !== "" &&
-                   <div className="column is-centered is-flex">
-                   <a href={data.strapiProject.project_trello}><FaTrello size={"4.5em"}/></a></div>}
+                   <div className="column is-2 is-flex">
+                   <a href={data.strapiProject.project_trello}><FaTrello size={"3em"}/></a></div>}
                   {data.strapiProject.project_slack !== "" &&
-                   <div className="column is-centered is-flex">
-                   <a href={data.strapiProject.project_slack}><FaSlack size={"4.5em"}/></a></div>}
+                   <div className="column is-2 is-flex">
+                   <a href={data.strapiProject.project_slack}><FaSlack size={"3em"}/></a></div>}
                   {data.strapiProject.project_email !== "" &&
-                   <div className="column is-centered is-flex">
-                   <a href={"mailto:" + data.strapiProject.project_email}><FaRegEnvelope size={"4.5em"}/></a></div>}
-                <div className="column is-one-quarter">
-                </div>
+                   <div className="column is-2 is-flex">
+                   <a href={"mailto:" + data.strapiProject.project_email}><FaRegEnvelope size={"3em"}/></a></div>}
+                   <div className="column is-one-fifth is-flex"> </div>
+                   <div className="column is-5 is-flex"> </div>
               </div>
               </div>
          </div>
