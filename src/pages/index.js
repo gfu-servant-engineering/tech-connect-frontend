@@ -40,6 +40,7 @@ export const pageQuery = graphql`
           project_name
           project_description
           profiles {
+            id
             profile_name
           }
           project_image {
