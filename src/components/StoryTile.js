@@ -8,9 +8,9 @@ const StoryTile = ({ data }) => (
   <div>
     <Link to={data.fields.slug}><PreviewCompatibleImage imageInfo={data.frontmatter.image}/></Link>
     <h3 className="has-text-weight-bold is-size-5">
-      <Link style={{display:'inline-block', color: '#1C2833'}} to={data.fields.slug}>{data.frontmatter.title}</Link>
+      <Link className="has-text-black" style={{display:'inline-block'}} to={data.fields.slug}>{data.frontmatter.title}</Link>
     </h3>
-    <Link style={{color: '#1C2833'}} to={data.fields.slug}><LinesEllipsis
+    <Link className="has-text-black" to={data.fields.slug}><LinesEllipsis
       text={data.excerpt}
       maxLine='3'
       ellipsis='...'

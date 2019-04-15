@@ -23,12 +23,16 @@ export const BlogPostTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <PreviewCompatibleImage imageInfo={image} /><br/>
-            <p>{description}</p><br/>
-            <PostContent content={content} />
+            <div className="columns is-centered">
+                <div className="column is-10">
+                    <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+                      {title}
+                    </h1>
+                    <PreviewCompatibleImage imageInfo={image} /><br/>
+                    <p>{description}</p><br/>
+                    <PostContent content={content} />
+                </div>
+            </div>
               <div style={{ marginTop: `4rem` }}>
 
                 <Disqus.DiscussionEmbed shortname="tech-connect" />
@@ -96,7 +100,7 @@ export const pageQuery = graphql`
         title
         image {
           childImageSharp {
-            fluid(maxWidth: 2048, quality: 100, toFormat:JPG) {
+            fluid(maxWidth:700, maxHeight:470, quality: 100, toFormat:JPG) {
               ...GatsbyImageSharpFluid
             }
           }
