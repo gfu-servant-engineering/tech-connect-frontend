@@ -11,7 +11,7 @@ const ProjectTile = ({ data }) => (
       <Link style={{display:'inline-block', color: '#1C2833'}} to={`/${data.id}`}>{data.project_name}</Link>
     </h3>
     <h4 className="has-text-weight-normal is-size-5 is-size-6" style={{color: '#1C2833'}}>
-      <Link style={{color: '#1C2833'}} to={`/${data.profiles.profile_name}`}><i>Sponsored by {data.profiles.profile_name}</i></Link>
+      <Link style={{color: '#1C2833'}} to={`/Profile_${data.profiles.id}`}><i>Sponsored by {data.profiles.profile_name}</i></Link>
     </h4>
     <Link style={{color: '#1C2833'}} to={`/${data.id}`}><LinesEllipsis
       text={data.project_description}
