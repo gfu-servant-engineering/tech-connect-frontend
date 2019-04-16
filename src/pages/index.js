@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import ProjectTile from '../components/ProjectTile.js'
+import StoryTile from '../components/StoryTile.js'
 
 const IndexPage = ({data}) => (
       <Layout>
@@ -24,6 +25,13 @@ const IndexPage = ({data}) => (
                 </div>
             <h1 className="has-text-weight-bold is-size-3 has-text-primary">Success Stories</h1>
             <hr className="horizontal-rule" />
+            <div className="columns is-multiline is-centered">
+                  {data.allMarkdownRemark.edges.map(({ node: story }) => (
+                      <div className="column is-8-tablet is-6-desktop is-3-widescreen">
+                          <StoryTile data={story}></StoryTile>
+                      </div>
+                  ))}
+            </div>
           </div>
         </section>
       </Layout>
@@ -65,6 +73,13 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            image {
+              childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             templateKey
             date(formatString: "MMMM DD, YYYY")
           }
