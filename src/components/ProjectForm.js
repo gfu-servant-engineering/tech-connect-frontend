@@ -75,9 +75,13 @@ import axios from 'axios';
             project_trello: project_trello,
             project_email: project_email,
           }
-        });
+        })
+        .then((result) => {
+            //access the results here....
+            alert('Your project creation was successful!')
+          });
 
-
+        {/* Image upload which is currently broken
         let data = new FormData();
         data.append('images', this.state.project_image);
 
@@ -90,6 +94,7 @@ import axios from 'axios';
             //access the results here....
             alert('Your project creation was successful!')
           });
+          */}
 
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
@@ -139,8 +144,8 @@ import axios from 'axios';
         return (
 
           <form onSubmit={this.onSubmit.bind(this)}>
-          <div className="columns is-centered is-multiline">
 
+          <div className="columns is-centered is-multiline">
           {/* NAME */}
           <div className="column is-3">
             <br/>
@@ -163,20 +168,6 @@ import axios from 'axios';
           </div>
 
 
-          {/* IMAGE UPLOAD */}
-          <div className="column is-2 is-centered">
-            <br/>
-            <label class="label is-medium">Upload an image...</label>
-            <div className='buttons fadein'>
-            <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
-            </div>
-            <p className="help">This field is required</p>
-          </div>
-          </div>
-
-
           {/* VIDEO LINK */}
           <div className="column is-3">
             <br/>
@@ -196,6 +187,21 @@ import axios from 'axios';
                 </div>
               </div>
             </div>
+          </div>
+          </div>
+
+          <div className="columns is-centered is-multiline">
+          {/* IMAGE UPLOAD */}
+          <div className="column is-2 is-centered">
+            <br/>
+            <label class="label is-medium">Upload an image...</label>
+            <div className='buttons fadein'>
+            <div className='button'>
+              <label htmlFor='single'></label>
+              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
+            </div>
+            <p className="help">This field is required</p>
+          </div>
           </div>
           </div>
 
