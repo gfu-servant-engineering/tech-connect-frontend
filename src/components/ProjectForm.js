@@ -142,14 +142,13 @@ import axios from 'axios';
                 && project_holy_goals.length > 0;
 
         return (
-
           <form onSubmit={this.onSubmit.bind(this)}>
 
           <div className="columns is-centered is-multiline">
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Project Name</label>
+            <label className="label is-large">Project Name</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -166,7 +165,6 @@ import axios from 'axios';
               </div>
             </div>
           </div>
-
 
           {/* VIDEO LINK */}
           <div className="column is-3">
@@ -188,9 +186,8 @@ import axios from 'axios';
               </div>
             </div>
           </div>
-          </div>
 
-          <div className="columns is-centered is-multiline">
+
           {/* IMAGE UPLOAD */}
           <div className="column is-2 is-centered">
             <br/>

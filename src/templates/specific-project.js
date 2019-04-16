@@ -58,17 +58,27 @@ const ProjectTemplate = ({ data }) => (
           </div>
           <div className="column is-5">
               <br/>
-              <h4 className="has-text-weight-bold is-size-4 has-text-primary">This project exemplifies the Kingdom of God by ...</h4>
-              <p>{data.strapiProject.project_holy_goals}</p>
-          </div>
-          <div className="column is-5">
-              <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What do you need?</h4>
               <p>{data.strapiProject.project_goals}</p>
           </div>
           <div className="column is-5">
               <br/>
-              <h4 className="has-text-weight-bold is-size-4 has-text-primary">Our timeline looks like ...</h4>
+              <h4 className="has-text-weight-bold is-size-4 has-text-primary">What inspired this project?</h4>
+              <p>{data.strapiProject.project_origins}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4 has-text-primary">This project is currently...</h4>
+              <p>{data.strapiProject.project_status}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4 has-text-primary">Tell us about yourself!</h4>
+              <p>{data.strapiProject.project_org_description}</p>
+          </div>
+          <div className="column is-5">
+              <br/>
+              <h4 className="has-text-weight-bold is-size-4 has-text-primary">This project exemplifies the Kingdom of God by ...</h4>
               <p>{data.strapiProject.project_holy_goals}</p>
           </div>
           <div className="column is-10">
@@ -102,6 +112,7 @@ export const pageQuery = graphql`
       project_org_description
       project_holy_goals
       project_timeline
+      project_blurb
       profiles {
         profile_name
       }
