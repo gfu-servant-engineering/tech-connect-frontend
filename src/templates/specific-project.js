@@ -3,13 +3,20 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
-
+import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
+import ResponsiveEmbed from 'react-responsive-embed'
 const ProjectTemplate = ({ data }) => (
     <Layout>
       <section className="section">
         <div className="columns is-centered">
           <div className="column is-5">
-            <PreviewCompatibleImage imageInfo={data.strapiProject.project_image} />
+          {data.strapiProject.project_video !== "" &&
+               <ResponsiveEmbed src={data.strapiProject.project_video}
+               style={{top:0, left:0, width:"100%", height:"100%"}}
+           />}
+          {data.strapiProject.project_video === "" &&
+               <PreviewCompatibleImage imageInfo={data.strapiProject.project_image} />
+          }
           </div>
           <div className="column is-5">
               <div style={{display:'inline', padding: '5%'}}>
@@ -18,11 +25,25 @@ const ProjectTemplate = ({ data }) => (
                 <Link style={{color: '#1C2833', paddingBottom: '20px'}} to={`/${data.strapiProject.profiles.profile_name}`}>Sponsored by {data.strapiProject.profiles.profile_name}</Link>
                 <br/>
                 <br/>
-                <Link className="button has-text-centered" href='/' type="default" block>
-                  Contact Sponsor
-                </Link>
+                <br/>
+              <div className="columns is-flex" >
+                  {data.strapiProject.project_github !== "" &&
+                   <div className="column is-2 is-flex">
+                    <a href={data.strapiProject.project_github}><FaGithub size={"3em"}/></a></div>}
+                  {data.strapiProject.project_trello !== "" &&
+                   <div className="column is-2 is-flex">
+                   <a href={data.strapiProject.project_trello}><FaTrello size={"3em"}/></a></div>}
+                  {data.strapiProject.project_slack !== "" &&
+                   <div className="column is-2 is-flex">
+                   <a href={data.strapiProject.project_slack}><FaSlack size={"3em"}/></a></div>}
+                  {data.strapiProject.project_email !== "" &&
+                   <div className="column is-2 is-flex">
+                   <a href={"mailto:" + data.strapiProject.project_email}><FaRegEnvelope size={"3em"}/></a></div>}
+                   <div className="column is-one-fifth is-flex"> </div>
+                   <div className="column is-5 is-flex"> </div>
               </div>
-            </div>
+              </div>
+         </div>
         </div>
         <div className="columns is-centered is-multiline">
           <div className="column is-10">
@@ -52,6 +73,7 @@ const ProjectTemplate = ({ data }) => (
           </div>
           <div className="column is-10">
             <br />
+
             <Disqus.DiscussionEmbed shortname="tech-connect" />
           </div>
         </div>
@@ -83,6 +105,18 @@ export const pageQuery = graphql`
       profiles {
         profile_name
       }
-    }
+      project_video
+      project_github
+      project_trello
+      project_slack
+      project_email
+      project_image {
+         childImageSharp {
+            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
+	             ...GatsbyImageSharpFluid
+            }
+          }
+        }
+     }
   }
   `
