@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Tabs from '../components/Tabs/Tabs.js'
-import { FaCheck, FaUser, FaList, FaExclamationTriangle } from 'react-icons/fa'
 import LinesEllipsis from 'react-lines-ellipsis'
 
 const ProfileTemplate = ({ data }) => (
@@ -59,26 +58,15 @@ const ProfileTemplate = ({ data }) => (
               </div> <br /><br />
           </div>
 
-
-          <div label="Endorsements" icon="FaList">
-            <center>
-                <span class="icon is-medium"><FaExclamationTriangle size={"2em"}/></span>
-            </center>
-            <center>
-             This user does not have any endorsements at this time.
-             </center>
-            <br /><br />
-          </div>
-
           <div label="Projects" icon="FaPagelines">
               <div className="columns is-8 is-multiline is-centered">
                 {data.strapiProfile.projects.map(project => (
                     <div className="column is-8- mobile is-10-tablet is-4-desktop is-4-widescreen">
                     <Link to={`/Project_${project.id}`}><PreviewCompatibleImage imageInfo={project.project_image} /></Link>
                     <h3 className="has-text-weight-bold is-size-5">
-                      <Link style={{display:'inline-block', color: '#1C2833'}} to={`/Project_${project.id}`}>{project.project_name}</Link>
+                      <Link className="has-text-primary" style={{display:'inline-block'}} to={`/Project_${project.id}`}>{project.project_name}</Link>
                     </h3>
-                    <Link style={{color: '#1C2833'}} to={`/Project_${project.id}`}><LinesEllipsis
+                    <Link className="has-text-primary" to={`/Project_${project.id}`}><LinesEllipsis
                       text={project.project_description}
                       maxLine='2'
                       ellipsis='...'

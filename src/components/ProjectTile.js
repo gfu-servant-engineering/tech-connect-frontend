@@ -8,12 +8,12 @@ const ProjectTile = ({ data }) => (
   <div>
     <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.project_image} /></Link>
     <h3 className="has-text-weight-bold is-size-5">
-      <Link style={{display:'inline-block', color: '#1C2833'}} to={`/${data.id}`}>{data.project_name}</Link>
+      <Link className="has-text-primary" style={{display:'inline-block'}} to={`/${data.id}`}>{data.project_name}</Link>
     </h3>
-    <h4 className="has-text-weight-normal is-size-5 is-size-6" style={{color: '#1C2833'}}>
-      <Link style={{color: '#1C2833'}} to={`/Profile_${data.profiles.id}`}><i>Sponsored by {data.profiles.profile_name}</i></Link>
+    <h4 className="has-text-weight-normal is-size-5 is-size-6">
+      <Link className="has-text-primary" to={`/Profile_${data.profiles.id}`}><i>Sponsored by {data.profiles.profile_name}</i></Link>
     </h4>
-    <Link style={{color: '#1C2833'}} to={`/${data.id}`}><LinesEllipsis
+    <Link className="has-text-primary" to={`/${data.id}`}><LinesEllipsis
       text={data.project_description}
       maxLine='3'
       ellipsis='...'
