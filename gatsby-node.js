@@ -44,6 +44,52 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
+  const getProfiles = makeRequest(graphql, `
+    {
+      allStrapiProfile {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each user.
+    result.data.allStrapiProfile.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/specific-profile.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+  
+  const getSkills = makeRequest(graphql, `
+    {
+      allStrapiSkill {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `);
+  
+  const getExperiences = makeRequest(graphql, `
+    {
+      allStrapiExperience {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `);
 
   return graphql(`
     {
@@ -85,7 +131,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 })
 
   // Query for articles nodes to use in creating pages.
-  return getArticles;
+  return Promise.all([
+	  getProjects,
+	  getProfiles,
+	  getSkills,
+	  getExperiences,
+  ])
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

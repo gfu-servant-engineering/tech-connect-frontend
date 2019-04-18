@@ -4,6 +4,7 @@
 // Kalidi logo brand color: #FD461E
 $tech-connect-blue: #1C2833
 $tech-connect-blue-invert: #fff
+$tab-border: #ccc
 
 $primary: $tech-connect-blue
 $primary-invert: $tech-connect-blue-invert
@@ -52,6 +53,27 @@ $body-color: $tech-connect-blue
 .horizontal-rule
   background-color: $tech-connect-blue
   height: 4px
+
+.tab-list
+  border-bottom: 1px solid $tab-border
+  padding-left: 0
+
+
+.tab-list-item
+  display: inline-block
+  list-style: none
+  margin-bottom: -1px
+  border-top-right-radius: 5px
+  border-top-left-radius: 5px
+
+
+.tab-list-active
+  background-color: white
+  border: solid $tab-border
+  border-width: 2px 2px 0 2px
+  font-weight: bold
+
+
 
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";

@@ -28,7 +28,9 @@ export const BlogPostTemplate = ({
                     <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
                       {title}
                     </h1>
-                    <PreviewCompatibleImage imageInfo={image} /><br/>
+                    <center>
+                        <PreviewCompatibleImage imageInfo={image} /><br/>
+                    </center>
                     <p>{description}</p><br/>
                     <PostContent content={content} />
                 </div>
