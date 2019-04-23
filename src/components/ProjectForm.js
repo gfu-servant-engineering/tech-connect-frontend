@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import FormData from 'form-data'
 import axios from 'axios';
+import { Link } from 'gatsby'
 
     class ProjectForm extends Component {
       constructor() {
@@ -477,9 +478,23 @@ import axios from 'axios';
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
-                    Submit Project for Review
-                  </button>
+
+                {/* This button is what submits the form to the Strapi backend.
+                    This is commented out to allow people to try out our site.
+                    When this button is pressed, everything posts to the backend
+                    other than the image, so that will need to be fixed.
+
+                    <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
+                      Submit Project for Review
+                    </button>
+                  */}
+
+                  {/* This button is a placeholder for the expo*/}
+                  <Link to="/thank-you">
+                      <button disabled={!isEnabled} class="button is-primary is-medium">
+                        Submit Project for Review
+                      </button>
+                  </Link>
                 </div>
               </div>
             </div>
