@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import FormData from 'form-data'
 import axios from 'axios';
+import Tabs from '../components/Tabs/Tabs.js'
 
     class ProjectForm extends Component {
       constructor() {
@@ -142,349 +143,589 @@ import axios from 'axios';
                 && project_holy_goals.length > 0;
 
         return (
+
+
           <form onSubmit={this.onSubmit.bind(this)}>
 
-          <div className="columns is-centered is-multiline">
-          {/* NAME */}
-          <div className="column is-3">
-            <br/>
-            <label className="label is-large">Project Name</label>
-            <div className="field is-horizontal required">
-              <div className="field-body">
-                <div className="field">
-                  <div className="control">
-                    <input className="input"
-                      type="text"
-                      name="project_name"
-                      value={project_name}
-                      onChange={this.onChange}
-                      placeholder="What is the name of your project?" />
-                      <p className="help">This field is required</p>
-                  </div>
-                </div>
+          <div>
+            <br />
+            <Tabs>
+              <div label="Name" icon="FaCheck">
+
+
+
+              <div className="columns is-centered is-multiline">
+              <div className="column is-10 is-centered">
+              <br /><br /><br />
+                <center>
+                <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                  Start by selecting a name for your project
+                </h4>
+                </center>
               </div>
-            </div>
-          </div>
-
-          {/* VIDEO LINK */}
-          <div className="column is-3">
-            <br/>
-            <label class="label is-medium">A link to a video</label>
-            <div class="field is-horizontal required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
-                      type="text"
-                      name="project_video"
-                      value={project_video}
-                      onChange={this.onChange}
-                      placeholder="youtube.com/your/video/link" />
-                      <p className="help">If you have a video thats explains more about your project, link it here!</p>
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-
-
-          {/* IMAGE UPLOAD */}
-          <div className="column is-2 is-centered">
-            <br/>
-            <label class="label is-medium">Upload an image...</label>
-            <div className='buttons fadein'>
-            <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
-            </div>
-            <p className="help">This field is required</p>
-          </div>
-          </div>
-          </div>
-
-          <div className="columns is-centered is-multiline">
-          {/* ACCTS HEADER */}
-          <div className="column is-10 is-centered">
-            <hr />
-            <center>
-            <h4 className="has-text-weight-bold is-size-5 has-text-primary">
-              If you have any existing accounts, we can link those for you...
-            </h4>
-            </center>
-          </div>
-          </div>
-
-          <div className="columns is-centered is-multiline">
-
-            {/* EMAIL */}
-            <div className="column is-2">
-              <br/>
-              <label class="label is-medium">Email</label>
-              <div class="field is-horizontal is-required">
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input class="input"
-                        type="text"
-                        name="project_email"
-                        value={project_email}
-                        onChange={this.onChange}
-                        placeholder="youremail@example.com" />
-
-                        <p className="help">This field is required</p>
+              <div style={{height:'400px'}} className="columns is-centered is-multiline">
+              {/* NAME */}
+              <div className="column is-5">
+                <br/>
+                <label className="label is-medium">Project Name</label>
+                <div className="field is-horizontal">
+                  <div className="field-body">
+                    <div className="field">
+                      <div className="control">
+                        <input className="input"
+                          type="text"
+                          name="project_name"
+                          value={project_name}
+                          onChange={this.onChange}
+                          placeholder="What is the name of your project?" />
+                          <p className="help">This field is required</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
 
 
-          {/* GITHUB */}
-          <div className="column is-2">
-            <br/>
-            <label class="label is-medium">Github</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
+
+              </div>
+              <div label="Media" icon="FaUser">
+
+              <div className="columns is-centered is-multiline">
+              <div className="column is-10 is-centered">
+              <br /><br /><br />
+                <center>
+                <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                  Next, add some media!
+                </h4>
+                </center>
+              </div>
+              </div>
+              <div style={{height:'400px'}} className="columns is-centered is-multiline">
+              {/* VIDEO LINK */}
+              <div className="column is-3">
+                <br/>
+                <label class="label is-medium">A link to a video</label>
+                <div class="field is-horizontal is-full-width required">
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <input class="input"
+                          type="text"
+                          name="project_video"
+                          value={project_video}
+                          onChange={this.onChange}
+                          placeholder="youtube.com/your/video/link" />
+                          <p className="help">If you have a video thats explains more about your project, link it here!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* IMAGE UPLOAD */}
+              <div className="column is-2 is-centered">
+                <br/>
+                <label class="label is-medium">Upload an image...</label>
+                <div className='buttons fadein'>
+                <div className='button'>
+                  <label htmlFor='single'></label>
+                  <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
+                </div>
+                <p className="help">This field is required</p>
+              </div>
+              </div>
+              </div>
+
+
+              </div>
+              <div label=" Project Description" icon="FaList">
+
+              <div className="columns is-centered is-multiline">
+              <div className="column is-10 is-centered">
+              <br /><br /><br />
+                <center>
+                <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                  Give us some details about your project
+                </h4>
+                </center>
+              </div>
+              </div>
+              <div className="columns is-centered is-multiline">
+                {/* DESC */}
+                <div className="column is-10">
+                  <br />
+                  <label class="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_description"
+                            value={project_description}
+                            onChange={this.onChange}
+                            placeholder="Is this a new problem?
+                            If not, have others attempted to solve it in the past?
+                            What is the cause of the problem? How are you aiming to solve it?">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                {/* GOALS */}
+                <div className="column is-5">
+                  <br/>
+                  <label class="label is-medium">What are your main goals?</label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_goals"
+                            value={project_goals}
+                            onChange={this.onChange}
+                            placeholder="Describe both long term and short term goals.
+                            Be specific about the kind of help you need.">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* NEEDS */}
+                <div className="column is-5">
+                  <br/>
+                  <label class="label is-medium">What do you need?</label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_needs"
+                            value={project_needs}
+                            onChange={this.onChange}
+                            placeholder="Tell us about the type of person you think would be most helpful to you">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+              </div>
+              <div label="Additional Details" icon="FaList">
+
+              <div className="columns is-centered is-multiline">
+              <div className="column is-10 is-centered">
+              <br /><br /><br />
+                <center>
+                <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                  Just a few more specifics...
+                </h4>
+                </center>
+              </div>
+              </div>
+                <div className="columns is-centered is-multiline">
+                {/* ORIGIN */}
+                <div className="column is-5">
+                  <br/>
+                  <label className="label is-medium">How did this project come about?</label>
+                  <div className="field is-horizontal">
+                    <div className="field-body">
+                      <div className="field">
+                        <div className="control">
+                          <textarea
+                            className="textarea is-medium"
+                            type="text"
+                            name="project_origins"
+                            value={project_origins}
+                            onChange={this.onChange}
+                            placeholder="Give us a backstory. What inspired you to start this project?
+                            This information helps people determine whether or not they'd be a good fit for this project.">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* STATUS */}
+                <div className="column is-5">
+                  <br/>
+                  <label class="label is-medium">
+                    What's the current status of your project?
+                  </label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_status"
+                            value={project_status}
+                            onChange={this.onChange}
+                            placeholder="Tell us what you have done so far to complete this project.
+                            Don't worry, a large foundation isn't required to submit a project.
+                            Just let us know where you're at.">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ORGANIZATION */}
+                <div className="column is-5">
+                  <br/>
+                  <label class="label is-medium">Tell us about yourself!</label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_org_description"
+                            value={project_org_description}
+                            onChange={this.onChange}
+                            placeholder="What organization do you work for if any?">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* HOLY GOALS */}
+                <div className="column is-5">
+                  <br/>
+                  <label class="label is-medium">How does this project further the Kindgom of God?</label>
+                  <div class="field is-horizontal">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea
+                            class="textarea is-medium"
+                            type="text"
+                            name="project_holy_goals"
+                            value={project_holy_goals}
+                            onChange={this.onChange}
+                            placeholder="Furthering the Kingdom of God is Tech Connect's main mission.
+                            It is imperative that your project's main mission is the same in one way or another.">
+                          </textarea>
+                          <p className="help">This field is required</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+              </div>
+              <div label="Accounts" icon="FaList">
+
+                <div className="columns is-centered is-multiline">
+                <div className="column is-10 is-centered">
+                <br /><br /><br />
+                  <center>
+                  <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                    If you have any existing accounts, we can link those for you...
+                  </h4>
+                  </center>
+                </div>
+                </div>
+                <div style={{height:'400px'}} className="columns is-centered is-multiline">
+                  {/* EMAIL */}
+                  <div className="column is-2">
+                    <br/>
+                    <label class="label is-medium">Email</label>
+                    <div class="field is-horizontal is-required">
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input"
+                              type="text"
+                              name="project_email"
+                              value={project_email}
+                              onChange={this.onChange}
+                              placeholder="youremail@example.com" />
+
+                              <p className="help">This field is required</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                {/* GITHUB */}
+                <div className="column is-2">
+                  <br/>
+                  <label class="label is-medium">Github</label>
+                  <div class="field is-horizontal is-required">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input"
+                            type="text"
+                            name="project_github"
+                            value={project_github}
+                            onChange={this.onChange}
+                            placeholder="github.com/repository" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SLACK */}
+                <div className="column is-2">
+                  <br/>
+                  <label class="label is-medium">Slack</label>
+                  <div class="field is-horizontal is-required">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input"
+                            type="text"
+                            name="project_slack"
+                            value={project_slack}
+                            onChange={this.onChange}
+                            placeholder="workspace.slack.com" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* TRELLO */}
+                <div className="column is-2">
+                  <br/>
+                  <label class="label is-medium">Trello</label>
+                  <div class="field is-horizontal is-required">
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input"
+                            type="text"
+                            name="project_trello"
+                            value={project_trello}
+                            onChange={this.onChange}
+                            placeholder="trello.com/your/trellolink" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+              <div label="Review and Submit" icon="FaList">
+
+              <div className="columns is-centered is-multiline">
+              <div className="column is-10 is-centered">
+              <br /><br /><br />
+                <center>
+                <h4 className="has-text-weight-bold is-size-4 has-text-primary">
+                  Review your project and submit!
+                </h4>
+                </center>
+              </div>
+              </div>
+              <br/>
+                <div className="columns is-centered is-multiline">
+                {/* NAME */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Project Name</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <input class="input"
-                      type="text"
-                      name="project_github"
-                      value={project_github}
-                      onChange={this.onChange}
-                      placeholder="github.com/repository" />
+                    <input class="input" type="text" value={project_name} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* SLACK */}
-          <div className="column is-2">
-            <br/>
-            <label class="label is-medium">Slack</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Video Link</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <input class="input"
-                      type="text"
-                      name="project_slack"
-                      value={project_slack}
-                      onChange={this.onChange}
-                      placeholder="workspace.slack.com" />
+                    <input class="input" type="text" value={project_video} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* TRELLO */}
-          <div className="column is-2">
-            <br/>
-            <label class="label is-medium">Trello</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Description</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <input class="input"
-                      type="text"
-                      name="project_trello"
-                      value={project_trello}
-                      onChange={this.onChange}
-                      placeholder="trello.com/your/trellolink" />
+                    <textarea class="textarea" type="textarea" value={project_description} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-
-          {/* DESC */}
-          <div className="column is-10">
-            <hr />
-            <br />
-            <label class="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Main Goals</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_description"
-                      value={project_description}
-                      onChange={this.onChange}
-                      placeholder="Is this a new problem?
-                      If not, have others attempted to solve it in the past?
-                      What is the cause of the problem? How are you aiming to solve it?">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_goals} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* GOALS */}
-          <div className="column is-5">
-            <br/>
-            <label class="label is-medium">What are your main goals?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Needs</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_goals"
-                      value={project_goals}
-                      onChange={this.onChange}
-                      placeholder="Describe both long term and short term goals.
-                      Be specific about the kind of help you need.">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_needs} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* NEEDS */}
-          <div className="column is-5">
-            <br/>
-            <label class="label is-medium">What do you need?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Project Origin</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_needs"
-                      value={project_needs}
-                      onChange={this.onChange}
-                      placeholder="Tell us about the type of person you think would be most helpful to you">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_origins} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-
-          {/* ORIGIN */}
-          <div className="column is-5">
-            <br/>
-            <label className="label is-medium">How did this project come about?</label>
-            <div className="field is-horizontal">
-              <div className="field-body">
-                <div className="field">
-                  <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_origins"
-                      value={project_origins}
-                      onChange={this.onChange}
-                      placeholder="Give us a backstory. What inspired you to start this project?
-                      This information helps people determine whether or not they'd be a good fit for this project.">
-                    </textarea>
-                    <p className="help">This field is required</p>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          {/* STATUS */}
-          <div className="column is-5">
-            <br/>
-            <label class="label is-medium">
-              What's the current status of your project?
-            </label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* STATUS */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Current Status</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_status"
-                      value={project_status}
-                      onChange={this.onChange}
-                      placeholder="Tell us what you have done so far to complete this project.
-                      Don't worry, a large foundation isn't required to submit a project.
-                      Just let us know where you're at.">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_status} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* ORGANIZATION */}
-          <div className="column is-5">
-            <br/>
-            <label class="label is-medium">Tell us about yourself!</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* ORG DESC */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Sponsor</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_org_description"
-                      value={project_org_description}
-                      onChange={this.onChange}
-                      placeholder="What organization do you work for if any?">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_org_description} readonly />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* HOLY GOALS */}
-          <div className="column is-5">
-            <br/>
-            <label class="label is-medium">How does this project further the Kindgom of God?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Holy Goals</label>
+                </div>
+                <div className="column is-4">
                   <div class="control">
-                    <textarea
-                      class="textarea is-medium"
-                      type="text"
-                      name="project_holy_goals"
-                      value={project_holy_goals}
-                      onChange={this.onChange}
-                      placeholder="Furthering the Kingdom of God is Tech Connect's main mission.
-                      It is imperative that your project's main mission is the same in one way or another.">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <textarea class="textarea" type="textarea" value={project_goals} readonly />
+                  </div>
+                </div>
+                </div>
+
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Email</label>
+                </div>
+                <div className="column is-4">
+                  <div class="control">
+                    <input class="input" type="textarea" value={project_email} readonly />
+                  </div>
+                </div>
+                </div>
+
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Github</label>
+                </div>
+                <div className="column is-4">
+                  <div class="control">
+                    <input class="input" type="textarea" value={project_github} readonly />
+                  </div>
+                </div>
+                </div>
+
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Slack</label>
+                </div>
+                <div className="column is-4">
+                  <div class="control">
+                    <input class="input" type="textarea" value={project_slack} readonly />
+                  </div>
+                </div>
+                </div>
+
+                <div className="columns is-centered is-multiline">
+                {/* VIDEO LINK */}
+                <div className="column is-1">
+                  <label style={{textAlign: 'right', alignSelf: 'stretch'}} className="label is-medium">Trello</label>
+                </div>
+                <div className="column is-4">
+                  <div class="control">
+                    <input class="input" type="textarea" value={project_trello} readonly />
+                  </div>
+                </div>
+                </div>
+
+              {/* SUBMIT */}
+              <div className="columns is-centered is-multiline">
+              <div class="field is-horizontal column is-2">
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
+                        Submit Project for Review
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* SUBMIT */}
-          <div class="field is-horizontal column is-10">
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
-                    Submit Project for Review
-                  </button>
-                </div>
               </div>
-            </div>
+              </div>
+            </Tabs>
           </div>
-        </div>
         </form>
 
 
