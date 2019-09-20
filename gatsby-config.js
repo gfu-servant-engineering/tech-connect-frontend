@@ -30,10 +30,14 @@ module.exports = {
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
           'profile',
-		      'skill',
-		      'experience'
+//		      'skill',
+//		      'experience'
         ],
         queryLimit: 1000,
+        loginData: {
+          identifier: "",
+          password: "",
+        },
       },
     },
     'gatsby-plugin-sharp',

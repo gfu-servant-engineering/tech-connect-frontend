@@ -67,6 +67,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
   
+    /*
   const getSkills = makeRequest(graphql, `
     {
       allStrapiSkill {
@@ -90,6 +91,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       }
     }
     `);
+*/
 
   return graphql(`
     {

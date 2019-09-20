@@ -122,13 +122,6 @@ export const pageQuery = graphql`
       project_trello
       project_slack
       project_email
-      project_image {
-         childImageSharp {
-            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
-	             ...GatsbyImageSharpFluid
-            }
-          }
-        }
-     }
-  }
-  `
+   }
+ }
+ `

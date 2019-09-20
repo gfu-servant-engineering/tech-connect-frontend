@@ -99,25 +99,24 @@ export const pageQuery = graphql`
           }
         }
       skills {
-		  skill_name
-	  }
-	  experiences {
-		  experience_title
-		  experience_description
-	  }
-	  projects {
-		  id
-		  project_name
-      project_image {
-         childImageSharp {
-            fluid(maxHeight:200, maxWidth:400, quality:90, toFormat:JPG) {
-               ...GatsbyImageSharpFluid
+        skill_name
+      }
+      experiences {
+        experience_title
+        experience_description
+      }
+      projects {
+        id
+        project_name
+        project_image {
+           childImageSharp {
+              fluid(maxHeight:200, maxWidth:400, quality:90, toFormat:JPG) {
+                 ...GatsbyImageSharpFluid
+              }
             }
           }
+          project_description
         }
-        project_description
-        profiles
-	    }
+      }
     }
-  }
   `
