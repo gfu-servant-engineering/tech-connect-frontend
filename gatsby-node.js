@@ -44,55 +44,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
-  const getProfiles = makeRequest(graphql, `
-    {
-      allStrapiProfile {
-        edges {
-          node {
-            id
-          }
-        }
-      }
-    }
-    `).then(result => {
-    // Create pages for each user.
-    result.data.allStrapiProfile.edges.forEach(({ node }) => {
-      createPage({
-        path: `/${node.id}`,
-        component: path.resolve(`src/templates/specific-profile.js`),
-        context: {
-          id: node.id,
-        },
-      })
-    })
-  });
-  
-    /*
-  const getSkills = makeRequest(graphql, `
-    {
-      allStrapiSkill {
-        edges {
-          node {
-            id
-          }
-        }
-      }
-    }
-    `);
-  
-  const getExperiences = makeRequest(graphql, `
-    {
-      allStrapiExperience {
-        edges {
-          node {
-            id
-          }
-        }
-      }
-    }
-    `);
-*/
-
   return graphql(`
     {
       allMarkdownRemark(limit: 1000) {
