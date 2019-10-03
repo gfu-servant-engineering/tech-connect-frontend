@@ -113,10 +113,6 @@ export const pageQuery = graphql`
       project_holy_goals
       project_timeline
       project_blurb
-      profiles {
-	id
-        profile_name
-      }
       project_video
       project_github
       project_trello

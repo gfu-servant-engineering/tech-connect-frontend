@@ -38,16 +38,12 @@ export const pageQuery = graphql`
           project_blurb
           project_holy_goals
           project_timeline
-  	      project_image {
-  	         childImageSharp {
-  	            fluid(maxWidth:300, maxHeight:200, quality:90, toFormat:JPG) {
-  		             ...GatsbyImageSharpFluid
-  	            }
-  	          }
-  	        }
-          profiles {
-            id
-            profile_name
+          project_image {
+             childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat:JPG) {
+                   ...GatsbyImageSharpFluid
+              }
+            }
           }
         }
       }
