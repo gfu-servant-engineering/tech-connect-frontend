@@ -13,13 +13,13 @@ const ProjectTile = ({ data }) => (
     <h4 className="has-text-weight-normal is-size-5 is-size-6">
       <i>Sponsored by Someone</i>
     </h4>
-    <Link className="has-text-primary" to={`/${data.id}`}><LinesEllipsis
-      text={data.project_description}
-      maxLine='3'
-      ellipsis='...'
-      trimRight
-      basedOn='letters'
-      /></Link>
+    <Link className="has-text-primary" to={`/${data.id}`}>
+      <LinesEllipsis
+        style={{ whiteSpace: 'pre-wrap' }}
+        text={data.project_description}
+        maxLine={3}
+      />
+    </Link>
   </div>
 )
 
