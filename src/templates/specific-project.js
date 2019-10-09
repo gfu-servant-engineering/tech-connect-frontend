@@ -59,7 +59,7 @@ const ProjectTemplate = ({ data }) => (
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What do you need?</h4>
-              <p>{data.strapiProject.project_goals}</p>
+              <p>{data.strapiProject.project_needs}</p>
           </div>
           <div className="column is-5">
               <br/>
