@@ -11,15 +11,15 @@ const ProjectTile = ({ data }) => (
       <Link className="has-text-primary" style={{display:'inline-block'}} to={`/${data.id}`}>{data.project_name}</Link>
     </h3>
     <h4 className="has-text-weight-normal is-size-5 is-size-6">
-      <Link className="has-text-primary" to={`/Profile_${data.profiles.id}`}><i>Sponsored by {data.profiles.profile_name}</i></Link>
+      <i>Sponsored by Someone</i>
     </h4>
-    <Link className="has-text-primary" to={`/${data.id}`}><LinesEllipsis
-      text={data.project_description}
-      maxLine='3'
-      ellipsis='...'
-      trimRight
-      basedOn='letters'
-      /></Link>
+    <Link className="has-text-primary" to={`/${data.id}`}>
+      <LinesEllipsis
+        style={{ whiteSpace: 'pre-wrap' }}
+        text={data.project_description}
+        maxLine={3}
+      />
+    </Link>
   </div>
 )
 

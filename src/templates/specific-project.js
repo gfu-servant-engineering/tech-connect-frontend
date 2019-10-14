@@ -22,7 +22,7 @@ const ProjectTemplate = ({ data }) => (
               <div style={{display:'inline', padding: '5%'}}>
                 <h1 className="has-text-weight-bold is-size-2 has-text-primary">{data.strapiProject.project_name}</h1>
                 <hr className="horizontal-rule" />
-                <Link className="has-text-primary" style={{paddingBottom: '20px'}} to={`/Profile_${data.strapiProject.profiles.id}`}>Sponsored by {data.strapiProject.profiles.profile_name}</Link>
+                <p className="has-text-primary" style={{paddingBottom: '20px'}}>Sponsored by Someone</p>
                 <br/>
                 <br/>
                 <br/>
@@ -59,7 +59,7 @@ const ProjectTemplate = ({ data }) => (
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What do you need?</h4>
-              <p>{data.strapiProject.project_goals}</p>
+              <p>{data.strapiProject.project_needs}</p>
           </div>
           <div className="column is-5">
               <br/>
@@ -113,22 +113,11 @@ export const pageQuery = graphql`
       project_holy_goals
       project_timeline
       project_blurb
-      profiles {
-	id
-        profile_name
-      }
       project_video
       project_github
       project_trello
       project_slack
       project_email
-      project_image {
-         childImageSharp {
-            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
-	             ...GatsbyImageSharpFluid
-            }
-          }
-        }
-     }
-  }
-  `
+   }
+ }
+ `

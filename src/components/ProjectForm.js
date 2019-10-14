@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import FormData from 'form-data'
+//import FormData from 'form-data'
 import axios from 'axios';
 import { Link } from 'gatsby'
 
@@ -82,7 +81,8 @@ import { Link } from 'gatsby'
             alert('Your project creation was successful!')
           });
 
-        {/* Image upload which is currently broken
+       /*
+        { Image upload which is currently broken
         let data = new FormData();
         data.append('images', this.state.project_image);
 
@@ -95,7 +95,7 @@ import { Link } from 'gatsby'
             //access the results here....
             alert('Your project creation was successful!')
           });
-          */}
+          }*/
 
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});

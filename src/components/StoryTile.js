@@ -10,13 +10,13 @@ const StoryTile = ({ data }) => (
     <h3 className="has-text-weight-bold is-size-5">
       <Link className="has-text-primary" style={{display:'inline-block'}} to={data.fields.slug}>{data.frontmatter.title}</Link>
     </h3>
-    <Link className="has-text-primary" to={data.fields.slug}><LinesEllipsis
-      text={data.excerpt}
-      maxLine='3'
-      ellipsis='...'
-      trimRight
-      basedOn='letters'
-      /></Link>
+    <Link className="has-text-primary" to={data.fields.slug}>
+      <LinesEllipsis
+        style={{ whiteSpace: 'pre-wrap' }}
+        text={data.excerpt}
+        maxLine='3'
+      />
+    </Link>
   </div>
 )
 
