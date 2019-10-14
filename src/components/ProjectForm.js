@@ -9,6 +9,8 @@ import { Link } from 'gatsby'
         this.state = {
           project_name: '',
           project_image: '',
+		  // inserted project_sponsor here
+		  project_sponsor: '',
           project_description: '',
           project_goals: '',
           project_needs: '',
@@ -41,6 +43,8 @@ import { Link } from 'gatsby'
         const {
           project_name,
           project_image,
+		  // inserted project_sponsor here
+		  // project_sponsor,
           project_description,
           project_goals,
           project_needs,
@@ -99,6 +103,8 @@ import { Link } from 'gatsby'
 
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
+		// inserted project_sponsor here
+		this.setState({'project_sponsor': ''});
         this.setState({'project_description': ''});
         this.setState({'project_goals': ''});
         this.setState({'project_needs': ''});
@@ -119,6 +125,8 @@ import { Link } from 'gatsby'
         const {
           project_name,
           project_image,
+		  // inserted project_sponsor here
+		  project_sponsor,
           project_description,
           project_goals,
           project_needs,
@@ -134,6 +142,8 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
+				// inserted project_sponsor here
+				&& project_sponsor.length > 0
                 && project_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
@@ -160,6 +170,27 @@ import { Link } from 'gatsby'
                       value={project_name}
                       onChange={this.onChange}
                       placeholder="What is the name of your project?" />
+                      <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  {/* SPONSOR */}
+          <div className="column is-3">
+            <br/>
+            <label className="label is-large">Project Sponsor</label>
+            <div className="field is-horizontal required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
+                      type="text"
+                      name="project_sponsor"
+                      value={project_sponsor}
+                      onChange={this.onChange}
+                      placeholder="Who is the sponsor of your project?" />
                       <p className="help">This field is required</p>
                   </div>
                 </div>
