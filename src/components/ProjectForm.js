@@ -9,8 +9,10 @@ import { Link } from 'gatsby'
         this.state = {
           project_name: '',
           project_image: '',
-		  // inserted project_sponsor here
+		  // inserted project_sponsor, image, and link here
 		  project_sponsor: '',
+		  project_sponsor_link: '',
+		  project_sponsor_image: '',
           project_description: '',
           project_goals: '',
           project_needs: '',
@@ -43,8 +45,10 @@ import { Link } from 'gatsby'
         const {
           project_name,
           project_image,
-		  // inserted project_sponsor here
-		  // project_sponsor,
+		  // inserted project_sponsor, link, and image here
+		  project_sponsor,
+		  project_sponsor_link,
+		  project_sponsor_image,
           project_description,
           project_goals,
           project_needs,
@@ -103,8 +107,10 @@ import { Link } from 'gatsby'
 
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
-		// inserted project_sponsor here
+		// inserted project_sponsor, link and image here
 		this.setState({'project_sponsor': ''});
+		this.setState({'project_sponsor_link': ''});
+		this.setState({'project_sponsor_image': ''});
         this.setState({'project_description': ''});
         this.setState({'project_goals': ''});
         this.setState({'project_needs': ''});
@@ -125,8 +131,10 @@ import { Link } from 'gatsby'
         const {
           project_name,
           project_image,
-		  // inserted project_sponsor here
+		  // inserted project_sponsor, link, and image here
 		  project_sponsor,
+		  project_sponsor_link,
+		  project_sponsor_image,
           project_description,
           project_goals,
           project_needs,
@@ -142,8 +150,9 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-				// inserted project_sponsor here
+				// inserted project_sponsor and link here
 				&& project_sponsor.length > 0
+				&& project_sponsor_link > 0
                 && project_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
@@ -154,6 +163,74 @@ import { Link } from 'gatsby'
 
         return (
           <form onSubmit={this.onSubmit.bind(this)}>
+		  
+		  <div className="columns is-centered is-multiline">
+		  {/* SPONSOR */}
+          <div className="column is-3">
+            <br/>
+            <label className="label is-large">Project Sponsor</label>
+            <div className="field is-horizontal required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
+                      type="text"
+                      name="project_sponsor"
+                      value={project_sponsor}
+                      onChange={this.onChange}
+                      placeholder="Who is the sponsor of your project?" />
+                      <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  {/* SPONSOR LINK */}
+          <div className="column is-2">
+            <br/>
+            <label class="label is-medium">Link to Sponsor</label>
+            <div class="field is-horizontal is-required">
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input"
+                      type="text"
+                      name="project_sponsor_link"
+                      value={project_sponsor_link}
+                      onChange={this.onChange}
+                      placeholder="sponsor-website.com" />
+					  <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  {/* SPONSOR IMAGE UPLOAD */}
+          <div className="column is-2 is-centered">
+            <br/>
+            <label class="label is-medium">Sponsor image...</label>
+            <div className='buttons fadein'>
+            <div className='button'>
+              <label htmlFor='single'></label>
+              <input type='file' id='single' name="project_sponsor_image" value={project_sponsor_image} onChange={this.onChange} />
+            </div>
+            <p className="help">Optional Sponsor logo</p>
+          </div>
+          </div>
+          </div>
+		  
+		  <div className="columns is-centered is-multiline">
+          {/* DIVIDER BEFORE PROJECT */}
+          <div className="column is-10 is-centered">
+            <hr />
+            <center>
+            <h4 className="has-text-weight-bold is-size-5 has-text-primary">
+            </h4>
+            </center>
+          </div>
+          </div>
 
           <div className="columns is-centered is-multiline">
           {/* NAME */}
@@ -170,27 +247,6 @@ import { Link } from 'gatsby'
                       value={project_name}
                       onChange={this.onChange}
                       placeholder="What is the name of your project?" />
-                      <p className="help">This field is required</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  {/* SPONSOR */}
-          <div className="column is-3">
-            <br/>
-            <label className="label is-large">Project Sponsor</label>
-            <div className="field is-horizontal required">
-              <div className="field-body">
-                <div className="field">
-                  <div className="control">
-                    <input className="input"
-                      type="text"
-                      name="project_sponsor"
-                      value={project_sponsor}
-                      onChange={this.onChange}
-                      placeholder="Who is the sponsor of your project?" />
                       <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -218,7 +274,6 @@ import { Link } from 'gatsby'
               </div>
             </div>
           </div>
-
 
           {/* IMAGE UPLOAD */}
           <div className="column is-2 is-centered">
