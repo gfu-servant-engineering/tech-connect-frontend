@@ -7,12 +7,12 @@ import { Link } from 'gatsby'
       constructor() {
         super();
         this.state = {
+		  // inserted sponsor name, image, and link here
+		  sponsor_name: '',
+		  sponsor_link: '',
+		  sponsor_image: '',
           project_name: '',
           project_image: '',
-		  // inserted project_sponsor, image, and link here
-		  project_sponsor: '',
-		  project_sponsor_link: '',
-		  project_sponsor_image: '',
           project_description: '',
           project_goals: '',
           project_needs: '',
@@ -43,12 +43,12 @@ import { Link } from 'gatsby'
         e.preventDefault();
         // get our form data out of state
         const {
+		  // inserted sponsor name, link, and image here
+		  sponsor_name,
+		  sponsor_link,
+		  sponsor_image,
           project_name,
           project_image,
-		  // inserted project_sponsor, link, and image here
-		  project_sponsor,
-		  project_sponsor_link,
-		  project_sponsor_image,
           project_description,
           project_goals,
           project_needs,
@@ -64,6 +64,7 @@ import { Link } from 'gatsby'
 
                 } = this.state;
 
+		// import project data to project content type?
         axios({
           method: 'post',
           url: 'http://techconnect-api.ddns.net:1337/projects',
@@ -88,7 +89,25 @@ import { Link } from 'gatsby'
             //access the results here....
             alert('Your project creation was successful!')
           });
+		
+		// import sponsor data to sponsor content type?
+		axios({
+          method: 'post',
+          url: 'http://techconnect-api.ddns.net:1337/sponsors',
+          data: {
+            sponsor_name: sponsor_name,
+			sponsor_link: sponsor_link,
+			sponsor_image: sponsor_image,
+          }
+        })
+        .then((result) => {
+            //access the results here....
+            alert('Your project creation was successful!')
+          });
 
+		// figure out how to connect sponsor and project with relationship
+
+		// insert image upload for sponsor image as well (after project image upload is fixed)
        /*
         { Image upload which is currently broken
         let data = new FormData();
@@ -104,13 +123,13 @@ import { Link } from 'gatsby'
             alert('Your project creation was successful!')
           });
           }*/
-
+		  
+		// inserted sponsor name, link and image here
+		this.setState({'sponsor_name': ''});
+		this.setState({'sponsor_link': ''});
+		this.setState({'sponsor_image': ''});
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
-		// inserted project_sponsor, link and image here
-		this.setState({'project_sponsor': ''});
-		this.setState({'project_sponsor_link': ''});
-		this.setState({'project_sponsor_image': ''});
         this.setState({'project_description': ''});
         this.setState({'project_goals': ''});
         this.setState({'project_needs': ''});
@@ -129,12 +148,12 @@ import { Link } from 'gatsby'
 
       render() {
         const {
+		  // inserted sponsor name, link, and image here
+		  sponsor_name,
+		  sponsor_link,
+		  sponsor_image,
           project_name,
           project_image,
-		  // inserted project_sponsor, link, and image here
-		  project_sponsor,
-		  project_sponsor_link,
-		  project_sponsor_image,
           project_description,
           project_goals,
           project_needs,
@@ -150,9 +169,9 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-				// inserted project_sponsor and link here
-				&& project_sponsor.length > 0
-				&& project_sponsor_link > 0
+				// inserted sponsor_name and link here
+				&& sponsor_name.length > 0
+				&& sponsor_link.length > 0
                 && project_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
@@ -165,7 +184,7 @@ import { Link } from 'gatsby'
           <form onSubmit={this.onSubmit.bind(this)}>
 		  
 		  <div className="columns is-centered is-multiline">
-		  {/* SPONSOR */}
+		  {/* SPONSOR NAME */}
           <div className="column is-3">
             <br/>
             <label className="label is-large">Project Sponsor</label>
@@ -175,8 +194,8 @@ import { Link } from 'gatsby'
                   <div className="control">
                     <input className="input"
                       type="text"
-                      name="project_sponsor"
-                      value={project_sponsor}
+                      name="sponsor_name"
+                      value={sponsor_name}
                       onChange={this.onChange}
                       placeholder="Who is the sponsor of your project?" />
                       <p className="help">This field is required</p>
@@ -196,8 +215,8 @@ import { Link } from 'gatsby'
                   <div class="control">
                     <input class="input"
                       type="text"
-                      name="project_sponsor_link"
-                      value={project_sponsor_link}
+                      name="sponsor_link"
+                      value={sponsor_link}
                       onChange={this.onChange}
                       placeholder="sponsor-website.com" />
 					  <p className="help">This field is required</p>
@@ -214,7 +233,7 @@ import { Link } from 'gatsby'
             <div className='buttons fadein'>
             <div className='button'>
               <label htmlFor='single'></label>
-              <input type='file' id='single' name="project_sponsor_image" value={project_sponsor_image} onChange={this.onChange} />
+              <input type='file' id='single' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
             </div>
             <p className="help">Optional Sponsor logo</p>
           </div>
