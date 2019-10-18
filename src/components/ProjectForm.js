@@ -7,9 +7,9 @@ import { Link } from 'gatsby'
       constructor() {
         super();
         this.state = {
-		  // inserted sponsor name, image, and link here
+		  // inserted sponsor name, image, and website here
 		  sponsor_name: '',
-		  sponsor_link: '',
+		  sponsor_website: '',
 		  sponsor_image: '',
           project_name: '',
           project_image: '',
@@ -43,9 +43,9 @@ import { Link } from 'gatsby'
         e.preventDefault();
         // get our form data out of state
         const {
-		  // inserted sponsor name, link, and image here
+		  // inserted sponsor name, website, and image here
 		  sponsor_name,
-		  sponsor_link,
+		  sponsor_website,
 		  sponsor_image,
           project_name,
           project_image,
@@ -96,7 +96,7 @@ import { Link } from 'gatsby'
           url: 'http://techconnect-api.ddns.net:1337/sponsors',
           data: {
             sponsor_name: sponsor_name,
-			sponsor_link: sponsor_link,
+			sponsor_website: sponsor_website,
 			sponsor_image: sponsor_image,
           }
         })
@@ -124,9 +124,9 @@ import { Link } from 'gatsby'
           });
           }*/
 		  
-		// inserted sponsor name, link and image here
+		// inserted sponsor name, website and image here
 		this.setState({'sponsor_name': ''});
-		this.setState({'sponsor_link': ''});
+		this.setState({'sponsor_website': ''});
 		this.setState({'sponsor_image': ''});
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
@@ -148,9 +148,9 @@ import { Link } from 'gatsby'
 
       render() {
         const {
-		  // inserted sponsor name, link, and image here
+		  // inserted sponsor name, website, and image here
 		  sponsor_name,
-		  sponsor_link,
+		  sponsor_website,
 		  sponsor_image,
           project_name,
           project_image,
@@ -169,9 +169,9 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-				// inserted sponsor_name and link here
+				// inserted sponsor_name and website here
 				&& sponsor_name.length > 0
-				&& sponsor_link.length > 0
+				&& sponsor_website.length > 0
                 && project_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
@@ -205,7 +205,7 @@ import { Link } from 'gatsby'
             </div>
           </div>
 		  
-		  {/* SPONSOR LINK */}
+		  {/* SPONSOR WEBSITE */}
           <div className="column is-2">
             <br/>
             <label class="label is-medium">Link to Sponsor</label>
@@ -215,8 +215,8 @@ import { Link } from 'gatsby'
                   <div class="control">
                     <input class="input"
                       type="text"
-                      name="sponsor_link"
-                      value={sponsor_link}
+                      name="sponsor_website"
+                      value={sponsor_website}
                       onChange={this.onChange}
                       placeholder="sponsor-website.com" />
 					  <p className="help">This field is required</p>
