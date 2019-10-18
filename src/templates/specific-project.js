@@ -22,7 +22,7 @@ const ProjectTemplate = ({ data }) => (
               <div style={{display:'inline', padding: '5%'}}>
                 <h1 className="has-text-weight-bold is-size-2 has-text-primary">{data.strapiProject.project_name}</h1>
                 <hr className="horizontal-rule" />
-                <p className="has-text-primary" style={{paddingBottom: '20px'}}>Sponsored by Someone</p>
+                <p className="has-text-primary" style={{paddingBottom: '20px'}}>Sponsored by {data.strapiProject.sponsor.sponsor_name}</p>
                 <br/>
                 <br/>
                 <br/>
@@ -97,6 +97,9 @@ export const pageQuery = graphql`
   query ProjectTemplate ($id: String!) {
     strapiProject(id: {eq: $id}) {
       project_name
+      sponsor {
+        sponsor_name
+      }
       project_image {
         childImageSharp {
           fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
