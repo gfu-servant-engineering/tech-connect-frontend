@@ -64,7 +64,6 @@ import { Link } from 'gatsby'
 
                 } = this.state;
 
-		// import project data to project content type?
         axios({
           method: 'post',
           url: 'http://techconnect-api.ddns.net:1337/projects',
@@ -90,24 +89,6 @@ import { Link } from 'gatsby'
             alert('Your project creation was successful!')
           });
 		
-		// import sponsor data to sponsor content type?
-		axios({
-          method: 'post',
-          url: 'http://techconnect-api.ddns.net:1337/sponsors',
-          data: {
-            sponsor_name: sponsor_name,
-			sponsor_website: sponsor_website,
-			sponsor_image: sponsor_image,
-          }
-        })
-        .then((result) => {
-            //access the results here....
-            alert('Your project creation was successful!')
-          });
-
-		// figure out how to connect sponsor and project with relationship
-
-		// insert image upload for sponsor image as well (after project image upload is fixed)
        /*
         { Image upload which is currently broken
         let data = new FormData();
@@ -226,7 +207,7 @@ import { Link } from 'gatsby'
             </div>
           </div>
 		  
-		  {/* SPONSOR IMAGE UPLOAD */}
+		  {/* SPONSOR IMAGE */}
           <div className="column is-2 is-centered">
             <br/>
             <label class="label is-medium">Sponsor image...</label>
