@@ -7,10 +7,10 @@ import { Link } from 'gatsby'
       constructor() {
         super();
         this.state = {
-		  // inserted sponsor name, image, and website here
-		  sponsor_name: '',
-		  sponsor_website: '',
-		  sponsor_image: '',
+          // inserted sponsor name, image, and website here
+          sponsor_name: '',
+          sponsor_website: '',
+          sponsor_image: '',
           project_name: '',
           project_image: '',
           project_description: '',
@@ -43,10 +43,10 @@ import { Link } from 'gatsby'
         e.preventDefault();
         // get our form data out of state
         const {
-		  // inserted sponsor name, website, and image here
-		  sponsor_name,
-		  sponsor_website,
-		  sponsor_image,
+          // inserted sponsor name, website, and image here
+          sponsor_name,
+          sponsor_website,
+          sponsor_image,
           project_name,
           project_image,
           project_description,
@@ -88,7 +88,7 @@ import { Link } from 'gatsby'
             //access the results here....
             alert('Your project creation was successful!')
           });
-		
+
        /*
         { Image upload which is currently broken
         let data = new FormData();
@@ -105,10 +105,10 @@ import { Link } from 'gatsby'
           });
           }*/
 		  
-		// inserted sponsor name, website and image here
-		this.setState({'sponsor_name': ''});
-		this.setState({'sponsor_website': ''});
-		this.setState({'sponsor_image': ''});
+        // inserted sponsor name, website and image here
+        this.setState({'sponsor_name': ''});
+        this.setState({'sponsor_website': ''});
+        this.setState({'sponsor_image': ''});
         this.setState({'project_name': ''});
         this.setState({'project_image': ''});
         this.setState({'project_description': ''});
@@ -129,10 +129,10 @@ import { Link } from 'gatsby'
 
       render() {
         const {
-		  // inserted sponsor name, website, and image here
-		  sponsor_name,
-		  sponsor_website,
-		  sponsor_image,
+          // inserted sponsor name, website, and image here
+          sponsor_name,
+          sponsor_website,
+          sponsor_image,
           project_name,
           project_image,
           project_description,
@@ -150,9 +150,9 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-				// inserted sponsor_name and website here
-				&& sponsor_name.length > 0
-				&& sponsor_website.length > 0
+                // inserted sponsor_name and website here
+                && sponsor_name.length > 0
+                && sponsor_website.length > 0
                 && project_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
@@ -163,74 +163,6 @@ import { Link } from 'gatsby'
 
         return (
           <form onSubmit={this.onSubmit.bind(this)}>
-		  
-		  <div className="columns is-centered is-multiline">
-		  {/* SPONSOR NAME */}
-          <div className="column is-3">
-            <br/>
-            <label className="label is-large">Project Sponsor</label>
-            <div className="field is-horizontal required">
-              <div className="field-body">
-                <div className="field">
-                  <div className="control">
-                    <input className="input"
-                      type="text"
-                      name="sponsor_name"
-                      value={sponsor_name}
-                      onChange={this.onChange}
-                      placeholder="Who is the sponsor of your project?" />
-                      <p className="help">This field is required</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  {/* SPONSOR WEBSITE */}
-          <div className="column is-2">
-            <br/>
-            <label class="label is-medium">Link to Sponsor</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
-                      type="text"
-                      name="sponsor_website"
-                      value={sponsor_website}
-                      onChange={this.onChange}
-                      placeholder="sponsor-website.com" />
-					  <p className="help">This field is required</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-		  
-		  {/* SPONSOR IMAGE */}
-          <div className="column is-2 is-centered">
-            <br/>
-            <label class="label is-medium">Sponsor image...</label>
-            <div className='buttons fadein'>
-            <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
-            </div>
-            <p className="help">Optional Sponsor logo</p>
-          </div>
-          </div>
-          </div>
-		  
-		  <div className="columns is-centered is-multiline">
-          {/* DIVIDER BEFORE PROJECT */}
-          <div className="column is-10 is-centered">
-            <hr />
-            <center>
-            <h4 className="has-text-weight-bold is-size-5 has-text-primary">
-            </h4>
-            </center>
-          </div>
-          </div>
 
           <div className="columns is-centered is-multiline">
           {/* NAME */}
@@ -288,6 +220,74 @@ import { Link } from 'gatsby'
           </div>
           </div>
           </div>
+		  
+		  <div className="columns is-centered is-multiline">
+          {/* DIVIDER BEFORE PROJECT */}
+          <div className="column is-10 is-centered">
+            <hr />
+            <center>
+            <h4 className="has-text-weight-bold is-size-5 has-text-primary">
+            </h4>
+            </center>
+          </div>
+          </div>
+		  
+		  <div className="columns is-centered is-multiline">
+		  {/* SPONSOR NAME */}
+          <div className="column is-3">
+            <br/>
+            <label className="label is-large">Project Sponsor</label>
+            <div className="field is-horizontal required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
+                      type="text"
+                      name="sponsor_name"
+                      value={sponsor_name}
+                      onChange={this.onChange}
+                      placeholder="Who is the sponsor of your project?" />
+                      <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  {/* SPONSOR WEBSITE */}
+          <div className="column is-3">
+            <br/>
+            <label class="label is-medium">Link to Sponsor's Website</label>
+            <div class="field is-horizontal is-required">
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input"
+                      type="text"
+                      name="sponsor_website"
+                      value={sponsor_website}
+                      onChange={this.onChange}
+                      placeholder="sponsor-website.com" />
+					  <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  {/* SPONSOR IMAGE */}
+          <div className="column is-2 is-centered">
+            <br/>
+            <label class="label is-medium">Sponsor image...</label>
+            <div className='buttons fadein'>
+            <div className='button'>
+              <label htmlFor='single'></label>
+              <input type='file' id='single' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
+            </div>
+            <p className="help">Optional Sponsor logo</p>
+          </div>
+          </div>
+          </div>
 
           <div className="columns is-centered is-multiline">
           {/* ACCTS HEADER */}
@@ -295,7 +295,7 @@ import { Link } from 'gatsby'
             <hr />
             <center>
             <h4 className="has-text-weight-bold is-size-5 has-text-primary">
-              If you have any existing accounts, we can link those for you...
+              If you have any existing accounts for your project, we can link those for you...
             </h4>
             </center>
           </div>
