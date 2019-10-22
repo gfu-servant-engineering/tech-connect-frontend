@@ -104,7 +104,7 @@ import { Link } from 'gatsby'
             alert('Your project creation was successful!')
           });
           }*/
-		  
+
         // inserted sponsor name, website and image here
         this.setState({'sponsor_name': ''});
         this.setState({'sponsor_website': ''});
@@ -168,7 +168,7 @@ import { Link } from 'gatsby'
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-large">Project Name</label>
+            <label className="label is-medium">Project Name</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -220,8 +220,8 @@ import { Link } from 'gatsby'
           </div>
           </div>
           </div>
-		  
-		  <div className="columns is-centered is-multiline">
+
+      <div className="columns is-centered is-multiline">
           {/* DIVIDER BEFORE PROJECT */}
           <div className="column is-10 is-centered">
             <hr />
@@ -231,12 +231,12 @@ import { Link } from 'gatsby'
             </center>
           </div>
           </div>
-		  
-		  <div className="columns is-centered is-multiline">
-		  {/* SPONSOR NAME */}
+      
+      <div className="columns is-centered is-multiline">
+      {/* SPONSOR NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-large">Project Sponsor</label>
+            <label className="label is-medium">Project Sponsor</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -253,8 +253,8 @@ import { Link } from 'gatsby'
               </div>
             </div>
           </div>
-		  
-		  {/* SPONSOR WEBSITE */}
+
+      {/* SPONSOR WEBSITE */}
           <div className="column is-3">
             <br/>
             <label class="label is-medium">Link to Sponsor's Website</label>
@@ -268,14 +268,14 @@ import { Link } from 'gatsby'
                       value={sponsor_website}
                       onChange={this.onChange}
                       placeholder="sponsor-website.com" />
-					  <p className="help">This field is required</p>
+            <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-		  
-		  {/* SPONSOR IMAGE */}
+
+      {/* SPONSOR IMAGE */}
           <div className="column is-2 is-centered">
             <br/>
             <label class="label is-medium">Sponsor image...</label>
