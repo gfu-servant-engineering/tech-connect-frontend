@@ -22,7 +22,7 @@ const ProjectTemplate = ({ data }) => (
               <div style={{display:'inline', padding: '5%'}}>
                 <h1 className="has-text-weight-bold is-size-2 has-text-primary">{data.strapiProject.project_name}</h1>
                 <hr className="horizontal-rule" />
-                <p className="has-text-primary" style={{paddingBottom: '20px'}}>Sponsored by <a class="is-link" href={data.strapiProject.sponsor_website}>{data.strapiProject.sponsor_name}</a></p>
+                <p className="has-text-primary" style={{paddingBottom: '20px'}}>Sponsored by <a className="is-link" href={data.strapiProject.sponsor_website}>{data.strapiProject.sponsor_name}</a></p>
                 <br/>
                 <br/>
                 <br/>
