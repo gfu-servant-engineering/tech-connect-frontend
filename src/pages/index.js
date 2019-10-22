@@ -53,9 +53,7 @@ export const pageQuery = graphql`
           id
           project_name
           project_description
-          sponsor {
-            sponsor_name
-          }
+          sponsor_name
           project_image {
             childImageSharp {
                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
