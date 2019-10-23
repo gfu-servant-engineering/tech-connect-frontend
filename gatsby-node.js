@@ -86,9 +86,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   // Query for articles nodes to use in creating pages.
   return Promise.all([
 	  getProjects,
-	  getProfiles,
-	  getSkills,
-	  getExperiences,
   ])
 };
 
