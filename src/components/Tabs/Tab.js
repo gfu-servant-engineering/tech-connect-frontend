@@ -33,20 +33,20 @@ class Tab extends Component {
 
     function determineIcon(icon) {
       if (icon === "FaCheck") {
-        return <span class="icon is-small"><FaCheck size={"1em"}/></span>
+        return <span className="icon is-small"><FaCheck size={"1em"}/></span>
       }
       else if (icon === "FaUser") {
-        return <span class="icon is-small"><FaUser size={"1em"}/></span>
+        return <span className="icon is-small"><FaUser size={"1em"}/></span>
       }
       else if (icon === "FaList"){
-        return <span class="icon is-small"><FaList size={"1em"}/></span>
+        return <span className="icon is-small"><FaList size={"1em"}/></span>
       }
       else if (icon === "FaPagelines"){
-        return <span class="icon is-small"><FaPagelines size={"1em"}/></span>
+        return <span className="icon is-small"><FaPagelines size={"1em"}/></span>
       }
       else
       {
-        return <span class="icon is-small">BAD ICON</span>
+        return <span className="icon is-small">BAD ICON</span>
       }
     }
 
