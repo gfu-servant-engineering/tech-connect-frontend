@@ -7,7 +7,6 @@ import { Link } from 'gatsby'
       constructor() {
         super();
         this.state = {
-          // inserted sponsor name, image, and website here
           sponsor_name: '',
           sponsor_website: '',
           sponsor_image: '',
@@ -43,7 +42,6 @@ import { Link } from 'gatsby'
         e.preventDefault();
         // get our form data out of state
         const {
-          // inserted sponsor name, website, and image here
           sponsor_name,
           sponsor_website,
           sponsor_image,
@@ -64,72 +62,97 @@ import { Link } from 'gatsby'
 
                 } = this.state;
 
+        console.log(process.env.STRAPI_USER)
+        console.log(process.env.STRAPI_PW)
+
+        // get jwt
         axios({
           method: 'post',
-          url: 'http://techconnect-api.ddns.net:1337/projects',
+          url: 'http://techconnect-api.ddns.net:1337/auth/local',
           data: {
-            project_name: project_name,
-            project_image: project_image,
-            project_description: project_description,
-            project_goals: project_goals,
-            project_needs: project_needs,
-            project_origins: project_origins,
-            project_status: project_status,
-            project_org_description: project_org_description,
-            project_holy_goals: project_holy_goals,
-            project_video: project_video,
-            project_github: project_github,
-            project_slack: project_slack,
-            project_trello: project_trello,
-            project_email: project_email,
+            identifier: process.env.STRAPI_USER,
+            password: process.env.STRAPI_PW
           }
         })
         .then((result) => {
+          const token = result.data.jwt
+
+          // create project
+          axios({
+            method: 'post',
+            url: 'http://techconnect-api.ddns.net:1337/projects',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: {
+              sponsor_name: sponsor_name,
+              sponsor_website: sponsor_website,
+              sponsor_image: sponsor_image,
+              project_name: project_name,
+              project_image: project_image,
+              project_description: project_description,
+              project_goals: project_goals,
+              project_needs: project_needs,
+              project_origins: project_origins,
+              project_status: project_status,
+              project_org_description: project_org_description,
+              project_holy_goals: project_holy_goals,
+              project_video: project_video,
+              project_github: project_github,
+              project_slack: project_slack,
+              project_trello: project_trello,
+              project_email: project_email,
+            }
+          })
+          .then((result) => {
             //access the results here....
             alert('Your project creation was successful!')
           });
 
-       /*
-        { Image upload which is currently broken
-        let data = new FormData();
-        data.append('images', this.state.project_image);
+          /*
+          { Image upload which is currently broken
+          let data = new FormData();
+          data.append('images', this.state.project_image);
 
-        axios.post('http://techconnect-api.ddns.net:1337/upload', data, {
-          onUploadProgress: progressEvent => {
-            console.log(progressEvent.loaded / progressEvent.total)
-          }
-        })
-        .then((result) => {
+          axios.post('http://techconnect-api.ddns.net:1337/upload', data, {
+            onUploadProgress: progressEvent => {
+              console.log(progressEvent.loaded / progressEvent.total)
+            }
+          })
+          .then((result) => {
             //access the results here....
             alert('Your project creation was successful!')
           });
           }*/
 
-        // inserted sponsor name, website and image here
-        this.setState({'sponsor_name': ''});
-        this.setState({'sponsor_website': ''});
-        this.setState({'sponsor_image': ''});
-        this.setState({'project_name': ''});
-        this.setState({'project_image': ''});
-        this.setState({'project_description': ''});
-        this.setState({'project_goals': ''});
-        this.setState({'project_needs': ''});
-        this.setState({'project_origins': ''});
-        this.setState({'project_status': ''});
-        this.setState({'project_org_description': ''});
-        this.setState({'project_holy_goals': ''});
-        this.setState({'project_github': ''});
-        this.setState({'project_slack': ''});
-        this.setState({'project_trello': ''});
-        this.setState({'project_email': ''});
-        this.setState({'project_video': ''});
-      }
+          this.setState({'sponsor_name': ''});
+          this.setState({'sponsor_website': ''});
+          this.setState({'sponsor_image': ''});
+          this.setState({'project_name': ''});
+          this.setState({'project_image': ''});
+          this.setState({'project_description': ''});
+          this.setState({'project_goals': ''});
+          this.setState({'project_needs': ''});
+          this.setState({'project_origins': ''});
+          this.setState({'project_status': ''});
+          this.setState({'project_org_description': ''});
+          this.setState({'project_holy_goals': ''});
+          this.setState({'project_github': ''});
+          this.setState({'project_slack': ''});
+          this.setState({'project_trello': ''});
+          this.setState({'project_email': ''});
+          this.setState({'project_video': ''});
 
+          })
+        .catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error);
+        });
+      }
 
 
       render() {
         const {
-          // inserted sponsor name, website, and image here
           sponsor_name,
           sponsor_website,
           sponsor_image,
@@ -576,11 +599,9 @@ import { Link } from 'gatsby'
                   */}
 
                   {/* This button is a placeholder for the expo*/}
-                  <Link to="/thank-you">
-                      <button disabled={!isEnabled} class="button is-primary is-medium">
+                      <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
                         Submit Project for Review
                       </button>
-                  </Link>
                 </div>
               </div>
             </div>
