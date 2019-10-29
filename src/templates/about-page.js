@@ -87,7 +87,7 @@ export const AboutPageTemplate = ({
                   </div>
                   <div className="column is-12">
                     <Link to="/create-project">
-                      <button class="button is-primary-invert is-large">
+                      <button className="button is-primary-invert is-large">
                         {button}
                       </button>
                     </Link>
