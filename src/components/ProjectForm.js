@@ -189,12 +189,12 @@ import { Link } from 'gatsby'
           {/* VIDEO LINK */}
           <div className="column is-3">
             <br/>
-            <label class="label is-medium">A link to a video</label>
-            <div class="field is-horizontal required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
+            <label className="label is-medium">A link to a video</label>
+            <div className="field is-horizontal required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="project_video"
                       value={project_video}
@@ -210,7 +210,7 @@ import { Link } from 'gatsby'
           {/* IMAGE UPLOAD */}
           <div className="column is-2 is-centered">
             <br/>
-            <label class="label is-medium">Upload an image...</label>
+            <label className="label is-medium">Upload an image...</label>
             <div className='buttons fadein'>
             <div className='button'>
               <label htmlFor='single'></label>
@@ -257,12 +257,12 @@ import { Link } from 'gatsby'
       {/* SPONSOR WEBSITE */}
           <div className="column is-3">
             <br/>
-            <label class="label is-medium">Link to Sponsor's Website</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
+            <label className="label is-medium">Link to Sponsor's Website</label>
+            <div className="field is-horizontal is-required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="sponsor_website"
                       value={sponsor_website}
@@ -278,7 +278,7 @@ import { Link } from 'gatsby'
       {/* SPONSOR IMAGE */}
           <div className="column is-2 is-centered">
             <br/>
-            <label class="label is-medium">Sponsor image...</label>
+            <label className="label is-medium">Sponsor image...</label>
             <div className='buttons fadein'>
             <div className='button'>
               <label htmlFor='single'></label>
@@ -306,12 +306,12 @@ import { Link } from 'gatsby'
             {/* EMAIL */}
             <div className="column is-2">
               <br/>
-              <label class="label is-medium">Email</label>
-              <div class="field is-horizontal is-required">
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <input class="input"
+              <label className="label is-medium">Email</label>
+              <div className="field is-horizontal is-required">
+                <div className="field-body">
+                  <div className="field">
+                    <div className="control">
+                      <input className="input"
                         type="text"
                         name="project_email"
                         value={project_email}
@@ -329,12 +329,12 @@ import { Link } from 'gatsby'
           {/* GITHUB */}
           <div className="column is-2">
             <br/>
-            <label class="label is-medium">Github</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
+            <label className="label is-medium">Github</label>
+            <div className="field is-horizontal is-required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="project_github"
                       value={project_github}
@@ -349,12 +349,12 @@ import { Link } from 'gatsby'
           {/* SLACK */}
           <div className="column is-2">
             <br/>
-            <label class="label is-medium">Slack</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
+            <label className="label is-medium">Slack</label>
+            <div className="field is-horizontal is-required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="project_slack"
                       value={project_slack}
@@ -369,12 +369,12 @@ import { Link } from 'gatsby'
           {/* TRELLO */}
           <div className="column is-2">
             <br/>
-            <label class="label is-medium">Trello</label>
-            <div class="field is-horizontal is-required">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <input class="input"
+            <label className="label is-medium">Trello</label>
+            <div className="field is-horizontal is-required">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                    <input className="input"
                       type="text"
                       name="project_trello"
                       value={project_trello}
@@ -391,13 +391,13 @@ import { Link } from 'gatsby'
           <div className="column is-10">
             <hr />
             <br />
-            <label class="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_description"
                       value={project_description}
@@ -416,13 +416,13 @@ import { Link } from 'gatsby'
           {/* GOALS */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">What are your main goals?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">What are your main goals?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_goals"
                       value={project_goals}
@@ -440,13 +440,13 @@ import { Link } from 'gatsby'
           {/* NEEDS */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">What do you need?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">What do you need?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_needs"
                       value={project_needs}
@@ -488,15 +488,15 @@ import { Link } from 'gatsby'
           {/* STATUS */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">
+            <label className="label is-medium">
               What's the current status of your project?
             </label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_status"
                       value={project_status}
@@ -515,13 +515,13 @@ import { Link } from 'gatsby'
           {/* ORGANIZATION */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">Tell us about yourself!</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">Tell us about yourself!</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_org_description"
                       value={project_org_description}
@@ -538,13 +538,13 @@ import { Link } from 'gatsby'
           {/* HOLY GOALS */}
           <div className="column is-5">
             <br/>
-            <label class="label is-medium">How does this project further the Kindgom of God?</label>
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
+            <label className="label is-medium">How does this project further the Kindgom of God?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
                     <textarea
-                      class="textarea is-medium"
+                      className="textarea is-medium"
                       type="text"
                       name="project_holy_goals"
                       value={project_holy_goals}
@@ -560,24 +560,24 @@ import { Link } from 'gatsby'
           </div>
 
           {/* SUBMIT */}
-          <div class="field is-horizontal column is-10">
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
+          <div className="field is-horizontal column is-10">
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
 
                 {/* This button is what submits the form to the Strapi backend.
                     This is commented out to allow people to try out our site.
                     When this button is pressed, everything posts to the backend
                     other than the image, so that will need to be fixed.
 
-                    <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
+                    <button type="submit" disabled={!isEnabled} className="button is-primary is-medium">
                       Submit Project for Review
                     </button>
                   */}
 
                   {/* This button is a placeholder for the expo*/}
                   <Link to="/thank-you">
-                      <button disabled={!isEnabled} class="button is-primary is-medium">
+                      <button disabled={!isEnabled} className="button is-primary is-medium">
                         Submit Project for Review
                       </button>
                   </Link>

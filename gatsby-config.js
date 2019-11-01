@@ -75,9 +75,13 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-netlify-cms',
+      resolve: 'gatsby-plugin-env-variables',
       options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        whitelist: [
+          "URL",
+          "CONTEXT", 
+          "DEPLOY_PRIME_URL",
+        ]
       },
     },
     {

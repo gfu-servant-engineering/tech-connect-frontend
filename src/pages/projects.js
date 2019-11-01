@@ -13,7 +13,7 @@ const ProjectPage = ({ data }) => (
       <div>
         <div className="columns is-multiline is-centered">
           {data.allStrapiProject.edges.map(document => (
-              <div className="column is-5-tablet is-4-desktop is-3-widescreen">
+              <div key={document.node.id} className="column is-5-tablet is-4-desktop is-3-widescreen">
                   <ProjectTile data={document.node}></ProjectTile>
               </div>
           ))}

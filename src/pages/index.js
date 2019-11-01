@@ -24,7 +24,7 @@ const IndexPage = ({data}) => (
             <hr className="horizontal-rule" />
                 <div className="columns is-multiline is-centered">
                   {data.allStrapiProject.edges.map(document => (
-                      <div className="column is-8-tablet is-6-desktop is-3-widescreen">
+                      <div key={document.node.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
                           <ProjectTile data={document.node}></ProjectTile>
                       </div>
                   ))}
@@ -33,7 +33,7 @@ const IndexPage = ({data}) => (
             <hr className="horizontal-rule" />
             <div className="columns is-multiline is-centered">
                   {data.allMarkdownRemark.edges.map(({ node: story }) => (
-                      <div className="column is-8-tablet is-6-desktop is-3-widescreen">
+                      <div key={story.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
                           <StoryTile data={story}></StoryTile>
                       </div>
                   ))}
