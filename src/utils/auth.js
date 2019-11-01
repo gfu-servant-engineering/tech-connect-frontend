@@ -3,11 +3,13 @@ import { navigate } from "gatsby"
 
 const isBrowser = typeof window !== "undefined"
 
+const siteURL = process.env.CONTEXT === "production" ? process.env.URL : process.env.DEPLOY_PRIME_URL
+
 const auth = isBrowser
   ? new auth0.WebAuth({
       domain: process.env.GATSBY_AUTH0_DOMAIN,
       clientID: process.env.GATSBY_AUTH0_CLIENTID,
-      redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
+      redirectUri: `${siteURL}${process.env.GATSBY_AUTH0_CALLBACK}`,
       responseType: "token id_token",
       scope: "openid profile email",
     })

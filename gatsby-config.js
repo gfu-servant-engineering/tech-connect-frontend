@@ -75,6 +75,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-env-variables',
+      options: {
+        whitelist: ["URL", "CONTEXT", "DEPLOY_PRIME_URL"]
+      },
+    },
+    {
       resolve:'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
       options: {
         develop: false,            // Activates purging in npm run develop
