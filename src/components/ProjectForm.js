@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 
     class ProjectForm extends Component {
       constructor() {
+        
         super();
         this.state = {
           project_name: '',
@@ -149,7 +150,7 @@ import { Link } from 'gatsby'
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-large">Project Name</label>
+            <label class="label is-large">Project Name</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">

@@ -1,3 +1,8 @@
+const { isNil } = require('lodash')
+
+const mapPagesUrls = {
+  index: '/',
+}
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
@@ -80,7 +85,48 @@ module.exports = {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
+
+    // Doug is trying to add search via lunr
     {
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+
+        languages: [
+          { 
+            // ISO 639-1 language codes. See https://lunrjs.com/guides/language_support.html for details
+            name: 'en',
+          }
+        ],
+        // Fields to index. If store === true value will be stored in index file.
+        // Attributes for custom indexing logic. See https://lunrjs.com/docs/lunr.Builder.html for details
+        fields: [
+          { name: 'title', store: true, attributes: { boost: 20 } },
+          { name: 'description', store: true },
+          { name: 'content', store: true },
+          { name: 'url', store: true },
+        ],
+        filterNodes: (node) => !isNil(node.frontmatter),
+        // How to resolve each field's value for a supported node type
+        resolvers: {
+        // For any node of type MarkdownRemark, list how to resolve the fields' values
+          MarkdownRemark: {
+            title: (node) => node.frontmatter.title,
+            description: (node) => node.frontmatter.description,
+            content: (node) => node.rawMarkdownBody,
+            url: (node) => mapPagesUrls[node.frontmatter.templateKey],
+        },
+      },
+      //custom index file name, default is search_index.json
+      filename: 'search_index.json',
+      //custom options on fetch api call for search_ındex.json
+      fetchOptions: {
+        credentials: 'same-origin',
+      },
+    },
+  },
+
+    {
+
       resolve:'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
       options: {
         develop: false,            // Activates purging in npm run develop

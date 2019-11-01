@@ -34,7 +34,6 @@ export const pageQuery = graphql`
           id
           project_name
           project_description
-          project_goals
           project_blurb
           project_holy_goals
           project_timeline
