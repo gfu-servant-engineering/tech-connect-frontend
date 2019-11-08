@@ -1,3 +1,9 @@
+const { isNil } = require('lodash')
+
+const mapPagesUrls = {
+  index: '/',
+}
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
@@ -14,6 +20,8 @@ module.exports = {
         name: 'images',
       },
     },
+
+    'gatsby-transformer-remark',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -80,6 +88,26 @@ module.exports = {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
+  {
+
+    resolve: 'gatsby-plugin-lunr',
+    options: {
+        languages: [{
+            name: 'en',
+            filterNodes: (node) => !isNil(node.frontmatter)
+        }],
+        fields: [
+            { name: 'profile_name', store: true, attributes: { boost: 20 } }
+        ],
+        resolvers: {
+            MarkdownRemark: {
+                name: (node) => node.frontmatter.name
+            },
+        },
+        filename: 'search_index.json'
+    },
+},
+
     {
       resolve:'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
       options: {
