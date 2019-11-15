@@ -62,16 +62,13 @@ import { Link } from 'gatsby'
 
                 } = this.state;
 
-        console.log(process.env.STRAPI_USER)
-        console.log(process.env.STRAPI_PW)
-
         // get jwt
         axios({
           method: 'post',
           url: 'http://techconnect-api.ddns.net:1337/auth/local',
           data: {
-            identifier: process.env.STRAPI_USER,
-            password: process.env.STRAPI_PW
+            identifier: process.env.GATSBY_STRAPI_USER,
+            password: process.env.GATSBY_STRAPI_PW
           }
         })
         .then((result) => {
@@ -104,45 +101,76 @@ import { Link } from 'gatsby'
               project_email: project_email,
             }
           })
-          .then((result) => {
-            //access the results here....
-            alert('Your project creation was successful!')
-          });
 
           /*
-          { Image upload which is currently broken
           let data = new FormData();
-          data.append('images', this.state.project_image);
+          data.append('files', document.getElementById("project_image").files[0]);
 
-          axios.post('http://techconnect-api.ddns.net:1337/upload', data, {
+          axios({
+            method: 'post',
+            url: 'http://techconnect-api.ddns.net:1337/upload',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            },
+            data: data,
             onUploadProgress: progressEvent => {
               console.log(progressEvent.loaded / progressEvent.total)
             }
           })
+          */
+
           .then((result) => {
-            //access the results here....
-            alert('Your project creation was successful!')
-          });
-          }*/
 
-          this.setState({'sponsor_name': ''});
-          this.setState({'sponsor_website': ''});
-          this.setState({'sponsor_image': ''});
-          this.setState({'project_name': ''});
-          this.setState({'project_image': ''});
-          this.setState({'project_description': ''});
-          this.setState({'project_goals': ''});
-          this.setState({'project_needs': ''});
-          this.setState({'project_origins': ''});
-          this.setState({'project_status': ''});
-          this.setState({'project_org_description': ''});
-          this.setState({'project_holy_goals': ''});
-          this.setState({'project_github': ''});
-          this.setState({'project_slack': ''});
-          this.setState({'project_trello': ''});
-          this.setState({'project_email': ''});
-          this.setState({'project_video': ''});
 
+            const refId = result.get('id');
+            console.log(refId);
+
+            let data = new FormData();
+            data.append('refId', refId);
+            data.append('field', 'project_image');
+            data.append('ref', 'project');
+            data.append('files', document.getElementById("project_image").files[0]);
+
+            axios({
+              method: 'post',
+              url: 'http://techconnect-api.ddns.net:1337/upload',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              },
+              data: data,
+              onUploadProgress: progressEvent => {
+                console.log(progressEvent.loaded / progressEvent.total)
+              }
+            })
+
+            .then((result) => {
+              //access the results here....
+              alert('Your project creation was successful!')
+            });
+
+            // if given sponsor image put that upload here
+
+
+            this.setState({'sponsor_name': ''});
+            this.setState({'sponsor_website': ''});
+            this.setState({'sponsor_image': ''});
+            this.setState({'project_name': ''});
+            this.setState({'project_image': ''});
+            this.setState({'project_description': ''});
+            this.setState({'project_goals': ''});
+            this.setState({'project_needs': ''});
+            this.setState({'project_origins': ''});
+            this.setState({'project_status': ''});
+            this.setState({'project_org_description': ''});
+            this.setState({'project_holy_goals': ''});
+            this.setState({'project_github': ''});
+            this.setState({'project_slack': ''});
+            this.setState({'project_trello': ''});
+            this.setState({'project_email': ''});
+            this.setState({'project_video': ''});
+            });
           })
         .catch(error => {
             // Handle error.
@@ -173,7 +201,6 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-                // inserted sponsor_name and website here
                 && sponsor_name.length > 0
                 && sponsor_website.length > 0
                 && project_description.length > 0
@@ -236,8 +263,8 @@ import { Link } from 'gatsby'
             <label class="label is-medium">Upload an image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
+              <label htmlFor='project_image'></label>
+              <input type='file' id='project_image' name="project_image" value={project_image} onChange={this.onChange} />
             </div>
             <p className="help">This field is required</p>
           </div>
@@ -304,8 +331,8 @@ import { Link } from 'gatsby'
             <label class="label is-medium">Sponsor image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
+              <label htmlFor='sponsor_image'></label>
+              <input type='file' id='sponsor_image' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
             </div>
             <p className="help">Optional Sponsor logo</p>
           </div>
