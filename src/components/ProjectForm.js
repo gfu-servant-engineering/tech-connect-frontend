@@ -84,9 +84,7 @@ import { Link } from 'gatsby'
             data: {
               sponsor_name: sponsor_name,
               sponsor_website: sponsor_website,
-              sponsor_image: sponsor_image,
               project_name: project_name,
-              project_image: project_image,
               project_description: project_description,
               project_goals: project_goals,
               project_needs: project_needs,
@@ -102,28 +100,10 @@ import { Link } from 'gatsby'
             }
           })
 
-          /*
-          let data = new FormData();
-          data.append('files', document.getElementById("project_image").files[0]);
-
-          axios({
-            method: 'post',
-            url: 'http://techconnect-api.ddns.net:1337/upload',
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            },
-            data: data,
-            onUploadProgress: progressEvent => {
-              console.log(progressEvent.loaded / progressEvent.total)
-            }
-          })
-          */
-
           .then((result) => {
 
-
-            const refId = result.get('id');
+            console.log(result);
+            const refId = result.data.id;
             console.log(refId);
 
             let data = new FormData();
