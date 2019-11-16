@@ -46,7 +46,6 @@ import { Link } from 'gatsby'
           sponsor_website,
           sponsor_image,
           project_name,
-          project_image,
           project_description,
           project_goals,
           project_needs,
@@ -102,15 +101,40 @@ import { Link } from 'gatsby'
 
           .then((result) => {
 
-            console.log(result);
+            // current project id number
             const refId = result.data.id;
-            console.log(refId);
 
-            let data = new FormData();
-            data.append('refId', refId);
-            data.append('field', 'project_image');
-            data.append('ref', 'project');
-            data.append('files', document.getElementById("project_image").files[0]);
+            // if given sponsor image put that upload here
+            if (!!sponsor_image) {
+
+              // sponsor image upload and link to current project
+              let data = new FormData();
+              data.append('refId', refId);
+              data.append('field', 'sponsor_image');
+              data.append('ref', 'project');
+              data.append('files', document.getElementById("sponsor_image").files[0]);
+
+              axios({
+                method: 'post',
+                url: 'http://techconnect-api.ddns.net:1337/upload',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'multipart/form-data'
+                },
+                data: data,
+                onUploadProgress: progressEvent => {
+                  console.log(progressEvent.loaded / progressEvent.total)
+                }
+              })
+            }
+
+
+            // project image upload and link to current project
+            let data2 = new FormData();
+            data2.append('refId', refId);
+            data2.append('field', 'project_image');
+            data2.append('ref', 'project');
+            data2.append('files', document.getElementById("project_image").files[0]);
 
             axios({
               method: 'post',
@@ -119,7 +143,7 @@ import { Link } from 'gatsby'
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data'
               },
-              data: data,
+              data: data2,
               onUploadProgress: progressEvent => {
                 console.log(progressEvent.loaded / progressEvent.total)
               }
@@ -129,8 +153,6 @@ import { Link } from 'gatsby'
               //access the results here....
               alert('Your project creation was successful!')
             });
-
-            // if given sponsor image put that upload here
 
 
             this.setState({'sponsor_name': ''});
@@ -598,7 +620,6 @@ import { Link } from 'gatsby'
                 {/* This button is what submits the form to the Strapi backend.
                     This is commented out to allow people to try out our site.
                     When this button is pressed, everything posts to the backend
-                    other than the image, so that will need to be fixed.
 
                     <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
                       Submit Project for Review
