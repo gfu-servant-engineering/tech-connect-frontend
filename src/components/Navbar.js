@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, withPrefix } from 'gatsby'
-import { login, logout, isAuthenticated } from "../utils/auth"
+import { login, logout, isAuthenticated, getProfile } from "../utils/auth"
 
 
 function loginButton() {
@@ -18,17 +18,41 @@ function loginButton() {
 }
 
 function logoutButton() {
-  return (
-    <a className="navbar-item"
-      href="#logout"
-      onClick={e => {
-        logout()
-        e.preventDefault()
-      }}
-    >
-      Logout
-    </a>
-  )
+  const user = getProfile()
+
+  if(!!user.name) {
+    return (
+      <div className="navbar-item has-dropdown is-hoverable">
+        <a className="navbar-link is-arrowless">
+          {user.name} 
+        </a>
+        <div className="navbar-dropdown">
+          <a className="navbar-item"
+            href="#logout"
+            onClick={e => {
+              logout()
+              e.preventDefault()
+            }}
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    )
+
+  } else {
+    return (
+      <a className="navbar-item"
+        href="#logout"
+        onClick={e => {
+          logout()
+          e.preventDefault()
+        }}
+      >
+        Logout
+      </a>
+    )
+  }
 }
 
 
@@ -63,7 +87,7 @@ const Navbar = class extends React.Component {
    let accountButton
    if(!isAuthenticated()) accountButton = loginButton()
    else accountButton = logoutButton()
-
+   
 
    return (
     <nav className="navbar is-transparent" role="navigation" aria-label="main-navigation">

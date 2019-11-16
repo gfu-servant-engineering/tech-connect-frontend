@@ -53,6 +53,7 @@ const setSession = (cb = () => {}) => (err, authResult) => {
     tokens.expiresAt = expiresAt
     user = authResult.idTokenPayload
     localStorage.setItem("isLoggedIn", true)
+    localStorage.setItem('userObj', JSON.stringify(user))
     navigate("/create-project")
     cb()
   }
@@ -67,7 +68,9 @@ export const handleAuthentication = () => {
 }
 
 export const getProfile = () => {
-  return user
+  var getObject = JSON.parse(localStorage.getItem('userObj'))
+  if(!getObject) getObject = user
+  return getObject
 }
 
 export const silentAuth = callback => {
