@@ -92,5 +92,26 @@ module.exports = {
       },
     }, // must be after other CSS plugins
     'gatsby-plugin-netlify', // make sure to keep it last in the array
+    {
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+        languages: [{ name: 'en' }],
+        // Fields to index
+        fields: [
+          { name: 'id', store: true},
+          { name: 'project_name', store: true, attributes: { boost: 20 }},
+          { name: 'project_description', store: true, attributes: { boost: 5 }},
+        ],
+        // How to resolve each field`s value for a supported node type
+        resolvers: {
+          // For any node of type MarkdownRemark, list how to resolve the fields` values
+          StrapiProject: {
+            id: node => node.id,
+            project_name: node => node.project_name,
+          },
+        },
+        filename: 'search_index.json',
+      },
+    },
   ],
 }
