@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import FormData from 'form-data'
 import axios from 'axios';
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 
     class ProjectForm extends Component {
       constructor() {
@@ -39,80 +38,104 @@ import { Link } from 'gatsby'
 
       onSubmit = (e) => {
 
-        e.preventDefault();
-        // get our form data out of state
-        const {
-          sponsor_name,
-          sponsor_website,
-          sponsor_image,
-          project_name,
-          project_description,
-          project_goals,
-          project_needs,
-          project_origins,
-          project_status,
-          project_org_description,
-          project_holy_goals,
-          project_video,
-          project_github,
-          project_slack,
-          project_trello,
-          project_email
+        // if allowed to submit projects
+        if (process.env.PROJECT_SUBMIT === 'true') {
 
-                } = this.state;
+          e.preventDefault();
+          // get our form data out of state
+          const {
+            sponsor_name,
+            sponsor_website,
+            sponsor_image,
+            project_name,
+            project_description,
+            project_goals,
+            project_needs,
+            project_origins,
+            project_status,
+            project_org_description,
+            project_holy_goals,
+            project_video,
+            project_github,
+            project_slack,
+            project_trello,
+            project_email
 
-        // get jwt
-        axios({
-          method: 'post',
-          url: 'http://techconnect-api.ddns.net:1337/auth/local',
-          data: {
-            identifier: process.env.GATSBY_STRAPI_USER,
-            password: process.env.GATSBY_STRAPI_PW
-          }
-        })
-        .then((result) => {
-          const token = result.data.jwt
+                  } = this.state;
 
-          // create project
+          // get jwt
           axios({
             method: 'post',
-            url: 'http://techconnect-api.ddns.net:1337/projects',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            url: 'http://techconnect-api.ddns.net:1337/auth/local',
             data: {
-              sponsor_name: sponsor_name,
-              sponsor_website: sponsor_website,
-              project_name: project_name,
-              project_description: project_description,
-              project_goals: project_goals,
-              project_needs: project_needs,
-              project_origins: project_origins,
-              project_status: project_status,
-              project_org_description: project_org_description,
-              project_holy_goals: project_holy_goals,
-              project_video: project_video,
-              project_github: project_github,
-              project_slack: project_slack,
-              project_trello: project_trello,
-              project_email: project_email,
+              identifier: process.env.GATSBY_STRAPI_USER,
+              password: process.env.GATSBY_STRAPI_PW
             }
           })
-
           .then((result) => {
+            const token = result.data.jwt
 
-            // current project id number
-            const refId = result.data.id;
+            // create project
+            axios({
+              method: 'post',
+              url: 'http://techconnect-api.ddns.net:1337/projects',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              data: {
+                sponsor_name: sponsor_name,
+                sponsor_website: sponsor_website,
+                project_name: project_name,
+                project_description: project_description,
+                project_goals: project_goals,
+                project_needs: project_needs,
+                project_origins: project_origins,
+                project_status: project_status,
+                project_org_description: project_org_description,
+                project_holy_goals: project_holy_goals,
+                project_video: project_video,
+                project_github: project_github,
+                project_slack: project_slack,
+                project_trello: project_trello,
+                project_email: project_email,
+              }
+            })
 
-            // if given sponsor image put that upload here
-            if (!!sponsor_image) {
+            .then((result) => {
 
-              // sponsor image upload and link to current project
-              let data = new FormData();
-              data.append('refId', refId);
-              data.append('field', 'sponsor_image');
-              data.append('ref', 'project');
-              data.append('files', document.getElementById("sponsor_image").files[0]);
+              // current project id number
+              const refId = result.data.id;
+
+              // if given sponsor image put that upload here
+              if (!!sponsor_image) {
+
+                // sponsor image upload and link to current project
+                let data = new FormData();
+                data.append('refId', refId);
+                data.append('field', 'sponsor_image');
+                data.append('ref', 'project');
+                data.append('files', document.getElementById("sponsor_image").files[0]);
+
+                axios({
+                  method: 'post',
+                  url: 'http://techconnect-api.ddns.net:1337/upload',
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                  },
+                  data: data,
+                  onUploadProgress: progressEvent => {
+                    console.log(progressEvent.loaded / progressEvent.total)
+                  }
+                })
+              }
+
+              // project image upload and link to current project
+              let data2 = new FormData();
+              data2.append('refId', refId);
+              data2.append('field', 'project_image');
+              data2.append('ref', 'project');
+              data2.append('files', document.getElementById("project_image").files[0]);
 
               axios({
                 method: 'post',
@@ -121,63 +144,46 @@ import { Link } from 'gatsby'
                   Authorization: `Bearer ${token}`,
                   'Content-Type': 'multipart/form-data'
                 },
-                data: data,
+                data: data2,
                 onUploadProgress: progressEvent => {
                   console.log(progressEvent.loaded / progressEvent.total)
                 }
               })
-            }
+
+              .then((result) => {
+                //access the results here....
+                navigate('/thank-you');
+              });
 
 
-            // project image upload and link to current project
-            let data2 = new FormData();
-            data2.append('refId', refId);
-            data2.append('field', 'project_image');
-            data2.append('ref', 'project');
-            data2.append('files', document.getElementById("project_image").files[0]);
-
-            axios({
-              method: 'post',
-              url: 'http://techconnect-api.ddns.net:1337/upload',
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
-              },
-              data: data2,
-              onUploadProgress: progressEvent => {
-                console.log(progressEvent.loaded / progressEvent.total)
-              }
+              this.setState({'sponsor_name': ''});
+              this.setState({'sponsor_website': ''});
+              this.setState({'sponsor_image': ''});
+              this.setState({'project_name': ''});
+              this.setState({'project_image': ''});
+              this.setState({'project_description': ''});
+              this.setState({'project_goals': ''});
+              this.setState({'project_needs': ''});
+              this.setState({'project_origins': ''});
+              this.setState({'project_status': ''});
+              this.setState({'project_org_description': ''});
+              this.setState({'project_holy_goals': ''});
+              this.setState({'project_github': ''});
+              this.setState({'project_slack': ''});
+              this.setState({'project_trello': ''});
+              this.setState({'project_email': ''});
+              this.setState({'project_video': ''});
+              });
             })
-
-            .then((result) => {
-              //access the results here....
-              alert('Your project creation was successful!')
-            });
-
-
-            this.setState({'sponsor_name': ''});
-            this.setState({'sponsor_website': ''});
-            this.setState({'sponsor_image': ''});
-            this.setState({'project_name': ''});
-            this.setState({'project_image': ''});
-            this.setState({'project_description': ''});
-            this.setState({'project_goals': ''});
-            this.setState({'project_needs': ''});
-            this.setState({'project_origins': ''});
-            this.setState({'project_status': ''});
-            this.setState({'project_org_description': ''});
-            this.setState({'project_holy_goals': ''});
-            this.setState({'project_github': ''});
-            this.setState({'project_slack': ''});
-            this.setState({'project_trello': ''});
-            this.setState({'project_email': ''});
-            this.setState({'project_video': ''});
-            });
-          })
-        .catch(error => {
-            // Handle error.
-            console.log('An error occurred:', error);
-        });
+          .catch(error => {
+              // Handle error.
+              console.log('An error occurred:', error);
+          });
+        }
+        // if not allowed to submit, navigate to thank you page
+        else {
+          navigate('/thank-you');
+        }
       }
 
 
@@ -617,19 +623,13 @@ import { Link } from 'gatsby'
               <div class="field">
                 <div class="control">
 
-                {/* This button is what submits the form to the Strapi backend.
-                    This is commented out to allow people to try out our site.
+                  {/* This button is what submits the form to the Strapi backend.
                     When this button is pressed, everything posts to the backend
-
+                    Uses an environment variable to determine if project can be submitted.
+                  */}
                     <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
                       Submit Project for Review
                     </button>
-                  */}
-
-                  {/* This button is a placeholder for the expo*/}
-                      <button type="submit" disabled={!isEnabled} class="button is-primary is-medium">
-                        Submit Project for Review
-                      </button>
                 </div>
               </div>
             </div>
