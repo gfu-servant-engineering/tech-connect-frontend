@@ -3,7 +3,7 @@ import { navigate } from 'gatsby';
 
 const SearchForm = ({query}) => (
   <form role="search" method="GET">
-    <label htmlFor="search-input"><h1>Search posts</h1></label>
+    <label htmlFor="search-input"><h1>Search</h1></label>
     <input
       type="search"
       id="search-input"

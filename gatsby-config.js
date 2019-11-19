@@ -101,6 +101,8 @@ module.exports = {
           { name: 'id', store: true},
           { name: 'project_name', store: true, attributes: { boost: 20 }},
           { name: 'project_description', store: true, attributes: { boost: 5 }},
+          { name: 'project_image', store: true},
+          { name: 'sponsor_name', store: true, attributes: { boost: 15 }},
         ],
         // How to resolve each field`s value for a supported node type
         resolvers: {
@@ -108,6 +110,9 @@ module.exports = {
           StrapiProject: {
             id: node => node.id,
             project_name: node => node.project_name,
+            project_description: node => node.project_description,
+            project_image: node => node.project_image,
+            sponsor_name: node => node.sponsor_name,
           },
         },
         filename: 'search_index.json',
