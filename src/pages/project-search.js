@@ -18,9 +18,17 @@ const ProjectSearch = ({data, location}) => {
   }, [location.search]);
 
   return (
-    <Layout location={location} title={data.site.siteMetadata.title}>
-      <SearchField query={searchQuery} />
-      <SearchResults query={searchQuery} results={results} data={data}/>
+    <Layout>
+      <section className="section" >
+        <div className="container" >
+          <div className="content" >
+            <h1 className="has-text-weight-bold is-size-3 has-text-primary">Project Search</h1>
+            <SearchField query={searchQuery} />
+            <hr className="horizontal-rule" />
+            <SearchResults query={searchQuery} results={results} data={data}/>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
