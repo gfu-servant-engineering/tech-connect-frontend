@@ -15,7 +15,7 @@ const ProjectSearch = ({data, location}) => {
         setResults(posts);
       });
     }
-  }, [location.search]);
+  }, [searchQuery]);
 
   return (
     <Layout>
