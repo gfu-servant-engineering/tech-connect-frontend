@@ -53,6 +53,7 @@ const SearchResults = ({data, query, results}) => {
             </div>
           )
         })}
+        {!!query ? (<h1 className="is-primary">No Results Found For "{query}"</h1>) : (<p></p>)}
       </div>
     </section>
   )
