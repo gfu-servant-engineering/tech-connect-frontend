@@ -59,8 +59,7 @@ import { navigate } from 'gatsby'
             project_slack,
             project_trello,
             project_email
-
-                  } = this.state;
+          } = this.state;
 
           // get jwt
           axios({
@@ -70,8 +69,7 @@ import { navigate } from 'gatsby'
               identifier: process.env.GATSBY_STRAPI_USER,
               password: process.env.GATSBY_STRAPI_PW
             }
-          })
-          .then((result) => {
+          }).then((result) => {
             const token = result.data.jwt
 
             // create project
@@ -98,9 +96,7 @@ import { navigate } from 'gatsby'
                 project_trello: project_trello,
                 project_email: project_email,
               }
-            })
-
-            .then((result) => {
+            }).then((result) => {
 
               // current project id number
               const refId = result.data.id;
@@ -147,9 +143,7 @@ import { navigate } from 'gatsby'
                 onUploadProgress: progressEvent => {
                   console.log(progressEvent.loaded / progressEvent.total)
                 }
-              })
-
-              .then((result) => {
+              }).then((result) => {
                 //access the results here....
                 navigate('/thank-you');
               });
@@ -173,8 +167,7 @@ import { navigate } from 'gatsby'
               this.setState({'project_email': ''});
               this.setState({'project_video': ''});
               });
-            })
-          .catch(error => {
+            }).catch(error => {
               // Handle error.
               console.log('An error occurred:', error);
           });
