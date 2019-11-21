@@ -39,7 +39,7 @@ import { navigate } from 'gatsby'
       onSubmit = (e) => {
 
         // if allowed to submit projects
-        if (process.env.GATSBY_SUBMIT_PROJECT === true) {
+        if (process.env.GATSBY_SUBMIT_PROJECT === 'true') {
 
           e.preventDefault();
           // get our form data out of state
