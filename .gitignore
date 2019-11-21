@@ -8,5 +8,6 @@ static/admin/*.bundle.*
 .DS_Store
 yarn-error.log
 *.swp
-/package-lock.json.env
+/package-lock.json
+.env
 .env.*
