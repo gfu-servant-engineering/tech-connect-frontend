@@ -65,7 +65,7 @@ import { navigate } from 'gatsby'
           // get jwt
           axios({
             method: 'post',
-            url: 'http://techconnect-api.ddns.net:1337/auth/local',
+            url: `${process.env.GATSBY_STRAPI_HOST}/auth/local`,
             data: {
               identifier: process.env.GATSBY_STRAPI_USER,
               password: process.env.GATSBY_STRAPI_PW
@@ -77,7 +77,7 @@ import { navigate } from 'gatsby'
             // create project
             axios({
               method: 'post',
-              url: 'http://techconnect-api.ddns.net:1337/projects',
+              url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -117,7 +117,7 @@ import { navigate } from 'gatsby'
 
                 axios({
                   method: 'post',
-                  url: 'http://techconnect-api.ddns.net:1337/upload',
+                  url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
                   headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -138,7 +138,7 @@ import { navigate } from 'gatsby'
 
               axios({
                 method: 'post',
-                url: 'http://techconnect-api.ddns.net:1337/upload',
+                url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
                 headers: {
                   Authorization: `Bearer ${token}`,
                   'Content-Type': 'multipart/form-data'
