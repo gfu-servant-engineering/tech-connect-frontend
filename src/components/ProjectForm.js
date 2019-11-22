@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-//import FormData from 'form-data'
 import axios from 'axios';
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 
     class ProjectForm extends Component {
       constructor() {
         super();
         this.state = {
-          // inserted sponsor name, image, and website here
           sponsor_name: '',
           sponsor_website: '',
           sponsor_image: '',
@@ -39,97 +37,150 @@ import { Link } from 'gatsby'
       }
 
       onSubmit = (e) => {
-
         e.preventDefault();
-        // get our form data out of state
-        const {
-          // inserted sponsor name, website, and image here
-          sponsor_name,
-          sponsor_website,
-          sponsor_image,
-          project_name,
-          project_image,
-          project_description,
-          project_goals,
-          project_needs,
-          project_origins,
-          project_status,
-          project_org_description,
-          project_holy_goals,
-          project_video,
-          project_github,
-          project_slack,
-          project_trello,
-          project_email
 
-                } = this.state;
+        // if allowed to submit projects
+        if (process.env.GATSBY_SUBMIT_PROJECT === 'true') {
+          // get our form data out of state
+          const {
+            sponsor_name,
+            sponsor_website,
+            sponsor_image,
+            project_name,
+            project_description,
+            project_goals,
+            project_needs,
+            project_origins,
+            project_status,
+            project_org_description,
+            project_holy_goals,
+            project_video,
+            project_github,
+            project_slack,
+            project_trello,
+            project_email
+          } = this.state;
 
-        axios({
-          method: 'post',
-          url: 'http://techconnect-api.ddns.net:1337/projects',
-          data: {
-            project_name: project_name,
-            project_image: project_image,
-            project_description: project_description,
-            project_goals: project_goals,
-            project_needs: project_needs,
-            project_origins: project_origins,
-            project_status: project_status,
-            project_org_description: project_org_description,
-            project_holy_goals: project_holy_goals,
-            project_video: project_video,
-            project_github: project_github,
-            project_slack: project_slack,
-            project_trello: project_trello,
-            project_email: project_email,
-          }
-        })
-        .then((result) => {
-            //access the results here....
-            alert('Your project creation was successful!')
+          // get jwt
+          axios({
+            method: 'post',
+            url: `${process.env.GATSBY_STRAPI_HOST}/auth/local`,
+            data: {
+              identifier: process.env.GATSBY_STRAPI_USER,
+              password: process.env.GATSBY_STRAPI_PW
+            }
+          }).then((result) => {
+            const token = result.data.jwt
+
+            // create project
+            axios({
+              method: 'post',
+              url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              data: {
+                sponsor_name: sponsor_name,
+                sponsor_website: sponsor_website,
+                project_name: project_name,
+                project_description: project_description,
+                project_goals: project_goals,
+                project_needs: project_needs,
+                project_origins: project_origins,
+                project_status: project_status,
+                project_org_description: project_org_description,
+                project_holy_goals: project_holy_goals,
+                project_video: project_video,
+                project_github: project_github,
+                project_slack: project_slack,
+                project_trello: project_trello,
+                project_email: project_email,
+              }
+            }).then((result) => {
+
+              // current project id number
+              const refId = result.data.id;
+
+              // if given sponsor image put that upload here
+              if (!!sponsor_image) {
+
+                // sponsor image upload and link to current project
+                let data = new FormData();
+                data.append('refId', refId);
+                data.append('field', 'sponsor_image');
+                data.append('ref', 'project');
+                data.append('files', document.getElementById("sponsor_image").files[0]);
+
+                axios({
+                  method: 'post',
+                  url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                  },
+                  data: data,
+                  onUploadProgress: progressEvent => {
+                    console.log(progressEvent.loaded / progressEvent.total)
+                  }
+                })
+              }
+
+              // project image upload and link to current project
+              let data2 = new FormData();
+              data2.append('refId', refId);
+              data2.append('field', 'project_image');
+              data2.append('ref', 'project');
+              data2.append('files', document.getElementById("project_image").files[0]);
+
+              axios({
+                method: 'post',
+                url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'multipart/form-data'
+                },
+                data: data2,
+                onUploadProgress: progressEvent => {
+                  console.log(progressEvent.loaded / progressEvent.total)
+                }
+              }).then((result) => {
+                //access the results here....
+                navigate('/thank-you');
+              });
+
+
+              this.setState({'sponsor_name': ''});
+              this.setState({'sponsor_website': ''});
+              this.setState({'sponsor_image': ''});
+              this.setState({'project_name': ''});
+              this.setState({'project_image': ''});
+              this.setState({'project_description': ''});
+              this.setState({'project_goals': ''});
+              this.setState({'project_needs': ''});
+              this.setState({'project_origins': ''});
+              this.setState({'project_status': ''});
+              this.setState({'project_org_description': ''});
+              this.setState({'project_holy_goals': ''});
+              this.setState({'project_github': ''});
+              this.setState({'project_slack': ''});
+              this.setState({'project_trello': ''});
+              this.setState({'project_email': ''});
+              this.setState({'project_video': ''});
+              });
+            }).catch(error => {
+              // Handle error.
+              console.log('An error occurred:', error);
           });
-
-       /*
-        { Image upload which is currently broken
-        let data = new FormData();
-        data.append('images', this.state.project_image);
-
-        axios.post('http://techconnect-api.ddns.net:1337/upload', data, {
-          onUploadProgress: progressEvent => {
-            console.log(progressEvent.loaded / progressEvent.total)
-          }
-        })
-        .then((result) => {
-            //access the results here....
-            alert('Your project creation was successful!')
-          });
-          }*/
-
-        // inserted sponsor name, website and image here
-        this.setState({'sponsor_name': ''});
-        this.setState({'sponsor_website': ''});
-        this.setState({'sponsor_image': ''});
-        this.setState({'project_name': ''});
-        this.setState({'project_image': ''});
-        this.setState({'project_description': ''});
-        this.setState({'project_goals': ''});
-        this.setState({'project_needs': ''});
-        this.setState({'project_origins': ''});
-        this.setState({'project_status': ''});
-        this.setState({'project_org_description': ''});
-        this.setState({'project_holy_goals': ''});
-        this.setState({'project_github': ''});
-        this.setState({'project_slack': ''});
-        this.setState({'project_trello': ''});
-        this.setState({'project_email': ''});
-        this.setState({'project_video': ''});
+        }
+        // if not allowed to submit, navigate to thank you page
+        else {
+          navigate('/thank-you');
+        }
       }
-
 
 
       render() {
         const {
-          // inserted sponsor name, website, and image here
           sponsor_name,
           sponsor_website,
           sponsor_image,
@@ -150,7 +201,6 @@ import { Link } from 'gatsby'
                 } = this.state;
         const isEnabled = project_name.length > 0
                 && project_image.length > 0
-                // inserted sponsor_name and website here
                 && sponsor_name.length > 0
                 && sponsor_website.length > 0
                 && project_description.length > 0
@@ -213,8 +263,8 @@ import { Link } from 'gatsby'
             <label className="label is-medium">Upload an image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="project_image" value={project_image} onChange={this.onChange} />
+              <label htmlFor='project_image'></label>
+              <input type='file' id='project_image' name="project_image" value={project_image} onChange={this.onChange} />
             </div>
             <p className="help">This field is required</p>
           </div>
@@ -281,8 +331,8 @@ import { Link } from 'gatsby'
             <label className="label is-medium">Sponsor image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='single'></label>
-              <input type='file' id='single' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
+              <label htmlFor='sponsor_image'></label>
+              <input type='file' id='sponsor_image' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
             </div>
             <p className="help">Optional Sponsor logo</p>
           </div>
@@ -565,22 +615,13 @@ import { Link } from 'gatsby'
               <div className="field">
                 <div className="control">
 
-                {/* This button is what submits the form to the Strapi backend.
-                    This is commented out to allow people to try out our site.
+                  {/* This button is what submits the form to the Strapi backend.
                     When this button is pressed, everything posts to the backend
-                    other than the image, so that will need to be fixed.
-
+                    Uses an environment variable to determine if project can be submitted.
+                  */}
                     <button type="submit" disabled={!isEnabled} className="button is-primary is-medium">
                       Submit Project for Review
                     </button>
-                  */}
-
-                  {/* This button is a placeholder for the expo*/}
-                  <Link to="/thank-you">
-                      <button disabled={!isEnabled} className="button is-primary is-medium">
-                        Submit Project for Review
-                      </button>
-                  </Link>
                 </div>
               </div>
             </div>
