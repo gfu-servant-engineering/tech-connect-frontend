@@ -30,8 +30,8 @@ const ProjectSearch = ({data, location}) => {
           <div className="content" >
             <h1 className="has-text-weight-bold is-size-3 has-text-primary">Project Search</h1>
             <SearchField query={searchQuery} />
-            <SearchPageNavigator pages={pages} currPage={searchPage} query={searchQuery}/>
             <hr className="horizontal-rule" />
+            {pages != 0 ? (<SearchPageNavigator pages={pages} currPage={searchPage} query={searchQuery}/>) : (<div />)}
             <SearchResults query={searchQuery} results={paginatedResults} data={data}/>
           </div>
         </div>
