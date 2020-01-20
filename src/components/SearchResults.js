@@ -45,11 +45,11 @@ const SearchResults = ({data, query, results}) => {
   return(
     <section aria-live="assertive">
       <div className="columns is-multiline is-centered">
-        {results.map(document => {
+        {results.map(result => {
           return(
-            <div key={document.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
-              <Link to={document.id}><PreviewCompatibleImage imageInfo={document.imageData} /></Link>
-              <ProjectTile data={document}></ProjectTile>
+            <div key={result.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
+              <Link to={result.id}><PreviewCompatibleImage imageInfo={result.imageData} /></Link>
+              <ProjectTile data={result}></ProjectTile>
             </div>
           )
         })}
