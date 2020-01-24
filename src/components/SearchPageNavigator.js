@@ -17,7 +17,6 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
   }
 
   return (
-    {/* Back Button */}
     <div className="field has-addons has-addons-centered is-centered">
       <p className="control">
         {currPage === 1 ? (
@@ -31,7 +30,6 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
         )}
       </p>
 
-    {/* Availiable Pages */}
       {pageNums.map(num => {
         if (num === currPage) {
           return(
@@ -52,7 +50,6 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
         }
       })}
 
-    {/* Next Button */}
       <p className="control">
         {currPage === pages ? (
           <button className="button is-link is-light" disabled>
