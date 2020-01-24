@@ -7,28 +7,17 @@ function gotoPage(query, page) {
 
 const SearchPageNavigator = ({pages, currPage, query}) => {
 
-  const pageButtons = []
+  const pageNums = []
   for (var i = 1; i <= pages; i++) {
-    if (i === currPage) {
-      pageButtons.push(
-        <p className="control">
-          <button className="button is-light" disabled>
-            <span><u>{i}</u></span>
-          </button>
-        </p>
-      )
-    } else {
-      pageButtons.push(
-        <p className="control">
-          <button className="button is-light">
-            <span>{i}</span>
-          </button>
-        </p>
-      )
-    }
+    pageNums.push(i);
+  }
+
+  var handleGoto = value => event => {
+      gotoPage(query, value)
   }
 
   return (
+    {/* Back Button */}
     <div className="field has-addons has-addons-centered is-centered">
       <p className="control">
         {currPage === 1 ? (
@@ -41,7 +30,29 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
           </button>
         )}
       </p>
-      {pageButtons}
+
+    {/* Availiable Pages */}
+      {pageNums.map(num => {
+        if (num === currPage) {
+          return(
+            <p className="control">
+              <button className="button is-light" onClick={handleGoto(num)} disabled>
+                <span><u>{num}</u></span>
+              </button>
+            </p>
+          )
+        } else {
+          return(
+            <p className="control">
+              <button className="button is-light" onClick={handleGoto(num)}>
+                <span>{num}</span>
+              </button>
+            </p>
+          )
+        }
+      })}
+
+    {/* Next Button */}
       <p className="control">
         {currPage === pages ? (
           <button className="button is-link is-light" disabled>
