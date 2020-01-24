@@ -44,6 +44,52 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
+const getBlogs = makeRequest(graphql, `
+    {
+      allStrapiBlogpage{
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiBlogpage.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/blog-post.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+
+    const getAbout = makeRequest(graphql, `
+    {
+      allStrapiAboutpage{
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiAboutpage.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/about-page.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });  
+
   return graphql(`
     {
       allMarkdownRemark(limit: 1000) {
