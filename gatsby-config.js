@@ -35,8 +35,8 @@ module.exports = {
         ],
         queryLimit: 1000,
         loginData: {
-          identifier: "",
-          password: "",
+          identifier: `${process.env.GATSBY_STRAPI_USER}`,
+          password: `${process.env.GATSBY_STRAPI_PW}`,
         },
       },
     },
