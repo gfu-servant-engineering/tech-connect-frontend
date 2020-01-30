@@ -5,6 +5,7 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
 import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
 import ResponsiveEmbed from 'react-responsive-embed'
+import ReactMarkdown from "react-markdown"
 const ProjectTemplate = ({ data }) => (
     <Layout>
       <section className="section">
@@ -49,37 +50,37 @@ const ProjectTemplate = ({ data }) => (
           <div className="column is-10">
             <br/>
             <h4 className="has-text-weight-bold is-size-4 has-text-primary">Describe your project ...</h4>
-              {data.strapiProject.project_description}
+              <ReactMarkdown source={data.strapiProject.project_description} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What are your goals?</h4>
-              <p>{data.strapiProject.project_goals}</p>
+              <ReactMarkdown source={data.strapiProject.project_goals} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What do you need?</h4>
-              <p>{data.strapiProject.project_needs}</p>
+              <ReactMarkdown source={data.strapiProject.project_needs} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">What inspired this project?</h4>
-              <p>{data.strapiProject.project_origins}</p>
+              <ReactMarkdown source={data.strapiProject.project_origins} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">This project is currently...</h4>
-              <p>{data.strapiProject.project_status}</p>
+              <ReactMarkdown source={data.strapiProject.project_status} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">Tell us about yourself!</h4>
-              <p>{data.strapiProject.project_org_description}</p>
+              <ReactMarkdown source={data.strapiProject.project_org_description} />
           </div>
           <div className="column is-5">
               <br/>
               <h4 className="has-text-weight-bold is-size-4 has-text-primary">This project exemplifies the Kingdom of God by ...</h4>
-              <p>{data.strapiProject.project_holy_goals}</p>
+              <ReactMarkdown source={data.strapiProject.project_holy_goals} />
           </div>
           <div className="column is-10">
             <br />
