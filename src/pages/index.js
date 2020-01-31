@@ -64,18 +64,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] },
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
-    ) {
+    allStrapiBlogpost (limit: 4){ 
       edges {
         node {
-          excerpt(pruneLength: 400)
-          id
-          fields {
-            slug
-          }
-          frontmatter {
             title
             image {
               childImageSharp {
@@ -86,7 +77,6 @@ export const pageQuery = graphql`
             }
             templateKey
             date(formatString: "MMMM DD, YYYY")
-          }
         }
       }
     }

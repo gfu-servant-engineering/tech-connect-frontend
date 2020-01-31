@@ -6,22 +6,25 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 
 const StoryTile = ({ data }) => (
   <div>
-    <Link to={data.fields.slug}><PreviewCompatibleImage imageInfo={data.frontmatter.image}/></Link>
+    <Link to={data.id}><PreviewCompatibleImage imageInfo={data.image}/></Link>
     <h3 className="has-text-weight-bold is-size-5">
-      <Link className="has-text-primary" style={{display:'inline-block'}} to={data.fields.slug}>{data.frontmatter.title}</Link>
+      <Link className="has-text-primary" style={{display:'inline-block'}} to={data.id}>{data.title}</Link>
     </h3>
-    <Link className="has-text-primary" to={data.fields.slug}>
-      <LinesEllipsis
-        style={{ whiteSpace: 'pre-wrap' }}
-        text={data.excerpt}
-        maxLine='3'
-      />
-    </Link>
+    <Link className="has-text-primary" to={`/${data.id}`}>
+        <LinesEllipsis
+          style={{ whiteSpace: 'pre-wrap' }}
+          text={data.description}
+          maxLine={3}
+        />
+      </Link>
   </div>
 )
 
 StoryTile.propTypes = {
-      data: PropTypes.object.isRequired,
+      id: PropTypes.number,
+      title: PropTypes.object,
+      description: PropTypes.string,
 }
+
 
 export default StoryTile
