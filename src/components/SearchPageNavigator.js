@@ -11,24 +11,20 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
   const pagePadding = 2;
   const maxPages = (pagePadding * 2) + 1;
 
-  if (pages <= maxPages) {
-    console.log(1);
+  if (pages <= maxPages) {  // No truncation needed
     for (var i = 1; i <= pages; i++) {
       pageNums.push(i);
     }
-  } else if (currPage >= pages - pagePadding) {
-    console.log(2);
-    for (var i = pages - maxPages; i <= pages; i++) {
+  } else if (currPage >= pages - pagePadding) { // End of truncation
+    for (i = pages - maxPages + 1; i <= pages; i++) {
       pageNums.push(i);
     }
-  } else if (currPage <= pagePadding) {
-    console.log(3);
-    for (var i = 1; i <= maxPages; i++) {
+  } else if (currPage <= pagePadding) { // Beginning of truncation
+    for (i = 1; i <= maxPages; i++) {
       pageNums.push(i);
     }
-  } else {
-    console.log(4);
-    for (var i = currPage - pagePadding; i <= currPage + pagePadding; i++) {
+  } else {  // Full truncation
+    for (i = currPage - pagePadding; i <= currPage + pagePadding; i++) {
       pageNums.push(i);
     }  
   }
@@ -39,12 +35,25 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
 
   return (
     <div className="field has-addons has-addons-centered is-centered">
+
+      <p className="control">
+        {currPage === 1 ? (
+          <button className="button is-link is-light" disabled>
+            <span>First</span>
+          </button>
+        ) : (
+          <button className="button is-link is-light" onClick={() => gotoPage(query, 1)}>
+            <span>First</span>
+          </button>
+        )}
+      </p>
+
       <p className="control">
         {currPage === 1 ? (
           <button className="button is-link is-light" disabled>
             <span>Back</span>
           </button>
-          ) : (
+        ) : (
           <button className="button is-link is-light" onClick={() => gotoPage(query, currPage - 1)}>
             <span>Back</span>
           </button>
@@ -76,9 +85,20 @@ const SearchPageNavigator = ({pages, currPage, query}) => {
           <button className="button is-link is-light" disabled>
             <span>Next</span>
           </button>
-          ) : (
+        ) : (
           <button className="button is-link is-light" onClick={() => gotoPage(query, currPage + 1)}>
             <span>Next</span>
+          </button>
+        )}
+      </p>
+      <p className="control">
+        {currPage === pages ? (
+          <button className="button is-link is-light" disabled>
+            <span>Last</span>
+          </button>
+        ) : (
+          <button className="button is-link is-light" onClick={() => gotoPage(query, pages)}>
+            <span>Last</span>
           </button>
         )}
       </p>
