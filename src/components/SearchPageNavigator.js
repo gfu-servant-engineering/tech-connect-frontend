@@ -7,9 +7,30 @@ function gotoPage(query, page) {
 
 const SearchPageNavigator = ({pages, currPage, query}) => {
 
-  const pageNums = []
-  for (var i = 1; i <= pages; i++) {
-    pageNums.push(i);
+  const pageNums = [];
+  const pagePadding = 2;
+  const maxPages = (pagePadding * 2) + 1;
+
+  if (pages <= maxPages) {
+    console.log(1);
+    for (var i = 1; i <= pages; i++) {
+      pageNums.push(i);
+    }
+  } else if (currPage >= pages - pagePadding) {
+    console.log(2);
+    for (var i = pages - maxPages; i <= pages; i++) {
+      pageNums.push(i);
+    }
+  } else if (currPage <= pagePadding) {
+    console.log(3);
+    for (var i = 1; i <= maxPages; i++) {
+      pageNums.push(i);
+    }
+  } else {
+    console.log(4);
+    for (var i = currPage - pagePadding; i <= currPage + pagePadding; i++) {
+      pageNums.push(i);
+    }  
   }
 
   var handleGoto = value => event => {
