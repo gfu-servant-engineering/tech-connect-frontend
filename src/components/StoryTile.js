@@ -11,10 +11,7 @@ const StoryTile = ({ data }) => {
       <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.image} /></Link>
       <h3 className="has-text-weight-bold is-size-5">
         <Link className="has-text-primary" style={{display:'inline-block'}} to={`/${data.id}`}>{data.title}</Link>
-      </h3>
-      <h4 className="has-text-weight-normal is-size-5 is-size-6">
-        <i>Sponsored by {data.sponsor_name}</i>
-      </h4>
+      </h3>  
       <Link className="has-text-primary" to={`/${data.id}`}>
         <LinesEllipsis
           style={{ whiteSpace: 'pre-wrap' }}

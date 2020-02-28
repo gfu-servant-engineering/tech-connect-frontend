@@ -66,7 +66,9 @@ export const pageQuery = graphql`
     allStrapiBlogpage (limit: 4){ 
       edges {
         node {
+            id
             title
+            description
             image {
               childImageSharp {
                 fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
