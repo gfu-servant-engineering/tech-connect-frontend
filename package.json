@@ -36,8 +36,6 @@
     "react-lines-ellipsis": ">0.14.0",
     "react-markdown": "^4.3.1",
     "react-responsive-embed": "^2.1.0",
-    "react-truncate-markdown": "^0.0.1",
-    "react-truncate-markup": "^4.1.0",
     "uuid": "^3.2.1"
   },
   "keywords": [
