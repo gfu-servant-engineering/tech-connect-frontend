@@ -1,11 +1,11 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
-import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
 import ResponsiveEmbed from 'react-responsive-embed'
-const AboutPageTemplate = ({data}) => {
+import SectionHeader from '../components/SectionHeader';
+const AboutPageTemplate = ({data}) => (
   <Layout>
     <section className="section section--gradient">
       <div className="container">
@@ -37,9 +37,9 @@ const AboutPageTemplate = ({data}) => {
               </div>
               <h4 className="is-size-3"
                 style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
-                {mission}
+                {data.strapiAboutpage.mission}
               </h4>
-              <SectionHeader SectionHeader={data.strapiAboutpage.headingAboutTechConnect}/>
+              <SectionHeader SectionHeader ={data.strapiAboutpage.headingAboutTechConnect}/>
               <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
                 <div className="columns is-centered is-vcentered">
                   <div className="column is-7">
@@ -50,14 +50,14 @@ const AboutPageTemplate = ({data}) => {
                   </div>
                 </div>
               </div>
-              <SectionHeader SectionHeader={data.strapiAboutpage.headingAboutMAF} style={{paddingTop: '5%'}}/>
+              <SectionHeader SectionHeader ={data.strapiAboutpage.headingAboutMaf} style={{paddingTop: '5%'}}/>
               <div style={{width: '80%', marginLeft: '10%'}}>
                 <div className="columns is-centered is-vcentered">
                   <div className="column is-5">
                     <PreviewCompatibleImage imageInfo={data.strapiAboutpage.image3} />
                   </div>
                   <div className="column is-7">
-                    <p className="is-size-5">{data.strapiAboutpage.aboutMAF}</p>
+                    <p className="is-size-5">{data.strapiAboutpage.aboutMaf}</p>
                   </div>
                 </div>
             </div>
@@ -88,12 +88,11 @@ const AboutPageTemplate = ({data}) => {
   </Layout>
 )
 
+export default AboutPageTemplate
 
-
-export default AboutPage
-
-export const aboutPageQuery = graphql`
-  query strapiAboutpage($id: String!) {
+export const PageQuery = graphql`
+query AboutPageTemplate ($id: String!) {
+   strapiAboutpage (id: {eq: $id}) {
         title
         image {
           childImageSharp {
@@ -106,28 +105,23 @@ export const aboutPageQuery = graphql`
         headingAboutTechConnect
         aboutTechConnect
         image2 {
-          alt
-          image {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
-              }
             }
           }  
         }
-        headingAboutMAF
-        aboutMAF
+        headingAboutMaf
+        aboutMaf
         image3 {
-          alt
-          image {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
-              }
             }
           }  
         }
         quote
         button
+      }
   }
 `

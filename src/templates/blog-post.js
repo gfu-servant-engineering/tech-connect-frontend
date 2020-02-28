@@ -6,7 +6,7 @@ import Disqus from 'disqus-react'
 import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
 import ResponsiveEmbed from 'react-responsive-embed'
 
-export const BlogPostTemplate = ({data}) => ({
+const BlogPostTemplate = ({data}) => (
   <Layout>
     <section className="section">
       <div className="container content">
@@ -15,12 +15,12 @@ export const BlogPostTemplate = ({data}) => ({
             <div className="columns is-centered">
                 <div className="column is-10">
                     <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-                      {data.strapiBlogpost.title}
+                      {data.strapiBlogpage.title}
                     </h1>
                     <center>
-                        <PreviewCompatibleImage imageInfo={data.strapiBlogPost.image} /><br/>
+                        <PreviewCompatibleImage imageInfo={data.strapiBlogpage.image} /><br/>
                     </center>
-                    <p>{data.strapiBlogPost.description}</p><br/>
+                    <p>{data.strapiBlogpage.description}</p><br/>
                 </div>
             </div>
               <div style={{ marginTop: `4rem` }}>
@@ -32,14 +32,13 @@ export const BlogPostTemplate = ({data}) => ({
       </div>
     </section>
   </Layout>
-  )
-}
+)
 
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostTemplate ($id: String!) {
-    strapiBlogpost(id: {eq: $id}) {
+    strapiBlogpage(id: {eq: $id}) {
       title
       date
       description
