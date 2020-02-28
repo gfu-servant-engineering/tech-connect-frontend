@@ -25,15 +25,15 @@ module.exports = {
     {
       resolve: 'gatsby-source-strapi',
       options: {
-        //apiURL: 'http://localhost:1337',
-        apiURL: 'http://techconnect-api.ddns.net:1337',
+        apiURL: 'http://localhost:1337',
+        //apiURL: 'http://techconnect-api.ddns.net:1337',
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
         ],
         queryLimit: 1000,
         loginData: {
           identifier: `${process.env.GATSBY_STRAPI_USER}`,
-          password: `${process.env.GATSBY_STRAPI_PW}`,
+          //password: `${process.env.GATSBY_STRAPI_PW}`,
         },
       },
     },

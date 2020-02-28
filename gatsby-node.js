@@ -1,7 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
+const eJson = require("edit-json-file")
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const fs = require('fs')
 
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for nodes to use in creating pages.
@@ -44,6 +46,34 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
+  const saveImages = makeRequest(graphql, `
+    query {
+      allStrapiProject {
+        edges {
+          node {
+            id
+            project_image {
+              childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
+                  src
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `).then( (data) => {
+      var imageFile = JSON.stringify(data);
+      fs.writeFile("public/imageSrc.json", imageFile, 'utf8', function (err) {
+        if (err) {
+          console.log("An error occured while writing JSON Object to File.");
+          return console.log(err);
+        }
+        console.log("JSON file has been saved.");
+      });
+    })
+
   return graphql(`
     {
       allMarkdownRemark(limit: 1000) {
@@ -81,11 +111,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         },
       })
     })
-})
+  })
 
   // Query for articles nodes to use in creating pages.
   return Promise.all([
-	  getProjects,
+  	getProjects,
   ])
 };
 
@@ -140,4 +170,20 @@ exports.createResolvers = ({ createResolvers }) => {
     },
   }
   createResolvers(resolvers)
+}
+
+exports.onPostBootstrap = () => {
+  /*
+    var index = eJson('public/search_index.json');
+    var images = eJson('public/imageSrc.json').data.data.allStrapiProject.edges;
+
+    // en -> store
+    for (var i = 0; i < images.length; i++) {
+      var node = images[i].node;
+      var id = node.id;
+      var image = node.project_image;
+      index.data.en.store[id].image = image;
+    }
+
+    index.save();*/
 }

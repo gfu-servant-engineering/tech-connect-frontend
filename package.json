@@ -9,6 +9,7 @@
     "axios": ">0.18.0",
     "bulma": ">0.7.0",
     "disqus-react": "^1.0.5",
+    "edit-json-file": "^1.4.0",
     "gatsby": "^2.0.66",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-env-variables": "^1.0.1",
