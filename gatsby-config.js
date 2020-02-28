@@ -32,6 +32,8 @@ module.exports = {
         apiURL: `${process.env.GATSBY_STRAPI_HOST}`,
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
+          'blogpage',
+          'aboutpage'
         ],
         queryLimit: 1000,
         loginData: {
