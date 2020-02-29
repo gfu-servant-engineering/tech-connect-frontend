@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import LinesEllipsis from 'react-lines-ellipsis'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
+import ReactMarkdown from "react-markdown"
 
 const StoryTile = ({ data }) => (
   <div>
@@ -10,12 +10,8 @@ const StoryTile = ({ data }) => (
     <h3 className="has-text-weight-bold is-size-5">
       <Link className="has-text-primary" style={{display:'inline-block'}} to={data.fields.slug}>{data.frontmatter.title}</Link>
     </h3>
-    <Link className="has-text-primary" to={data.fields.slug}>
-      <LinesEllipsis
-        style={{ whiteSpace: 'pre-wrap' }}
-        text={data.excerpt}
-        maxLine='3'
-      />
+    <Link className="has-text-primary ellipsis is-ellipsis-3" to={data.fields.slug}>
+      <ReactMarkdown source={data.excerpt} />
     </Link>
   </div>
 )
