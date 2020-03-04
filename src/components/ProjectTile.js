@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import LinesEllipsis from 'react-lines-ellipsis'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
+import ReactMarkdown from "react-markdown"
 
 const ProjectTile = ({ data }) => {
 
@@ -15,12 +15,8 @@ const ProjectTile = ({ data }) => {
       <h4 className="has-text-weight-normal is-size-5 is-size-6">
         <i>Sponsored by {data.sponsor_name}</i>
       </h4>
-      <Link className="has-text-primary" to={`/${data.id}`}>
-        <LinesEllipsis
-          style={{ whiteSpace: 'pre-wrap' }}
-          text={data.project_description}
-          maxLine={3}
-        />
+      <Link className="has-text-primary ellipsis is-ellipsis-3" to={`/${data.id}`}>
+        <ReactMarkdown source={data.project_description} />
       </Link>
     </div>
   )

@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import LinesEllipsis from 'react-lines-ellipsis'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
+import ReactMarkdown from "react-markdown"
+
 
 const StoryTile = ({ data }) => {
 
