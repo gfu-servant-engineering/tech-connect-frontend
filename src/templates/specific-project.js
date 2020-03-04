@@ -5,6 +5,7 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
 import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
 import ResponsiveEmbed from 'react-responsive-embed'
+
 const ProjectTemplate = ({ data }) => (
     <Layout>
       <section className="section">
