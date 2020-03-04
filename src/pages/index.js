@@ -14,7 +14,6 @@ const IndexPage = ({data}) => (
                     Tech Connect is looking for people with a faith in Jesus Christ and the desire to
                     share their time and talents to partner with this ministry.
                   </h1>
-
                   <h1 className="has-text-weight-bold is-size-2 has-text-primary is-hidden-tablet">
                       Tech Connect
                   </h1>
@@ -32,9 +31,9 @@ const IndexPage = ({data}) => (
             <h1 className="has-text-weight-bold is-size-3 has-text-primary">Success Stories</h1>
             <hr className="horizontal-rule" />
             <div className="columns is-multiline is-centered">
-                  {data.allMarkdownRemark.edges.map(({ node: story }) => (
-                      <div key={story.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
-                          <StoryTile data={story}></StoryTile>
+                  {data.allStrapiBlogpage.edges.map(document => (
+                      <div key={document.node.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
+                          <StoryTile data={document.node}></StoryTile>
                       </div>
                   ))}
             </div>
@@ -64,19 +63,12 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] },
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
-    ) {
+    allStrapiBlogpage (limit: 4){ 
       edges {
         node {
-          excerpt(pruneLength: 400)
-          id
-          fields {
-            slug
-          }
-          frontmatter {
+            id
             title
+            description
             image {
               childImageSharp {
                 fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
@@ -86,7 +78,6 @@ export const pageQuery = graphql`
             }
             templateKey
             date(formatString: "MMMM DD, YYYY")
-          }
         }
       }
     }

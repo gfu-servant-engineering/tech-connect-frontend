@@ -1,26 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import Layout from '../components/Layout.js'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
+import Disqus from 'disqus-react'
+import ResponsiveEmbed from 'react-responsive-embed'
 import SectionHeader from '../components/SectionHeader';
-
-
-export const AboutPageTemplate = ({
-  title,
-  image,
-  headingAboutTechConnect,
-  headingAboutMAF,
-  mission,
-  quote,
-  aboutTechConnect,
-  aboutMAF,
-  image2,
-  image3,
-  button,
-}) => {
-
-  return (
+const AboutPageTemplate = ({data}) => (
+  <Layout>
     <section className="section section--gradient">
       <div className="container">
         <div className="columns">
@@ -30,9 +16,9 @@ export const AboutPageTemplate = ({
                 className="full-width-image-container margin-top-0"
                 style={{
                   backgroundImage: `url(${
-                    !!image && !!image.childImageSharp
-                      ? image.childImageSharp.fluid.src
-                      : image
+                    !! data.strapiAboutpage.image && !! data.strapiAboutpage.image.childImageSharp
+                      ? data.strapiAboutpage.image.childImageSharp.fluid.src
+                      : data.strapiAboutpage.image
                   })`,
                 }}
               >
@@ -46,32 +32,32 @@ export const AboutPageTemplate = ({
                     borderRadius: '10px'
                   }}
                 >
-                  {title}
+                  {data.strapiAboutpage.title}
                 </h2>
               </div>
               <h4 className="is-size-3"
                 style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
-                {mission}
+                {data.strapiAboutpage.mission}
               </h4>
-              <SectionHeader SectionHeader={headingAboutTechConnect}/>
+              <SectionHeader SectionHeader ={data.strapiAboutpage.headingAboutTechConnect}/>
               <div style={{width: '80%', marginLeft: '10%', paddingBottom: '5%'}}>
                 <div className="columns is-centered is-vcentered">
                   <div className="column is-7">
-                    <p className="is-size-5">{aboutTechConnect}</p>
+                    <p className="is-size-5">{data.strapiAboutpage.aboutTechConnect}</p>
                   </div>
                   <div className="column is-5">
-                    <PreviewCompatibleImage imageInfo={image2} />
+                    <PreviewCompatibleImage imageInfo={data.strapiAboutpage.image2} />
                   </div>
                 </div>
               </div>
-              <SectionHeader SectionHeader={headingAboutMAF} style={{paddingTop: '5%'}}/>
+              <SectionHeader SectionHeader ={data.strapiAboutpage.headingAboutMaf} style={{paddingTop: '5%'}}/>
               <div style={{width: '80%', marginLeft: '10%'}}>
                 <div className="columns is-centered is-vcentered">
                   <div className="column is-5">
-                    <PreviewCompatibleImage imageInfo={image3} />
+                    <PreviewCompatibleImage imageInfo={data.strapiAboutpage.image3} />
                   </div>
                   <div className="column is-7">
-                    <p className="is-size-5">{aboutMAF}</p>
+                    <p className="is-size-5">{data.strapiAboutpage.aboutMaf}</p>
                   </div>
                 </div>
             </div>
@@ -82,13 +68,13 @@ export const AboutPageTemplate = ({
                   <div className="column is-12">
                     <h2 className="is-size-3 has-text-weight-normal" 
                       style={{color: 'white', fontStyle: 'italic', paddingLeft: '10%', paddingRight: '10%'}}>
-                      {quote}
+                      {data.strapiAboutpage.quote}
                     </h2>
                   </div>
                   <div className="column is-12">
                     <Link to="/create-project">
                       <button className="button is-primary-invert is-large">
-                        {button}
+                        {data.strapiAboutpage.button}
                       </button>
                     </Link>
                   </div>
@@ -99,54 +85,14 @@ export const AboutPageTemplate = ({
         </div>
       </div>
     </section>
-  )
-}
+  </Layout>
+)
 
-AboutPageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
-  mission: PropTypes.string,
-  headingAboutTechConnect: PropTypes.string,
-  headingAboutMAF: PropTypes.string,
-  quote: PropTypes.string,
-  aboutTechConnect:PropTypes.string,
-  aboutMAF: PropTypes.string,
-  image2: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  image3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  button: PropTypes.string
-}
+export default AboutPageTemplate
 
-const AboutPage = ({ data }) => {
-  const { markdownRemark: post } = data
-
-  return (
-    <Layout>
-      <AboutPageTemplate
-        title={post.frontmatter.title}
-        image={post.frontmatter.image}
-        headingAboutTechConnect={post.frontmatter.headingAboutTechConnect}
-        headingAboutMAF={post.frontmatter.headingAboutMAF}
-        mission={post.frontmatter.mission}
-        aboutTechConnect={post.frontmatter.aboutTechConnect}
-        aboutMAF={post.frontmatter.aboutMAF}
-        quote={post.frontmatter.quote}
-        image2={post.frontmatter.image2}
-        image3={post.frontmatter.image3}
-        button={post.frontmatter.button}
-      />
-    </Layout>
-  )
-}
-
-AboutPage.propTypes = {
-  data: PropTypes.object.isRequired,
-}
-
-export default AboutPage
-
-export const aboutPageQuery = graphql`
-  query AboutPage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      frontmatter {
+export const PageQuery = graphql`
+query AboutPageTemplate ($id: String!) {
+   strapiAboutpage (id: {eq: $id}) {
         title
         image {
           childImageSharp {
@@ -159,30 +105,23 @@ export const aboutPageQuery = graphql`
         headingAboutTechConnect
         aboutTechConnect
         image2 {
-          alt
-          image {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
-              }
             }
           }  
         }
-        headingAboutMAF
-        aboutMAF
+        headingAboutMaf
+        aboutMaf
         image3 {
-          alt
-          image {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
-              }
             }
           }  
         }
         quote
         button
       }
-    }
   }
 `
