@@ -15,7 +15,7 @@ const ProjectTile = ({ data }) => {
       <h4 className="has-text-weight-normal is-size-5 is-size-6">
         <i>Sponsored by {data.sponsor_name}</i>
       </h4>
-      <Link className="has-text-primary" to={`/${data.id}`}>
+      <Link className="has-text-primary ellipsis is-ellipsis-3" to={`/${data.id}`}>
         <ReactMarkdown source={data.project_description} />
       </Link>
     </div>
