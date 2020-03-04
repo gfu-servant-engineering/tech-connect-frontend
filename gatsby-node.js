@@ -173,3 +173,19 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     })
   }
 }
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Frontmatter: {
+      author: {
+        resolve(source, args, context, info) {
+          return context.nodeModel.getNodeById({
+            id: source.author,
+            type: "AuthorJson",
+          })
+        },
+      },
+    },
+  }
+  createResolvers(resolvers)
+}
