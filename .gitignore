@@ -9,5 +9,6 @@ static/admin/*.bundle.*
 yarn-error.log
 *.swp
 /package-lock.json
+/.env*
 .env
 .env.*

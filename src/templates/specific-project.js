@@ -6,6 +6,7 @@ import Disqus from 'disqus-react'
 import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
 import ResponsiveEmbed from 'react-responsive-embed'
 import ReactMarkdown from "react-markdown"
+
 const ProjectTemplate = ({ data }) => (
     <Layout>
       <section className="section">
