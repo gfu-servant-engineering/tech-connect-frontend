@@ -84,6 +84,9 @@ const Navbar = class extends React.Component {
             <Link className="navbar-item" to="/create-project">
               Create a Project
             </Link>
+            <Link className="navbar-item" to="/project-search">
+              Search Projects
+            </Link>
             <Link className="navbar-item" to="/projects">
               View All Projects
             </Link>
