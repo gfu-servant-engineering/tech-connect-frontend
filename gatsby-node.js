@@ -20,8 +20,8 @@ const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
 
 // Implement the Gatsby API "createPages". This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions;
 
   const getArticles = makeRequest(graphql, `
     {
@@ -74,6 +74,52 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       });
     })
 
+  const getBlogpage = makeRequest(graphql, `
+    {
+      allStrapiBlogpage {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiBlogpage.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/blog-post.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+
+  const getAboutpage = makeRequest(graphql, `
+    {
+      allStrapiAboutpage {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiAboutpage.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/about-page.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
+
   return graphql(`
     {
       allMarkdownRemark(limit: 1000) {
@@ -115,7 +161,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
   // Query for articles nodes to use in creating pages.
   return Promise.all([
-  	getProjects,
+    getProjects,
+    getAboutpages,
+    getBlogpages,
   ])
 };
 

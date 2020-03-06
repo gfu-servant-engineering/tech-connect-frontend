@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
@@ -29,6 +33,8 @@ module.exports = {
         //apiURL: 'http://techconnect-api.ddns.net:1337',
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
+          'blogpage',
+          'aboutpage'
         ],
         queryLimit: 1000,
         loginData: {
