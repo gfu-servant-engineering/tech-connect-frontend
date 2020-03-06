@@ -173,7 +173,6 @@ exports.createResolvers = ({ createResolvers }) => {
 }
 
 exports.onPostBootstrap = () => {
-  /*
     var index = eJson('public/search_index.json');
     var images = eJson('public/imageSrc.json').data.data.allStrapiProject.edges;
 
@@ -181,9 +180,9 @@ exports.onPostBootstrap = () => {
     for (var i = 0; i < images.length; i++) {
       var node = images[i].node;
       var id = node.id;
-      var image = node.project_image;
+      var image = node.project_image.childImageSharp.fluid.src;
       index.data.en.store[id].image = image;
     }
 
-    index.save();*/
+    index.save();
 }
