@@ -9,6 +9,7 @@
     "bulma": ">0.7.0",
     "disqus-react": "^1.0.5",
     "gatsby": "^2.0.66",
+    "gatsby-background-image": "^0.9.14",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-env-variables": "^1.0.1",
     "gatsby-plugin-netlify": "^2.0.6",
@@ -20,7 +21,7 @@
     "gatsby-remark-images": "^3.0.1",
     "gatsby-remark-relative-images": ">0.2.2",
     "gatsby-source-filesystem": "^2.0.23",
-    "gatsby-source-strapi": "0.0.7",
+    "gatsby-source-strapi": ">0.0.9",
     "gatsby-transformer-remark": "^2.1.15",
     "gatsby-transformer-sharp": "^2.1.9",
     "lodash": "^4.17.5",
@@ -35,6 +36,7 @@
     "react-icons": "^3.5.0",
     "react-lines-ellipsis": ">0.14.0",
     "react-responsive-embed": "^2.1.0",
+    "styled-components": "^5.0.1",
     "uuid": "^3.2.1"
   },
   "keywords": [

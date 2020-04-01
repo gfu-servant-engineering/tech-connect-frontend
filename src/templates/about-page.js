@@ -4,6 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import SectionHeader from '../components/SectionHeader';
+import PreviewCompatibleHero from '../components/PreviewCompatibleHero'
 
 
 export const AboutPageTemplate = ({
@@ -21,34 +22,19 @@ export const AboutPageTemplate = ({
 }) => {
 
   return (
-    <section className="section section--gradient">
+    <section>
+    <section className="hero is-primary is-medium">
+              <PreviewCompatibleHero
+                    imageInfo={image}
+                    className="hero-body"
+                    title={title}
+              />
+            </section>
+    
       <div className="container">
         <div className="columns">
           <div className="column is-12 is-offset-0">
             <div className="section">
-              <div
-                className="full-width-image-container margin-top-0"
-                style={{
-                  backgroundImage: `url(${
-                    !!image && !!image.childImageSharp
-                      ? image.childImageSharp.fluid.src
-                      : image
-                  })`,
-                }}
-              >
-                <h2
-                  className="is-size-1"
-                  style={{
-                    boxShadow: '0.5rem 0 0 #1C2833, -0.5rem 0 0 #1C2833',
-                    backgroundColor: '#1C2833',
-                    color: 'white',
-                    padding: '1rem',
-                    borderRadius: '10px'
-                  }}
-                >
-                  {title}
-                </h2>
-              </div>
               <h4 className="is-size-3"
                 style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
                 {mission}
