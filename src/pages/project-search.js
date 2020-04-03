@@ -6,7 +6,7 @@ import SearchPageNavigator from '../components/SearchPageNavigator';
 
 const ProjectSearch = ({data, location}) => {
   const [results, setResults] = useState([]);
-  const searchQuery = new URLSearchParams(location.search).get('keywords') || '';
+  const searchQuery = new URLSearchParams(location.search).get('keywords') || '*';
   const searchPage = parseInt(new URLSearchParams(location.search).get('page') || 1);
   const resultsPerPage = 8;
 
