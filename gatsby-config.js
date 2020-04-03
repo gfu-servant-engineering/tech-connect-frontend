@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-strapi',
       options: {
-        apiURL: process.env.GATSBY_STRAPI_HOST,
+        apiURL: `${process.env.GATSBY_STRAPI_HOST}`,
         contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
           'project',
           'blogpage',
