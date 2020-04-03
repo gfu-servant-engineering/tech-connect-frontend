@@ -15,7 +15,7 @@ function SubmitTimeout() {
 }
 
 function Submit() {
-  navigate(`/project-search?keywords=${encodeURIComponent(queryText)}&page=1`)
+  navigate(`/browse?keywords=${encodeURIComponent(queryText)}&page=1`)
   var searchButton = document.getElementById("searchButton")
   searchButton.classList.remove("is-loading")
   timeout = undefined
@@ -23,19 +23,22 @@ function Submit() {
 
 const SearchForm = ({query}) => {
   return(
-    <div className="field has-addons has-addons-centered">
-      <div className="control is-expanded">
-        <input
-          type="text"
-          className="input"
-          name="search"
-          placeholder="Search Here"
-          onKeyPress={(e) => {if (e.key === 'Enter') Submit()}}
-          onChange={(e) => {queryText = e.target.value; SubmitTimeout()}}
-        />
-      </div>
-      <div className="control">
-        <button id="searchButton" onClick={() => Submit()} className="button is-link">Search</button>
+    <div>
+      <h1 className="has-text-weight-bold is-size-3 has-text-primary">Search</h1>
+      <div className="field has-addons has-addons-centered">
+        <div className="control is-expanded">
+          <input
+            type="text"
+            className="input"
+            name="search"
+            placeholder="Search Here"
+            onKeyPress={(e) => {if (e.key === 'Enter') Submit()}}
+            onChange={(e) => {queryText = e.target.value; SubmitTimeout()}}
+          />
+        </div>
+        <div className="control">
+          <button id="searchButton" onClick={() => Submit()} className="button is-link">Search</button>
+        </div>
       </div>
     </div>
   )

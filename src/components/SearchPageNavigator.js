@@ -2,7 +2,7 @@ import React from 'react';
 import { navigate } from 'gatsby';
 
 function gotoPage(query, page) {
-  navigate(`/project-search?keywords=${encodeURIComponent(query)}&page=${page}`)
+  navigate(`/browse?keywords=${encodeURIComponent(query)}&page=${page}`)
 }
 
 const SearchPageNavigator = ({pages, currPage, query}) => {
