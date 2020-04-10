@@ -16,7 +16,6 @@ const ProjectSearch = ({data, location}) => {
         const refs = lunr.en.index.search(searchQuery);
         const posts = refs.map(({ ref }) => lunr.en.store[ref]);
         const results = posts.filter( (post) => post.blog_id !== undefined);
-        console.log(results)
         setResults(results);
       });
     }
@@ -40,29 +39,5 @@ const ProjectSearch = ({data, location}) => {
     </Layout>
   );
 };
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allStrapiProject {
-      edges {
-        node {
-          id
-          project_image {
-            childImageSharp {
-              fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default ProjectSearch

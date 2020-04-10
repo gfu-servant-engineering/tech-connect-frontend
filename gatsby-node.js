@@ -46,7 +46,7 @@ exports.createPages = ({ actions, graphql }) => {
     })
   });
 
-  const saveImages = makeRequest(graphql, `
+  const saveProjectImages = makeRequest(graphql, `
     query {
       allStrapiProject {
         edges {
@@ -63,16 +63,44 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-    `).then( (data) => {
-      var imageFile = JSON.stringify(data);
-      fs.writeFile("public/imageSrc.json", imageFile, 'utf8', function (err) {
-        if (err) {
-          console.log("An error occured while writing JSON Object to File.");
-          return console.log(err);
+  `).then( (data) => {
+    var imageFile = JSON.stringify(data);
+    fs.writeFile("public/projectImageSrc.json", imageFile, 'utf8', function (err) {
+      if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+      }
+      console.log("JSON file has been saved.");
+    });
+  });
+
+  const saveBlogImages = makeRequest(graphql, `
+    query {
+      allStrapiBlogpage {
+        edges {
+          node {
+            id
+            image {
+              childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
+                  src
+                }
+              }
+            }
+          }
         }
-        console.log("JSON file has been saved.");
-      });
-    })
+      }
+    }
+  `).then( (data) => {
+    var imageFile = JSON.stringify(data);
+    fs.writeFile("public/blogImageSrc.json", imageFile, 'utf8', function (err) {
+      if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+      }
+      console.log("JSON file has been saved.");
+    });
+  });
 
   const getBlogpages = makeRequest(graphql, `
     {
@@ -183,14 +211,33 @@ exports.createResolvers = ({ createResolvers }) => {
 
 exports.onPostBootstrap = () => {
     var index = eJson('public/search_index.json');
-    var images = eJson('public/imageSrc.json').data.data.allStrapiProject.edges;
+    var projectImages = eJson('public/projectImageSrc.json').data.data.allStrapiProject.edges;
+    var blogImages = eJson('public/blogImageSrc.json').data.data.allStrapiBlogpage.edges;
 
     // en -> store
-    for (var i = 0; i < images.length; i++) {
-      var node = images[i].node;
+    for (var i = 0; i < projectImages.length; i++) {
+      var node = projectImages[i].node;
       var id = node.id;
       var image = node.project_image.childImageSharp.fluid.src;
-      index.data.en.store[id].image = image;
+      var indexInstance = index.data.en.store[id];
+      indexInstance.project_image = image;
+      
+      // renaming because of projects bad naming scheme
+      indexInstance.id = indexInstance.project_id;
+    }
+
+    // en -> store
+    for (var i = 0; i < blogImages.length; i++) {
+      var node = blogImages[i].node;
+      var id = node.id;
+      var image = node.image.childImageSharp.fluid.src;
+      var indexInstance = index.data.en.store[id];
+      indexInstance.image = image;
+
+      // renaming because of blogpages bad naming scheme
+      indexInstance.title = indexInstance.blog_name;
+      indexInstance.description = indexInstance.blog_description;
+      indexInstance.id = indexInstance.blog_id;
     }
 
     index.save();

@@ -11,8 +11,6 @@ const SearchResults = ({data, query, results, isProject}) => {
         {results.map(result => {
           return(
             <div key={result.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
-              <Link to={result.id}><PreviewCompatibleImage imageInfo={result.image} /></Link>
-              <ProjectTile data={result}></ProjectTile>
               {isProject ? (<ProjectTile data={result}></ProjectTile>) :
                            (<StoryTile data={result}></StoryTile>)}
             </div>

@@ -40,28 +40,4 @@ const ProjectSearch = ({data, location}) => {
   );
 };
 
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allStrapiProject {
-      edges {
-        node {
-          id
-          project_image {
-            childImageSharp {
-              fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default ProjectSearch

@@ -4,9 +4,7 @@ import { Link } from 'gatsby'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import ReactMarkdown from "react-markdown"
 
-
 const StoryTile = ({ data }) => {
-
   return (
     <div>
       <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.image} /></Link>

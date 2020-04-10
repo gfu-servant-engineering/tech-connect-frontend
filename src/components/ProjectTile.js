@@ -5,7 +5,6 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import ReactMarkdown from "react-markdown"
 
 const ProjectTile = ({ data }) => {
-
   return (
     <div>
       <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.project_image} /></Link>
