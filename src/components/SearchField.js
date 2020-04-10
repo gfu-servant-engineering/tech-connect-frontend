@@ -15,7 +15,8 @@ function SubmitTimeout() {
 }
 
 function Submit() {
-  navigate(`/browse?keywords=${encodeURIComponent(queryText)}&page=1`)
+  var path = window.location.pathname;
+  navigate(`${path}?keywords=${encodeURIComponent(queryText)}&page=1`)
   var searchButton = document.getElementById("searchButton")
   searchButton.classList.remove("is-loading")
   timeout = undefined

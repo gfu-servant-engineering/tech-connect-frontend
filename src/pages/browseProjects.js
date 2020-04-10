@@ -16,7 +16,6 @@ const ProjectSearch = ({data, location}) => {
         const refs = lunr.en.index.search(searchQuery);
         const posts = refs.map(({ ref }) => lunr.en.store[ref]);
         const results = posts.filter( (post) => post.project_id !== undefined);
-        console.log(results);
         setResults(results);
       });
     }
@@ -33,7 +32,7 @@ const ProjectSearch = ({data, location}) => {
             <SearchField query={searchQuery} />
             <hr className="horizontal-rule" />
             {pages !== 0 ? (<SearchPageNavigator pages={pages} currPage={searchPage} query={searchQuery}/>) : (<div />)}
-            <SearchResults query={searchQuery} results={paginatedResults} data={data}/>
+            <SearchResults query={searchQuery} results={paginatedResults} data={data} isProject={true}/>
           </div>
         </div>
       </section>

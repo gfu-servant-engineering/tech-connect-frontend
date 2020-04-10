@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import ProjectTile from '../components/ProjectTile.js';
+import StoryTile from '../components/StoryTile.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 
-const SearchResults = ({data, query, results}) => {
+const SearchResults = ({data, query, results, isProject}) => {
   return(
     <section aria-live="assertive">
       <div className="columns is-multiline is-centered">
@@ -12,6 +13,8 @@ const SearchResults = ({data, query, results}) => {
             <div key={result.id} className="column is-8-tablet is-6-desktop is-3-widescreen">
               <Link to={result.id}><PreviewCompatibleImage imageInfo={result.image} /></Link>
               <ProjectTile data={result}></ProjectTile>
+              {isProject ? (<ProjectTile data={result}></ProjectTile>) :
+                           (<StoryTile data={result}></StoryTile>)}
             </div>
           )
         })}
