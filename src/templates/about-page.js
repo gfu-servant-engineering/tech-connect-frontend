@@ -2,39 +2,25 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
-import Disqus from 'disqus-react'
-import ResponsiveEmbed from 'react-responsive-embed'
 import SectionHeader from '../components/SectionHeader';
+
+import PreviewCompatibleHero from '../components/PreviewCompatibleHero'
 const AboutPageTemplate = ({data}) => (
   <Layout>
-    <section className="section section--gradient">
+
+    <section className="hero is-primary is-medium">
+              <PreviewCompatibleHero
+                    imageInfo={data.strapiAboutpage.image}
+                    className="hero-body"
+                    title={data.strapiAboutpage.title}
+              />
+            </section>
+    
       <div className="container">
         <div className="columns">
           <div className="column is-12 is-offset-0">
             <div className="section">
-              <div
-                className="full-width-image-container margin-top-0"
-                style={{
-                  backgroundImage: `url(${
-                    !! data.strapiAboutpage.image && !! data.strapiAboutpage.image.childImageSharp
-                      ? data.strapiAboutpage.image.childImageSharp.fluid.src
-                      : data.strapiAboutpage.image
-                  })`,
-                }}
-              >
-                <h2
-                  className="is-size-1"
-                  style={{
-                    boxShadow: '0.5rem 0 0 #1C2833, -0.5rem 0 0 #1C2833',
-                    backgroundColor: '#1C2833',
-                    color: 'white',
-                    padding: '1rem',
-                    borderRadius: '10px'
-                  }}
-                >
-                  {data.strapiAboutpage.title}
-                </h2>
-              </div>
+
               <h4 className="is-size-3"
                 style={{width: '100%', paddingBottom: '5%', textAlign: 'center'}}>
                 {data.strapiAboutpage.mission}
@@ -84,9 +70,8 @@ const AboutPageTemplate = ({data}) => (
           </div>
         </div>
       </div>
-    </section>
-  </Layout>
-)
+    </Layout>
+  )
 
 export default AboutPageTemplate
 
@@ -108,20 +93,20 @@ query AboutPageTemplate ($id: String!) {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
+              }
             }
           }  
-        }
         headingAboutMaf
         aboutMaf
         image3 {
             childImageSharp {
               fluid(maxWidth: 400, quality: 90, toFormat:JPG) {
                 ...GatsbyImageSharpFluid
+              }
             }
           }  
-        }
         quote
         button
       }
-  }
+    }
 `

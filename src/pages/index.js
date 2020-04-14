@@ -51,7 +51,7 @@ export const pageQuery = graphql`
         node {
           id
           project_name
-          project_description
+          short_description
           sponsor_name
           project_image {
             childImageSharp {
@@ -68,7 +68,7 @@ export const pageQuery = graphql`
         node {
             id
             title
-            description
+            short_description
             image {
               childImageSharp {
                 fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {

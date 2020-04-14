@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
-import ReactMarkdown from "react-markdown"
 
 
 const StoryTile = ({ data }) => {
@@ -14,7 +13,7 @@ const StoryTile = ({ data }) => {
         <Link className="has-text-primary" style={{display:'inline-block'}} to={`/${data.id}`}>{data.title}</Link>
       </h3>
       <Link className="has-text-primary ellipsis is-ellipsis-3" to={`/${data.id}`}>
-        <ReactMarkdown source={data.description} />
+        {data.short_description}
       </Link>
     </div>
   )
@@ -23,7 +22,8 @@ const StoryTile = ({ data }) => {
 StoryTile.propTypes = {
       id: PropTypes.number,
       title: PropTypes.object,
-      description: PropTypes.string,
+      image: PropTypes.object,
+      short_description: PropTypes.string,
 }
 
 export default StoryTile

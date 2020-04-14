@@ -3,8 +3,6 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout.js'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 import Disqus from 'disqus-react'
-import { FaGithub, FaTrello, FaRegEnvelope, FaSlack} from 'react-icons/fa'
-import ResponsiveEmbed from 'react-responsive-embed'
 
 const BlogPostTemplate = ({data}) => (
   <Layout>

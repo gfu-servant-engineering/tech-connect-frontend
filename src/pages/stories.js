@@ -34,7 +34,7 @@ export const pageQuery = graphql`
           id
           title
           date
-          description
+          short_description
           image {
           childImageSharp {
             fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
