@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import LinesEllipsis from 'react-lines-ellipsis'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 
 const ProjectTile = ({ data }) => {
@@ -15,12 +14,8 @@ const ProjectTile = ({ data }) => {
       <h4 className="has-text-weight-normal is-size-5 is-size-6">
         <i>Sponsored by {data.sponsor_name}</i>
       </h4>
-      <Link className="has-text-primary" to={`/${data.id}`}>
-        <LinesEllipsis
-          style={{ whiteSpace: 'pre-wrap' }}
-          text={data.project_description}
-          maxLine={3}
-        />
+      <Link className="has-text-primary ellipsis is-ellipsis-3" to={`/${data.id}`}>
+        {data.short_description}
       </Link>
     </div>
   )
@@ -29,9 +24,9 @@ const ProjectTile = ({ data }) => {
 ProjectTile.propTypes = {
       id: PropTypes.number,
       project_name: PropTypes.object,
-      project_description: PropTypes.string,
-      project_goals: PropTypes.string,
-      project_blurb: PropTypes.string,
+      project_image: PropTypes.object,
+      sponsor_name: PropTypes.string,
+      short_description: PropTypes.string,
 }
 
 export default ProjectTile

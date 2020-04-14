@@ -218,7 +218,7 @@ import { navigate } from 'gatsby'
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Project Name</label>
+            <label htmlFor="project_name" className="label is-medium">Project Name</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -239,7 +239,7 @@ import { navigate } from 'gatsby'
           {/* VIDEO LINK */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">A link to a video</label>
+            <label htmlFor="project_video" className="label is-medium">A link to a video</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -260,10 +260,9 @@ import { navigate } from 'gatsby'
           {/* IMAGE UPLOAD */}
           <div className="column is-2 is-centered">
             <br/>
-            <label className="label is-medium">Upload an image...</label>
+            <label htmlFor="project_image" className="label is-medium">Upload an image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='project_image'></label>
               <input type='file' id='project_image' name="project_image" value={project_image} onChange={this.onChange} />
             </div>
             <p className="help">This field is required</p>
@@ -286,7 +285,7 @@ import { navigate } from 'gatsby'
       {/* SPONSOR NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Project Sponsor</label>
+            <label htmlFor="sponsor_name" className="label is-medium">Project Sponsor</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -307,7 +306,7 @@ import { navigate } from 'gatsby'
       {/* SPONSOR WEBSITE */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Link to Sponsor's Website</label>
+            <label htmlFor="sponsor_website" className="label is-medium">Link to Sponsor's Website</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -328,10 +327,9 @@ import { navigate } from 'gatsby'
       {/* SPONSOR IMAGE */}
           <div className="column is-2 is-centered">
             <br/>
-            <label className="label is-medium">Sponsor image...</label>
+            <label htmlFor="sponsor_image" className="label is-medium">Sponsor image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='sponsor_image'></label>
               <input type='file' id='sponsor_image' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
             </div>
             <p className="help">Optional Sponsor logo</p>
@@ -356,7 +354,7 @@ import { navigate } from 'gatsby'
             {/* EMAIL */}
             <div className="column is-2">
               <br/>
-              <label className="label is-medium">Email</label>
+              <label htmlFor="project_email" className="label is-medium">Email</label>
               <div className="field is-horizontal is-required">
                 <div className="field-body">
                   <div className="field">
@@ -379,7 +377,7 @@ import { navigate } from 'gatsby'
           {/* GITHUB */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Github</label>
+            <label htmlFor="project_github" className="label is-medium">Github</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -399,7 +397,7 @@ import { navigate } from 'gatsby'
           {/* SLACK */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Slack</label>
+            <label htmlFor="project_slack" className="label is-medium">Slack</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -419,7 +417,7 @@ import { navigate } from 'gatsby'
           {/* TRELLO */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Trello</label>
+            <label htmlFor="project_trello" className="label is-medium">Trello</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -441,7 +439,7 @@ import { navigate } from 'gatsby'
           <div className="column is-10">
             <hr />
             <br />
-            <label className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <label htmlFor="project_description" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -466,7 +464,7 @@ import { navigate } from 'gatsby'
           {/* GOALS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">What are your main goals?</label>
+            <label htmlFor="project_goals" className="label is-medium">What are your main goals?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -490,7 +488,7 @@ import { navigate } from 'gatsby'
           {/* NEEDS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">What do you need?</label>
+            <label htmlFor="project_needs" className="label is-medium">What do you need?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -514,7 +512,7 @@ import { navigate } from 'gatsby'
           {/* ORIGIN */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">How did this project come about?</label>
+            <label htmlFor="project_origins" className="label is-medium">How did this project come about?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -538,7 +536,7 @@ import { navigate } from 'gatsby'
           {/* STATUS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">
+            <label htmlFor="project_status" className="label is-medium">
               What's the current status of your project?
             </label>
             <div className="field is-horizontal">
@@ -565,7 +563,7 @@ import { navigate } from 'gatsby'
           {/* ORGANIZATION */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">Tell us about yourself!</label>
+            <label htmlFor="project_org_description" className="label is-medium">Tell us about yourself!</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -588,7 +586,7 @@ import { navigate } from 'gatsby'
           {/* HOLY GOALS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">How does this project further the Kindgom of God?</label>
+            <label htmlFor="project_holy_goals" className="label is-medium">How does this project further the Kindgom of God?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">

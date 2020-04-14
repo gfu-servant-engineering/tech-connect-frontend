@@ -18,8 +18,8 @@ const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
 
 // Implement the Gatsby API "createPages". This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage } = actions;
 
   const getArticles = makeRequest(graphql, `
     {
@@ -44,48 +44,57 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     })
   });
 
-  return graphql(`
+  const getBlogpages = makeRequest(graphql, `
     {
-      allMarkdownRemark(limit: 1000) {
+      allStrapiBlogpage {
         edges {
           node {
             id
-            fields {
-              slug
-            }
-            frontmatter {
-              templateKey
-            }
           }
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()))
-      return Promise.reject(result.errors)
-    }
-
-    const posts = result.data.allMarkdownRemark.edges
-
-    posts.forEach(edge => {
-      const id = edge.node.id
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiBlogpage.edges.forEach(({ node }) => {
       createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/blog-post.js`),
         context: {
-          id,
+          id: node.id,
         },
       })
     })
-})
+  });
+
+  const getAboutpage = makeRequest(graphql, `
+    {
+      allStrapiAboutpage {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+    `).then(result => {
+    // Create pages for each article.
+    result.data.allStrapiAboutpage.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.id}`,
+        component: path.resolve(`src/templates/about-page.js`),
+        context: {
+          id: node.id,
+        },
+      })
+    })
+  });
 
   // Query for articles nodes to use in creating pages.
   return Promise.all([
-	  getProjects,
+    getArticles,
+    getAboutpage,
+    getBlogpages,
   ])
 };
 
@@ -124,4 +133,20 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     })
   }
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Frontmatter: {
+      author: {
+        resolve(source, args, context, info) {
+          return context.nodeModel.getNodeById({
+            id: source.author,
+            type: "AuthorJson",
+          })
+        },
+      },
+    },
+  }
+  createResolvers(resolvers)
 }
