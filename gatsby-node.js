@@ -56,6 +56,17 @@ exports.createPages = ({ actions, graphql }) => {
               childImageSharp {
                 fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
                   src
+                  aspectRatio
+                  presentationHeight
+                  presentationWidth
+                  srcSet
+                  sizes
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
+                  originalName
+                  originalImg
+                  base64
                 }
               }
             }
@@ -84,6 +95,17 @@ exports.createPages = ({ actions, graphql }) => {
               childImageSharp {
                 fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
                   src
+                  aspectRatio
+                  presentationHeight
+                  presentationWidth
+                  srcSet
+                  sizes
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
+                  originalName
+                  originalImg
+                  base64
                 }
               }
             }
@@ -218,7 +240,7 @@ exports.onPostBootstrap = () => {
     for (var i = 0; i < projectImages.length; i++) {
       var node = projectImages[i].node;
       var id = node.id;
-      var image = node.project_image.childImageSharp.fluid.src;
+      var image = node.project_image;
       var indexInstance = index.data.en.store[id];
       indexInstance.project_image = image;
       
@@ -230,7 +252,7 @@ exports.onPostBootstrap = () => {
     for (var i = 0; i < blogImages.length; i++) {
       var node = blogImages[i].node;
       var id = node.id;
-      var image = node.image.childImageSharp.fluid.src;
+      var image = node.image;
       var indexInstance = index.data.en.store[id];
       indexInstance.image = image;
 
