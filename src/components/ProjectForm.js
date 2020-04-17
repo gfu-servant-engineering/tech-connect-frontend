@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Proptypes } from 'react';
 import axios from 'axios';
 import { navigate } from 'gatsby'
+import RichTextEditor from 'react-rte';
 
     class ProjectForm extends Component {
       constructor() {
@@ -11,13 +12,15 @@ import { navigate } from 'gatsby'
           sponsor_image: '',
           project_name: '',
           project_image: '',
-          project_description: '',
-          project_goals: '',
-          project_needs: '',
-          project_origins: '',
-          project_status: '',
-          project_org_description: '',
-          project_holy_goals: '',
+          project_description: 'dof',
+          desc_state: RichTextEditor.createEmptyValue(),
+          short_description: '',
+          project_goals: RichTextEditor.createEmptyValue(),
+          project_needs: RichTextEditor.createEmptyValue(),
+          project_origins: RichTextEditor.createEmptyValue(),
+          project_status: RichTextEditor.createEmptyValue(),
+          project_org_description: RichTextEditor.createEmptyValue(),
+          project_holy_goals: RichTextEditor.createEmptyValue(),
           project_video: '',
           project_github: '',
           project_slack: '',
@@ -36,6 +39,37 @@ import { navigate } from 'gatsby'
         this.setState({ [e.target.name]: e.target.value });
       }
 
+      descOnChange = (value) => {
+	  this.setState({["desc_state" ]: value});
+	  console.log(desc_state);
+	  
+	  
+ 	  }
+
+ 	  goalsOnChange = (value) => {
+	  this.setState({project_goals : value});
+ 	  }
+
+ 	  needOnChange = (value) => {
+	  this.setState({project_needs : value});
+ 	  }
+
+ 	  originOnChange = (value) => {
+	  this.setState({project_origins : value});
+ 	  }
+
+ 	  statusOnChange = (value) => {
+	  this.setState({project_status : value});
+ 	  }
+
+ 	  orgOnChange = (value) => {
+	  this.setState({project_org_description : value});
+ 	  }
+
+ 	  holyGoalsOnChange = (value) => {
+	  this.setState({project_holy_goals : value});
+ 	  }
+
       onSubmit = (e) => {
         e.preventDefault();
 
@@ -48,6 +82,7 @@ import { navigate } from 'gatsby'
             sponsor_image,
             project_name,
             project_description,
+            short_description,
             project_goals,
             project_needs,
             project_origins,
@@ -83,7 +118,8 @@ import { navigate } from 'gatsby'
                 sponsor_name: sponsor_name,
                 sponsor_website: sponsor_website,
                 project_name: project_name,
-                project_description: project_description,
+                project_description: desc_state,
+                short_description: short_description,
                 project_goals: project_goals,
                 project_needs: project_needs,
                 project_origins: project_origins,
@@ -155,6 +191,7 @@ import { navigate } from 'gatsby'
               this.setState({'project_name': ''});
               this.setState({'project_image': ''});
               this.setState({'project_description': ''});
+              this.setState({'short_description': ''});
               this.setState({'project_goals': ''});
               this.setState({'project_needs': ''});
               this.setState({'project_origins': ''});
@@ -187,6 +224,8 @@ import { navigate } from 'gatsby'
           project_name,
           project_image,
           project_description,
+          desc_state,
+          short_description,
           project_goals,
           project_needs,
           project_origins,
@@ -204,6 +243,7 @@ import { navigate } from 'gatsby'
                 && sponsor_name.length > 0
                 && sponsor_website.length > 0
                 && project_description.length > 0
+                && short_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
                 && project_origins.length > 0
@@ -439,7 +479,28 @@ import { navigate } from 'gatsby'
           <div className="column is-10">
             <hr />
             <br />
-            <label htmlFor="project_description" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <label htmlFor="desc_state" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                  <RichTextEditor
+
+            		value={desc_state}
+                    onChange={this.descOnChange}
+          		  />
+                    <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {/* Short_DESC */}
+          <div className="column is-10">
+            <hr />
+            <br />
+            <label htmlFor="short_description" className="label is-medium">Give a brief summary of your project?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -447,12 +508,10 @@ import { navigate } from 'gatsby'
                     <textarea
                       className="textarea is-medium"
                       type="text"
-                      name="project_description"
-                      value={project_description}
+                      name="short_description"
+                      value={short_description}
                       onChange={this.onChange}
-                      placeholder="Is this a new problem?
-                      If not, have others attempted to solve it in the past?
-                      What is the cause of the problem? How are you aiming to solve it?">
+                      placeholder="Give a short description of your project to be displayed">
                     </textarea>
                     <p className="help">This field is required</p>
                   </div>
@@ -462,23 +521,18 @@ import { navigate } from 'gatsby'
           </div>
 
           {/* GOALS */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_goals" className="label is-medium">What are your main goals?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_goals"
-                      value={project_goals}
-                      onChange={this.onChange}
-                      placeholder="Describe both long term and short term goals.
-                      Be specific about the kind of help you need.">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <RichTextEditor
+            		value={project_goals}
+                    onChange={this.goalsOnChange}
+          		  />
+          		     <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -486,21 +540,17 @@ import { navigate } from 'gatsby'
           </div>
 
           {/* NEEDS */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_needs" className="label is-medium">What do you need?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_needs"
-                      value={project_needs}
-                      onChange={this.onChange}
-                      placeholder="Tell us about the type of person you think would be most helpful to you">
-                    </textarea>
+                    <RichTextEditor
+            		value={project_needs}
+                    onChange={this.needOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -510,22 +560,17 @@ import { navigate } from 'gatsby'
 
 
           {/* ORIGIN */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_origins" className="label is-medium">How did this project come about?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_origins"
-                      value={project_origins}
-                      onChange={this.onChange}
-                      placeholder="Give us a backstory. What inspired you to start this project?
-                      This information helps people determine whether or not they'd be a good fit for this project.">
-                    </textarea>
+                    <RichTextEditor
+            		value={project_origins}
+                    onChange={this.originOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -534,7 +579,7 @@ import { navigate } from 'gatsby'
           </div>
 
           {/* STATUS */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_status" className="label is-medium">
               What's the current status of your project?
@@ -543,16 +588,10 @@ import { navigate } from 'gatsby'
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_status"
-                      value={project_status}
-                      onChange={this.onChange}
-                      placeholder="Tell us what you have done so far to complete this project.
-                      Don't worry, a large foundation isn't required to submit a project.
-                      Just let us know where you're at.">
-                    </textarea>
+                    <RichTextEditor
+            		value={project_status}
+                    onChange={this.statusOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -561,21 +600,17 @@ import { navigate } from 'gatsby'
           </div>
 
           {/* ORGANIZATION */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_org_description" className="label is-medium">Tell us about yourself!</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_org_description"
-                      value={project_org_description}
-                      onChange={this.onChange}
-                      placeholder="What organization do you work for if any?">
-                    </textarea>
+                    <RichTextEditor
+            		value={project_org_description}
+                    onChange={this.orgOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -584,22 +619,17 @@ import { navigate } from 'gatsby'
           </div>
 
           {/* HOLY GOALS */}
-          <div className="column is-5">
+          <div className="column is-10">
             <br/>
             <label htmlFor="project_holy_goals" className="label is-medium">How does this project further the Kindgom of God?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_holy_goals"
-                      value={project_holy_goals}
-                      onChange={this.onChange}
-                      placeholder="Furthering the Kingdom of God is Tech Connect's main mission.
-                      It is imperative that your project's main mission is the same in one way or another.">
-                    </textarea>
+                    <RichTextEditor
+            		value={project_holy_goals}
+                    onChange={this.holyGoalsOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -630,5 +660,6 @@ import { navigate } from 'gatsby'
 
         );
       }
+      
     }
     export default ProjectForm;

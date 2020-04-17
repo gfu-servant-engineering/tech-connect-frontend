@@ -2,6 +2,8 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
+
 
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for nodes to use in creating pages.
@@ -133,7 +135,9 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     })
   }
+    
 }
+
 
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
