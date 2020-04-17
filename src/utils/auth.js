@@ -70,6 +70,10 @@ export const getProfile = () => {
   return user
 }
 
+export const getAuthJWT = () => {
+  return tokens.accessToken
+}
+
 export const silentAuth = callback => {
   if (!isAuthenticated()) return callback()
   auth.checkSession({}, setSession(callback))
