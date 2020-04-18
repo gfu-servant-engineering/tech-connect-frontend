@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { navigate } from 'gatsby'
-import { getAuthJWT } from '../utils/auth.js';
+import { getAuthJWT, getProfile } from '../utils/auth.js';
 
     class ProjectForm extends Component {
       constructor() {
@@ -66,6 +66,9 @@ import { getAuthJWT } from '../utils/auth.js';
           // get jwt from auth0
           const token = getAuthJWT();
 
+          // get submitter id from auth0
+          const submitter_id = getProfile().sub;
+
           // create project
           axios({
             method: 'post',
@@ -89,6 +92,7 @@ import { getAuthJWT } from '../utils/auth.js';
               project_slack: project_slack,
               project_trello: project_trello,
               project_email: project_email,
+              submitter_id: submitter_id,
             }
           }).then((result) => {
 
