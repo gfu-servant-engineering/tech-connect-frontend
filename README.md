@@ -8,28 +8,12 @@ It links to a tweaked [Strapi backend](https://github.com/gfu-servant-engineerin
 
 ## Prerequisites
 
-- Node (recommend using v8.2.0 or higher)
+- Node (v12.2.0 or higher)
 - [Gatsby CLI](https://www.gatsbyjs.org/docs/)
 - A running Strapi server (currently at `http://techconnect-api.ddns.net:1337`)
 
 ## Getting Started
-```
-$ git clone https://github.com/gfu-servant-engineering/tech-connect-frontend
-$ cd tech-connect-frontend
-$ yarn
-$ npm run develop
-```
-To test the CMS locally, you'll need run a production build of the site:
-```
-$ npm run build
-$ npm run serve
-```
-
-### Setting up Strapi
-
-Refer to the backend [readme](https://github.com/gfu-servant-engineering/tech-connect-backend/blob/master/README.md) for Strapi installation instructions.
-
-Edit the `apiURL` attribute in `gatsby-config.js` to change the address of the Strapi server.
+For complete instructions, go to [Basic Environment Setup](https://github.com/gfu-servant-engineering/tech-connect-frontend/wiki/Front-End-Setup-Info#basic-environment-setup) within the wiki. This should get you up and running and able to start on development.
 
 ## Debugging
 Windows users might encounter ```node-gyp``` errors when trying to npm install.
