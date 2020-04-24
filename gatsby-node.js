@@ -262,6 +262,7 @@ exports.onPostBootstrap = () => {
       indexInstance.title = indexInstance.blog_name;
       indexInstance.description = indexInstance.blog_description;
       indexInstance.id = indexInstance.blog_id;
+      indexInstance.short_description = indexInstance.blog_short_description;
     }
 
     index.save();

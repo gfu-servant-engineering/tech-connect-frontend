@@ -46,7 +46,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allStrapiProject (limit: 4){
+    allStrapiProject (filter: {is_draft: {eq: false}}, limit: 4){
       edges {
         node {
           id

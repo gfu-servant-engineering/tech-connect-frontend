@@ -111,6 +111,7 @@ module.exports = {
           { name: 'blog_id', store: true},
           { name: 'blog_name', store: true, attributes: { boost: 20 }},
           { name: 'blog_description', store: true, attributes: { boost: 5 }},
+          { name: 'blog_short_description', store: true},
         ],
         // How to resolve each field`s value for a supported node type
         resolvers: {
@@ -124,9 +125,10 @@ module.exports = {
             project_is_draft:           node => node.is_draft,
           },
           StrapiBlogpage: {
-            blog_id:          node => node.id,
-            blog_name:        node => node.title,
-            blog_description: node => node.description,
+            blog_id:                node => node.id,
+            blog_name:              node => node.title,
+            blog_description:       node => node.description,
+            blog_short_description: node => node.short_description,
           }
         },
         filename: 'search_index.json',
