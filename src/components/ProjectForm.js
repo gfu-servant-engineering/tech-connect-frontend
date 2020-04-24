@@ -13,11 +13,19 @@ import { getAuthJWT } from '../utils/auth.js';
           project_name: '',
           project_image: '',
           project_description: '',
+          desc_state: RichTextEditor.createEmptyValue(),
+          short_description: '',
+          goal_state: RichTextEditor.createEmptyValue(),
           project_goals: '',
+          needs_state: RichTextEditor.createEmptyValue(),
           project_needs: '',
+          origins_state: RichTextEditor.createEmptyValue(),
           project_origins: '',
+          status_state: RichTextEditor.createEmptyValue(),
           project_status: '',
+          org_state: RichTextEditor.createEmptyValue(),
           project_org_description: '',
+          holy_goals_state: RichTextEditor.createEmptyValue(),
           project_holy_goals: '',
           project_video: '',
           project_github: '',
@@ -37,6 +45,49 @@ import { getAuthJWT } from '../utils/auth.js';
         this.setState({ [e.target.name]: e.target.value });
       }
 
+      descOnChange = (value) => {
+      	const data = value.toString('markdown');
+	  	this.setState({project_description: data});
+	  	this.setState({desc_state: value});
+	  	console.log(this.state.project_description)
+ 	  }
+
+ 	  goalsOnChange = (value) => {
+	  	const data = value.toString('markdown');
+	  	this.setState({project_goals: data});
+	  	this.setState({goal_state: value});
+ 	  }
+
+ 	  needOnChange = (value) => {
+	  	const data = value.toString('markdown');
+	  	this.setState({project_needs: data});
+	  	this.setState({needs_state: value});
+ 	  }
+
+ 	  originOnChange = (value) => {
+	  	const data = value.toString('markdown');
+	  	this.setState({project_origins: data});
+	  	this.setState({origins_state: value});
+ 	  }
+
+ 	  statusOnChange = (value) => {
+	    const data = value.toString('markdown');
+	  	this.setState({project_status: data});
+	  	this.setState({status_state: value});
+ 	  }
+
+ 	  orgOnChange = (value) => {
+	  	const data = value.toString('markdown');
+	  	this.setState({project_org_description: data});
+	  	this.setState({org_state: value});
+ 	  }
+
+ 	  holyGoalsOnChange = (value) => {
+	    const data = value.toString('markdown');
+	  	this.setState({project_holy_goals: data});
+	  	this.setState({holy_goals_state: value});
+ 	  }
+
       onSubmit = (e) => {
         e.preventDefault();
 
@@ -49,6 +100,7 @@ import { getAuthJWT } from '../utils/auth.js';
             sponsor_image,
             project_name,
             project_description,
+            short_description,
             project_goals,
             project_needs,
             project_origins,
@@ -94,6 +146,7 @@ import { getAuthJWT } from '../utils/auth.js';
 
             // current project id number
             const refId = result.data.id;
+
 
             // if given sponsor image put that upload here
             if (!!sponsor_image) {
@@ -180,12 +233,20 @@ import { getAuthJWT } from '../utils/auth.js';
           project_name,
           project_image,
           project_description,
+          desc_state,
+          short_description,
           project_goals,
+          goal_state,
           project_needs,
+          needs_state,
           project_origins,
+          origins_state,
           project_status,
+          status_state,
           project_org_description,
+          org_state,
           project_holy_goals,
+          holy_goals_state,
           project_video,
           project_github,
           project_slack,
@@ -197,6 +258,7 @@ import { getAuthJWT } from '../utils/auth.js';
                 && sponsor_name.length > 0
                 && sponsor_website.length > 0
                 && project_description.length > 0
+                && short_description.length > 0
                 && project_goals.length > 0
                 && project_needs.length > 0
                 && project_origins.length > 0
@@ -429,10 +491,30 @@ import { getAuthJWT } from '../utils/auth.js';
 
 
           {/* DESC */}
-          <div className="column is-10">
+          <div className="column is-7">
             <hr />
             <br />
-            <label htmlFor="project_description" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <label htmlFor="desc_state" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field">
+                  <div className="control">
+                  <RichTextEditor
+            		value={desc_state}
+                    onChange={this.descOnChange}
+          		  />
+                    <p className="help">This field is required</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {/* Short_DESC */}
+          <div className="column is-6">
+            <hr />
+            <br />
+            <label htmlFor="short_description" className="label is-medium">Give a brief summary of your project?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -440,12 +522,10 @@ import { getAuthJWT } from '../utils/auth.js';
                     <textarea
                       className="textarea is-medium"
                       type="text"
-                      name="project_description"
-                      value={project_description}
+                      name="short_description"
+                      value={short_description}
                       onChange={this.onChange}
-                      placeholder="Is this a new problem?
-                      If not, have others attempted to solve it in the past?
-                      What is the cause of the problem? How are you aiming to solve it?">
+                      placeholder="Give a short description of your project to be displayed">
                     </textarea>
                     <p className="help">This field is required</p>
                   </div>
@@ -455,23 +535,18 @@ import { getAuthJWT } from '../utils/auth.js';
           </div>
 
           {/* GOALS */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_goals" className="label is-medium">What are your main goals?</label>
+            <label htmlFor="goal_state" className="label is-medium">What are your main goals?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_goals"
-                      value={project_goals}
-                      onChange={this.onChange}
-                      placeholder="Describe both long term and short term goals.
-                      Be specific about the kind of help you need.">
-                    </textarea>
-                    <p className="help">This field is required</p>
+                    <RichTextEditor
+            		value={goal_state}
+                    onChange={this.goalsOnChange}
+          		  />
+          		     <p className="help">This field is required</p>
                   </div>
                 </div>
               </div>
@@ -479,21 +554,17 @@ import { getAuthJWT } from '../utils/auth.js';
           </div>
 
           {/* NEEDS */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_needs" className="label is-medium">What do you need?</label>
+            <label htmlFor="needs_state" className="label is-medium">What do you need?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_needs"
-                      value={project_needs}
-                      onChange={this.onChange}
-                      placeholder="Tell us about the type of person you think would be most helpful to you">
-                    </textarea>
+                    <RichTextEditor
+            		value={needs_state}
+                    onChange={this.needOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -503,22 +574,17 @@ import { getAuthJWT } from '../utils/auth.js';
 
 
           {/* ORIGIN */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_origins" className="label is-medium">How did this project come about?</label>
+            <label htmlFor="origins_state" className="label is-medium">How did this project come about?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_origins"
-                      value={project_origins}
-                      onChange={this.onChange}
-                      placeholder="Give us a backstory. What inspired you to start this project?
-                      This information helps people determine whether or not they'd be a good fit for this project.">
-                    </textarea>
+                    <RichTextEditor
+            		value={origins_state}
+                    onChange={this.originOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -527,25 +593,19 @@ import { getAuthJWT } from '../utils/auth.js';
           </div>
 
           {/* STATUS */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_status" className="label is-medium">
+            <label htmlFor="status_state" className="label is-medium">
               What's the current status of your project?
             </label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_status"
-                      value={project_status}
-                      onChange={this.onChange}
-                      placeholder="Tell us what you have done so far to complete this project.
-                      Don't worry, a large foundation isn't required to submit a project.
-                      Just let us know where you're at.">
-                    </textarea>
+                    <RichTextEditor
+            		value={status_state}
+                    onChange={this.statusOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -554,21 +614,17 @@ import { getAuthJWT } from '../utils/auth.js';
           </div>
 
           {/* ORGANIZATION */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_org_description" className="label is-medium">Tell us about yourself!</label>
+            <label htmlFor="org_state" className="label is-medium">Tell us about yourself!</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_org_description"
-                      value={project_org_description}
-                      onChange={this.onChange}
-                      placeholder="What organization do you work for if any?">
-                    </textarea>
+                    <RichTextEditor
+            		value={org_state}
+                    onChange={this.orgOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -577,22 +633,17 @@ import { getAuthJWT } from '../utils/auth.js';
           </div>
 
           {/* HOLY GOALS */}
-          <div className="column is-5">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_holy_goals" className="label is-medium">How does this project further the Kindgom of God?</label>
+            <label htmlFor="holy_goals_state" className="label is-medium">How does this project further the Kindgom of God?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
-                    <textarea
-                      className="textarea is-medium"
-                      type="text"
-                      name="project_holy_goals"
-                      value={project_holy_goals}
-                      onChange={this.onChange}
-                      placeholder="Furthering the Kingdom of God is Tech Connect's main mission.
-                      It is imperative that your project's main mission is the same in one way or another.">
-                    </textarea>
+                    <RichTextEditor
+            		value={holy_goals_state}
+                    onChange={this.holyGoalsOnChange}
+          		  />
                     <p className="help">This field is required</p>
                   </div>
                 </div>
@@ -623,5 +674,6 @@ import { getAuthJWT } from '../utils/auth.js';
 
         );
       }
+      
     }
     export default ProjectForm;
