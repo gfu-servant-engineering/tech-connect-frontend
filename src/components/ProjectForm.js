@@ -1,4 +1,4 @@
-import React, { Component, Proptypes } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { navigate } from 'gatsby'
 import RichTextEditor from 'react-rte';
