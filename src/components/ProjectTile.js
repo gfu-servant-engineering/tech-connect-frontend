@@ -4,7 +4,6 @@ import { Link } from 'gatsby'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 
 const ProjectTile = ({ data }) => {
-
   return (
     <div>
       <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.project_image} /></Link>

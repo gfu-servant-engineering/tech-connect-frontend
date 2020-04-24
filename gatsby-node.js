@@ -1,7 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
+const eJson = require("edit-json-file")
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const fs = require('fs')
 
 const makeRequest = (graphql, request) => new Promise((resolve, reject) => {
   // Query for nodes to use in creating pages.
@@ -42,6 +44,84 @@ exports.createPages = ({ actions, graphql }) => {
         },
       })
     })
+  });
+
+  const saveProjectImages = makeRequest(graphql, `
+    query {
+      allStrapiProject {
+        edges {
+          node {
+            id
+            project_image {
+              childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
+                  src
+                  aspectRatio
+                  presentationHeight
+                  presentationWidth
+                  srcSet
+                  sizes
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
+                  originalName
+                  originalImg
+                  base64
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `).then( (data) => {
+    var imageFile = JSON.stringify(data);
+    fs.writeFile("public/projectImageSrc.json", imageFile, 'utf8', function (err) {
+      if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+      }
+      console.log("JSON file has been saved.");
+    });
+  });
+
+  const saveBlogImages = makeRequest(graphql, `
+    query {
+      allStrapiBlogpage {
+        edges {
+          node {
+            id
+            image {
+              childImageSharp {
+                fluid(maxWidth:300, maxHeight:200, quality:90, toFormat: JPG) {
+                  src
+                  aspectRatio
+                  presentationHeight
+                  presentationWidth
+                  srcSet
+                  sizes
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
+                  originalName
+                  originalImg
+                  base64
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `).then( (data) => {
+    var imageFile = JSON.stringify(data);
+    fs.writeFile("public/blogImageSrc.json", imageFile, 'utf8', function (err) {
+      if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+      }
+      console.log("JSON file has been saved.");
+    });
   });
 
   const getBlogpages = makeRequest(graphql, `
@@ -149,4 +229,41 @@ exports.createResolvers = ({ createResolvers }) => {
     },
   }
   createResolvers(resolvers)
+}
+
+exports.onPostBootstrap = () => {
+    var index = eJson('public/search_index.json');
+    var projectImages = eJson('public/projectImageSrc.json').data.data.allStrapiProject.edges;
+    var blogImages = eJson('public/blogImageSrc.json').data.data.allStrapiBlogpage.edges;
+
+    // en -> store
+    for (var i = 0; i < projectImages.length; i++) {
+      var node = projectImages[i].node;
+      var id = node.id;
+      var image = node.project_image;
+      var indexInstance = index.data.en.store[id];
+      indexInstance.project_image = image;
+      
+      // renaming because of projects bad naming scheme
+      indexInstance.id = indexInstance.project_id;
+      indexInstance.short_description = indexInstance.project_short_description;
+      indexInstance.sponsor_name = indexInstance.project_sponsor_name;
+    }
+
+    // en -> store
+    for (var i = 0; i < blogImages.length; i++) {
+      var node = blogImages[i].node;
+      var id = node.id;
+      var image = node.image;
+      var indexInstance = index.data.en.store[id];
+      indexInstance.image = image;
+
+      // renaming because of blogpages bad naming scheme
+      indexInstance.title = indexInstance.blog_name;
+      indexInstance.description = indexInstance.blog_description;
+      indexInstance.id = indexInstance.blog_id;
+      indexInstance.short_description = indexInstance.blog_short_description;
+    }
+
+    index.save();
 }

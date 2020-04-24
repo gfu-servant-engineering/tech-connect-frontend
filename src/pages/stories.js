@@ -1,49 +1,43 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Layout from '../components/Layout.js'
-import StoryTile from '../components/StoryTile.js'
+import React, { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import SearchField from '../components/SearchField';
+import SearchResults from '../components/SearchResults';
+import SearchPageNavigator from '../components/SearchPageNavigator';
 
-const StoriesPage = ({ data }) => (
-  <Layout>
-  <section className="section">
-    <div className="container">
-      <h1 className="has-text-weight-bold is-size-1 has-text-primary">Explore Stories</h1>
-      <hr className="horizontal-rule" />
-      <br></br>
-      <div>
-        <div className="columns is-multiline is-centered">
-          {data.allStrapiBlogpage.edges.map(document => (
-              <div key={document.node.id} className="column is-5-tablet is-4-desktop is-3-widescreen">
-                  <StoryTile data={document.node}></StoryTile>
-              </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-  </Layout>
-)
+const ProjectSearch = ({data, location}) => {
+  const [results, setResults] = useState([]);
+  const searchQuery = new URLSearchParams(location.search).get('keywords') || '*';
+  const searchPage = parseInt(new URLSearchParams(location.search).get('page') || 1);
+  const resultsPerPage = 8;
 
-export default StoriesPage
-
-export const pageQuery = graphql`
-  query StoryPage {
-    allStrapiBlogpage {
-      edges {
-        node {
-          id
-          title
-          date
-          short_description
-          image {
-          childImageSharp {
-            fluid(maxWidth:700, maxHeight:470, quality:90, toFormat:JPG) {
-             ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
+  useEffect(() => {
+    if (searchQuery && window.__LUNR__) {
+      window.__LUNR__.__loaded.then(lunr => {
+        const refs = lunr.en.index.search(searchQuery);
+        const posts = refs.map(({ ref }) => lunr.en.store[ref]);
+        const results = posts.filter( (post) => post.blog_id !== undefined);
+        setResults(results);
+      });
     }
-  }
-`
+  }, [searchQuery]);
+
+  const pages = Math.floor((results.length - 1) / resultsPerPage) + 1;
+  const paginatedResults = results.slice((searchPage - 1) * resultsPerPage, (searchPage * resultsPerPage));
+
+  return (
+    <Layout>
+      <section className="section" >
+        <div className="container" >
+          <div className="content" >
+            <SearchField query={searchQuery} />
+            <hr className="horizontal-rule" />
+            {pages !== 0 ? (<SearchPageNavigator pages={pages} currPage={searchPage} query={searchQuery}/>) : (<div />)}
+            <SearchResults query={searchQuery} results={paginatedResults} data={data} isProject={false}/>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default ProjectSearch

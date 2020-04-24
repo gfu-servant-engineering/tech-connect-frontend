@@ -96,32 +96,44 @@ module.exports = {
         purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
       },
     }, // must be after other CSS plugins
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
     {
       resolve: 'gatsby-plugin-lunr',
       options: {
         languages: [{ name: 'en' }],
         // Fields to index
         fields: [
-          { name: 'id', store: true},
+          { name: 'project_id', store: true},
           { name: 'project_name', store: true, attributes: { boost: 20 }},
           { name: 'project_description', store: true, attributes: { boost: 5 }},
-          { name: 'project_image', store: true},
-          { name: 'sponsor_name', store: true, attributes: { boost: 15 }},
+          { name: 'project_short_description', store: true,},
+          { name: 'project_sponsor_name', store: true, attributes: { boost: 15 }},
+          { name: 'project_is_draft', store: true},
+          { name: 'blog_id', store: true},
+          { name: 'blog_name', store: true, attributes: { boost: 20 }},
+          { name: 'blog_description', store: true, attributes: { boost: 5 }},
+          { name: 'blog_short_description', store: true},
         ],
         // How to resolve each field`s value for a supported node type
         resolvers: {
           // For any node of type MarkdownRemark, list how to resolve the fields` values
           StrapiProject: {
-            id: node => node.id,
-            project_name: node => node.project_name,
-            project_description: node => node.project_description,
-            project_image: node => node.project_image,
-            sponsor_name: node => node.sponsor_name,
+            project_id:                 node => node.id,
+            project_name:               node => node.project_name,
+            project_description:        node => node.project_description,
+            project_short_description:  node => node.short_description,
+            project_sponsor_name:       node => node.sponsor_name,
+            project_is_draft:           node => node.is_draft,
           },
+          StrapiBlogpage: {
+            blog_id:                node => node.id,
+            blog_name:              node => node.title,
+            blog_description:       node => node.description,
+            blog_short_description: node => node.short_description,
+          }
         },
         filename: 'search_index.json',
       },
     },
+    'gatsby-plugin-netlify', // make sure to keep it last in the array
   ],
 }

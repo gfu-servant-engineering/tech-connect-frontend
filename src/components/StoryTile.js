@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
 
-
 const StoryTile = ({ data }) => {
-
   return (
     <div>
       <Link to={`/${data.id}`}><PreviewCompatibleImage imageInfo={data.image} /></Link>

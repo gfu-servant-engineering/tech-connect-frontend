@@ -2,7 +2,8 @@ import React from 'react';
 import { navigate } from 'gatsby';
 
 function gotoPage(query, page) {
-  navigate(`/project-search?keywords=${encodeURIComponent(query)}&page=${page}`)
+  var path = window.location.pathname;
+  navigate(`${path}?keywords=${encodeURIComponent(query)}&page=${page}`)
 }
 
 const SearchPageNavigator = ({pages, currPage, query}) => {
