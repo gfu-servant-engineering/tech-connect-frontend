@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage.js'
-import ReactMarkdown from "react-markdown"
 
 const ProjectTile = ({ data }) => {
   return (
@@ -15,7 +14,7 @@ const ProjectTile = ({ data }) => {
         <i>Sponsored by {data.sponsor_name}</i>
       </h4>
       <Link className="has-text-primary ellipsis is-ellipsis-3" to={`/${data.id}`}>
-        <ReactMarkdown source={data.project_description} />
+        {data.short_description}
       </Link>
     </div>
   )
@@ -24,9 +23,9 @@ const ProjectTile = ({ data }) => {
 ProjectTile.propTypes = {
       id: PropTypes.number,
       project_name: PropTypes.object,
-      project_description: PropTypes.string,
-      project_goals: PropTypes.string,
-      project_blurb: PropTypes.string,
+      project_image: PropTypes.object,
+      sponsor_name: PropTypes.string,
+      short_description: PropTypes.string,
 }
 
 export default ProjectTile

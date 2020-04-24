@@ -246,6 +246,8 @@ exports.onPostBootstrap = () => {
       
       // renaming because of projects bad naming scheme
       indexInstance.id = indexInstance.project_id;
+      indexInstance.short_description = indexInstance.project_short_description;
+      indexInstance.sponsor_name = indexInstance.project_sponsor_name;
     }
 
     // en -> store

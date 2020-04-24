@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { navigate } from 'gatsby'
+import { getAuthJWT } from '../utils/auth.js';
 
     class ProjectForm extends Component {
       constructor() {
@@ -61,76 +62,48 @@ import { navigate } from 'gatsby'
             project_email
           } = this.state;
 
-          // get jwt
+          
+          // get jwt from auth0
+          const token = getAuthJWT();
+
+          // create project
           axios({
             method: 'post',
-            url: `${process.env.GATSBY_STRAPI_HOST}/auth/local`,
+            url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             data: {
-              identifier: process.env.GATSBY_STRAPI_USER,
-              password: process.env.GATSBY_STRAPI_PW
+              sponsor_name: sponsor_name,
+              sponsor_website: sponsor_website,
+              project_name: project_name,
+              project_description: project_description,
+              project_goals: project_goals,
+              project_needs: project_needs,
+              project_origins: project_origins,
+              project_status: project_status,
+              project_org_description: project_org_description,
+              project_holy_goals: project_holy_goals,
+              project_video: project_video,
+              project_github: project_github,
+              project_slack: project_slack,
+              project_trello: project_trello,
+              project_email: project_email,
             }
           }).then((result) => {
-            const token = result.data.jwt
 
-            // create project
-            axios({
-              method: 'post',
-              url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              data: {
-                sponsor_name: sponsor_name,
-                sponsor_website: sponsor_website,
-                project_name: project_name,
-                project_description: project_description,
-                project_goals: project_goals,
-                project_needs: project_needs,
-                project_origins: project_origins,
-                project_status: project_status,
-                project_org_description: project_org_description,
-                project_holy_goals: project_holy_goals,
-                project_video: project_video,
-                project_github: project_github,
-                project_slack: project_slack,
-                project_trello: project_trello,
-                project_email: project_email,
-              }
-            }).then((result) => {
+            // current project id number
+            const refId = result.data.id;
 
-              // current project id number
-              const refId = result.data.id;
+            // if given sponsor image put that upload here
+            if (!!sponsor_image) {
 
-              // if given sponsor image put that upload here
-              if (!!sponsor_image) {
-
-                // sponsor image upload and link to current project
-                let data = new FormData();
-                data.append('refId', refId);
-                data.append('field', 'sponsor_image');
-                data.append('ref', 'project');
-                data.append('files', document.getElementById("sponsor_image").files[0]);
-
-                axios({
-                  method: 'post',
-                  url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                  },
-                  data: data,
-                  onUploadProgress: progressEvent => {
-                    console.log(progressEvent.loaded / progressEvent.total)
-                  }
-                })
-              }
-
-              // project image upload and link to current project
-              let data2 = new FormData();
-              data2.append('refId', refId);
-              data2.append('field', 'project_image');
-              data2.append('ref', 'project');
-              data2.append('files', document.getElementById("project_image").files[0]);
+              // sponsor image upload and link to current project
+              let data = new FormData();
+              data.append('refId', refId);
+              data.append('field', 'sponsor_image');
+              data.append('ref', 'project');
+              data.append('files', document.getElementById("sponsor_image").files[0]);
 
               axios({
                 method: 'post',
@@ -139,37 +112,57 @@ import { navigate } from 'gatsby'
                   Authorization: `Bearer ${token}`,
                   'Content-Type': 'multipart/form-data'
                 },
-                data: data2,
+                data: data,
                 onUploadProgress: progressEvent => {
                   console.log(progressEvent.loaded / progressEvent.total)
                 }
-              }).then((result) => {
-                //access the results here....
-                navigate('/thank-you');
-              });
+              })
+            }
+
+            // project image upload and link to current project
+            let data2 = new FormData();
+            data2.append('refId', refId);
+            data2.append('field', 'project_image');
+            data2.append('ref', 'project');
+            data2.append('files', document.getElementById("project_image").files[0]);
+
+            axios({
+              method: 'post',
+              url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              },
+              data: data2,
+              onUploadProgress: progressEvent => {
+                console.log(progressEvent.loaded / progressEvent.total)
+              }
+            }).then((result) => {
+              //access the results here....
+              navigate('/thank-you');
+            });
 
 
-              this.setState({'sponsor_name': ''});
-              this.setState({'sponsor_website': ''});
-              this.setState({'sponsor_image': ''});
-              this.setState({'project_name': ''});
-              this.setState({'project_image': ''});
-              this.setState({'project_description': ''});
-              this.setState({'project_goals': ''});
-              this.setState({'project_needs': ''});
-              this.setState({'project_origins': ''});
-              this.setState({'project_status': ''});
-              this.setState({'project_org_description': ''});
-              this.setState({'project_holy_goals': ''});
-              this.setState({'project_github': ''});
-              this.setState({'project_slack': ''});
-              this.setState({'project_trello': ''});
-              this.setState({'project_email': ''});
-              this.setState({'project_video': ''});
-              });
-            }).catch(error => {
-              // Handle error.
-              console.log('An error occurred:', error);
+            this.setState({'sponsor_name': ''});
+            this.setState({'sponsor_website': ''});
+            this.setState({'sponsor_image': ''});
+            this.setState({'project_name': ''});
+            this.setState({'project_image': ''});
+            this.setState({'project_description': ''});
+            this.setState({'project_goals': ''});
+            this.setState({'project_needs': ''});
+            this.setState({'project_origins': ''});
+            this.setState({'project_status': ''});
+            this.setState({'project_org_description': ''});
+            this.setState({'project_holy_goals': ''});
+            this.setState({'project_github': ''});
+            this.setState({'project_slack': ''});
+            this.setState({'project_trello': ''});
+            this.setState({'project_email': ''});
+            this.setState({'project_video': ''});
+          }).catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error);
           });
         }
         // if not allowed to submit, navigate to thank you page
@@ -218,7 +211,7 @@ import { navigate } from 'gatsby'
           {/* NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Project Name</label>
+            <label htmlFor="project_name" className="label is-medium">Project Name</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -239,7 +232,7 @@ import { navigate } from 'gatsby'
           {/* VIDEO LINK */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">A link to a video</label>
+            <label htmlFor="project_video" className="label is-medium">A link to a video</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -260,10 +253,9 @@ import { navigate } from 'gatsby'
           {/* IMAGE UPLOAD */}
           <div className="column is-2 is-centered">
             <br/>
-            <label className="label is-medium">Upload an image...</label>
+            <label htmlFor="project_image" className="label is-medium">Upload an image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='project_image'></label>
               <input type='file' id='project_image' name="project_image" value={project_image} onChange={this.onChange} />
             </div>
             <p className="help">This field is required</p>
@@ -286,7 +278,7 @@ import { navigate } from 'gatsby'
       {/* SPONSOR NAME */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Project Sponsor</label>
+            <label htmlFor="sponsor_name" className="label is-medium">Project Sponsor</label>
             <div className="field is-horizontal required">
               <div className="field-body">
                 <div className="field">
@@ -307,7 +299,7 @@ import { navigate } from 'gatsby'
       {/* SPONSOR WEBSITE */}
           <div className="column is-3">
             <br/>
-            <label className="label is-medium">Link to Sponsor's Website</label>
+            <label htmlFor="sponsor_website" className="label is-medium">Link to Sponsor's Website</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -328,10 +320,9 @@ import { navigate } from 'gatsby'
       {/* SPONSOR IMAGE */}
           <div className="column is-2 is-centered">
             <br/>
-            <label className="label is-medium">Sponsor image...</label>
+            <label htmlFor="sponsor_image" className="label is-medium">Sponsor image...</label>
             <div className='buttons fadein'>
             <div className='button'>
-              <label htmlFor='sponsor_image'></label>
               <input type='file' id='sponsor_image' name="sponsor_image" value={sponsor_image} onChange={this.onChange} />
             </div>
             <p className="help">Optional Sponsor logo</p>
@@ -356,7 +347,7 @@ import { navigate } from 'gatsby'
             {/* EMAIL */}
             <div className="column is-2">
               <br/>
-              <label className="label is-medium">Email</label>
+              <label htmlFor="project_email" className="label is-medium">Email</label>
               <div className="field is-horizontal is-required">
                 <div className="field-body">
                   <div className="field">
@@ -379,7 +370,7 @@ import { navigate } from 'gatsby'
           {/* GITHUB */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Github</label>
+            <label htmlFor="project_github" className="label is-medium">Github</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -399,7 +390,7 @@ import { navigate } from 'gatsby'
           {/* SLACK */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Slack</label>
+            <label htmlFor="project_slack" className="label is-medium">Slack</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -419,7 +410,7 @@ import { navigate } from 'gatsby'
           {/* TRELLO */}
           <div className="column is-2">
             <br/>
-            <label className="label is-medium">Trello</label>
+            <label htmlFor="project_trello" className="label is-medium">Trello</label>
             <div className="field is-horizontal is-required">
               <div className="field-body">
                 <div className="field">
@@ -441,7 +432,7 @@ import { navigate } from 'gatsby'
           <div className="column is-10">
             <hr />
             <br />
-            <label className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
+            <label htmlFor="project_description" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -466,7 +457,7 @@ import { navigate } from 'gatsby'
           {/* GOALS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">What are your main goals?</label>
+            <label htmlFor="project_goals" className="label is-medium">What are your main goals?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -490,7 +481,7 @@ import { navigate } from 'gatsby'
           {/* NEEDS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">What do you need?</label>
+            <label htmlFor="project_needs" className="label is-medium">What do you need?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -514,7 +505,7 @@ import { navigate } from 'gatsby'
           {/* ORIGIN */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">How did this project come about?</label>
+            <label htmlFor="project_origins" className="label is-medium">How did this project come about?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -538,7 +529,7 @@ import { navigate } from 'gatsby'
           {/* STATUS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">
+            <label htmlFor="project_status" className="label is-medium">
               What's the current status of your project?
             </label>
             <div className="field is-horizontal">
@@ -565,7 +556,7 @@ import { navigate } from 'gatsby'
           {/* ORGANIZATION */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">Tell us about yourself!</label>
+            <label htmlFor="project_org_description" className="label is-medium">Tell us about yourself!</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
@@ -588,7 +579,7 @@ import { navigate } from 'gatsby'
           {/* HOLY GOALS */}
           <div className="column is-5">
             <br/>
-            <label className="label is-medium">How does this project further the Kindgom of God?</label>
+            <label htmlFor="project_holy_goals" className="label is-medium">How does this project further the Kindgom of God?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">

@@ -105,7 +105,9 @@ module.exports = {
           { name: 'project_id', store: true},
           { name: 'project_name', store: true, attributes: { boost: 20 }},
           { name: 'project_description', store: true, attributes: { boost: 5 }},
+          { name: 'project_short_description', store: true,},
           { name: 'project_sponsor_name', store: true, attributes: { boost: 15 }},
+          { name: 'project_is_draft', store: true},
           { name: 'blog_id', store: true},
           { name: 'blog_name', store: true, attributes: { boost: 20 }},
           { name: 'blog_description', store: true, attributes: { boost: 5 }},
@@ -114,10 +116,12 @@ module.exports = {
         resolvers: {
           // For any node of type MarkdownRemark, list how to resolve the fields` values
           StrapiProject: {
-            project_id:           node => node.id,
-            project_name:         node => node.project_name,
-            project_description:  node => node.project_description,
-            project_sponsor_name: node => node.sponsor_name,
+            project_id:                 node => node.id,
+            project_name:               node => node.project_name,
+            project_description:        node => node.project_description,
+            project_short_description:  node => node.short_description,
+            project_sponsor_name:       node => node.sponsor_name,
+            project_is_draft:           node => node.is_draft,
           },
           StrapiBlogpage: {
             blog_id:          node => node.id,
