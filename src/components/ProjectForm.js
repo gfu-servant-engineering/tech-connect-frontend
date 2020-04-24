@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { navigate } from 'gatsby'
-import RichTextEditor from 'react-rte';
+import { getAuthJWT } from '../utils/auth.js';
 
     class ProjectForm extends Component {
       constructor() {
@@ -114,77 +114,49 @@ import RichTextEditor from 'react-rte';
             project_email
           } = this.state;
 
-          // get jwt
+          
+          // get jwt from auth0
+          const token = getAuthJWT();
+
+          // create project
           axios({
             method: 'post',
-            url: `${process.env.GATSBY_STRAPI_HOST}/auth/local`,
+            url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             data: {
-              identifier: process.env.GATSBY_STRAPI_USER,
-              password: process.env.GATSBY_STRAPI_PW
+              sponsor_name: sponsor_name,
+              sponsor_website: sponsor_website,
+              project_name: project_name,
+              project_description: project_description,
+              project_goals: project_goals,
+              project_needs: project_needs,
+              project_origins: project_origins,
+              project_status: project_status,
+              project_org_description: project_org_description,
+              project_holy_goals: project_holy_goals,
+              project_video: project_video,
+              project_github: project_github,
+              project_slack: project_slack,
+              project_trello: project_trello,
+              project_email: project_email,
             }
           }).then((result) => {
-            const token = result.data.jwt
 
-            // create project
-            axios({
-              method: 'post',
-              url: `${process.env.GATSBY_STRAPI_HOST}/projects`,
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              data: {
-                sponsor_name: sponsor_name,
-                sponsor_website: sponsor_website,
-                project_name: project_name,
-                project_description: project_description,
-                short_description: short_description,
-                project_goals: project_goals,
-                project_needs: project_needs,
-                project_origins: project_origins,
-                project_status: project_status,
-                project_org_description: project_org_description,
-                project_holy_goals: project_holy_goals,
-                project_video: project_video,
-                project_github: project_github,
-                project_slack: project_slack,
-                project_trello: project_trello,
-                project_email: project_email,
-              }
-            }).then((result) => {
+            // current project id number
+            const refId = result.data.id;
 
-              // current project id number
-              const refId = result.data.id;
 
-              // if given sponsor image put that upload here
-              if (!!sponsor_image) {
+            // if given sponsor image put that upload here
+            if (!!sponsor_image) {
 
-                // sponsor image upload and link to current project
-                let data = new FormData();
-                data.append('refId', refId);
-                data.append('field', 'sponsor_image');
-                data.append('ref', 'project');
-                data.append('files', document.getElementById("sponsor_image").files[0]);
-
-                axios({
-                  method: 'post',
-                  url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                  },
-                  data: data,
-                  onUploadProgress: progressEvent => {
-                    console.log(progressEvent.loaded / progressEvent.total)
-                  }
-                })
-              }
-
-              // project image upload and link to current project
-              let data2 = new FormData();
-              data2.append('refId', refId);
-              data2.append('field', 'project_image');
-              data2.append('ref', 'project');
-              data2.append('files', document.getElementById("project_image").files[0]);
+              // sponsor image upload and link to current project
+              let data = new FormData();
+              data.append('refId', refId);
+              data.append('field', 'sponsor_image');
+              data.append('ref', 'project');
+              data.append('files', document.getElementById("sponsor_image").files[0]);
 
               axios({
                 method: 'post',
@@ -193,38 +165,57 @@ import RichTextEditor from 'react-rte';
                   Authorization: `Bearer ${token}`,
                   'Content-Type': 'multipart/form-data'
                 },
-                data: data2,
+                data: data,
                 onUploadProgress: progressEvent => {
                   console.log(progressEvent.loaded / progressEvent.total)
                 }
-              }).then((result) => {
-                //access the results here....
-                navigate('/thank-you');
-              });
+              })
+            }
+
+            // project image upload and link to current project
+            let data2 = new FormData();
+            data2.append('refId', refId);
+            data2.append('field', 'project_image');
+            data2.append('ref', 'project');
+            data2.append('files', document.getElementById("project_image").files[0]);
+
+            axios({
+              method: 'post',
+              url: `${process.env.GATSBY_STRAPI_HOST}/upload`,
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              },
+              data: data2,
+              onUploadProgress: progressEvent => {
+                console.log(progressEvent.loaded / progressEvent.total)
+              }
+            }).then((result) => {
+              //access the results here....
+              navigate('/thank-you');
+            });
 
 
-              this.setState({'sponsor_name': ''});
-              this.setState({'sponsor_website': ''});
-              this.setState({'sponsor_image': ''});
-              this.setState({'project_name': ''});
-              this.setState({'project_image': ''});
-              this.setState({'project_description': ''});
-              this.setState({'short_description': ''});
-              this.setState({'project_goals': ''});
-              this.setState({'project_needs': ''});
-              this.setState({'project_origins': ''});
-              this.setState({'project_status': ''});
-              this.setState({'project_org_description': ''});
-              this.setState({'project_holy_goals': ''});
-              this.setState({'project_github': ''});
-              this.setState({'project_slack': ''});
-              this.setState({'project_trello': ''});
-              this.setState({'project_email': ''});
-              this.setState({'project_video': ''});
-              });
-            }).catch(error => {
-              // Handle error.
-              console.log('An error occurred:', error);
+            this.setState({'sponsor_name': ''});
+            this.setState({'sponsor_website': ''});
+            this.setState({'sponsor_image': ''});
+            this.setState({'project_name': ''});
+            this.setState({'project_image': ''});
+            this.setState({'project_description': ''});
+            this.setState({'project_goals': ''});
+            this.setState({'project_needs': ''});
+            this.setState({'project_origins': ''});
+            this.setState({'project_status': ''});
+            this.setState({'project_org_description': ''});
+            this.setState({'project_holy_goals': ''});
+            this.setState({'project_github': ''});
+            this.setState({'project_slack': ''});
+            this.setState({'project_trello': ''});
+            this.setState({'project_email': ''});
+            this.setState({'project_video': ''});
+          }).catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error);
           });
         }
         // if not allowed to submit, navigate to thank you page
