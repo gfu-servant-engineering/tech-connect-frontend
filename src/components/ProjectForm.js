@@ -12,15 +12,21 @@ import RichTextEditor from 'react-rte';
           sponsor_image: '',
           project_name: '',
           project_image: '',
-          project_description: 'dof',
+          project_description: '',
           desc_state: RichTextEditor.createEmptyValue(),
           short_description: '',
-          project_goals: RichTextEditor.createEmptyValue(),
-          project_needs: RichTextEditor.createEmptyValue(),
-          project_origins: RichTextEditor.createEmptyValue(),
-          project_status: RichTextEditor.createEmptyValue(),
-          project_org_description: RichTextEditor.createEmptyValue(),
-          project_holy_goals: RichTextEditor.createEmptyValue(),
+          goal_state: RichTextEditor.createEmptyValue(),
+          project_goals: '',
+          needs_state: RichTextEditor.createEmptyValue(),
+          project_needs: '',
+          origins_state: RichTextEditor.createEmptyValue(),
+          project_origins: '',
+          status_state: RichTextEditor.createEmptyValue(),
+          project_status: '',
+          org_state: RichTextEditor.createEmptyValue(),
+          project_org_description: '',
+          holy_goals_state: RichTextEditor.createEmptyValue(),
+          project_holy_goals: '',
           project_video: '',
           project_github: '',
           project_slack: '',
@@ -40,34 +46,46 @@ import RichTextEditor from 'react-rte';
       }
 
       descOnChange = (value) => {
-	  this.setState({["desc_state" ]: value});
-	  console.log(desc_state);
-	  
-	  
+      	const data = value.toString('markdown');
+	  	this.setState({project_description: data});
+	  	this.setState({desc_state: value});
+	  	console.log(this.state.project_description)
  	  }
 
  	  goalsOnChange = (value) => {
-	  this.setState({project_goals : value});
+	  	const data = value.toString('markdown');
+	  	this.setState({project_goals: data});
+	  	this.setState({goal_state: value});
  	  }
 
  	  needOnChange = (value) => {
-	  this.setState({project_needs : value});
+	  	const data = value.toString('markdown');
+	  	this.setState({project_needs: data});
+	  	this.setState({needs_state: value});
  	  }
 
  	  originOnChange = (value) => {
-	  this.setState({project_origins : value});
+	  	const data = value.toString('markdown');
+	  	this.setState({project_origins: data});
+	  	this.setState({origins_state: value});
  	  }
 
  	  statusOnChange = (value) => {
-	  this.setState({project_status : value});
+	    const data = value.toString('markdown');
+	  	this.setState({project_status: data});
+	  	this.setState({status_state: value});
  	  }
 
  	  orgOnChange = (value) => {
-	  this.setState({project_org_description : value});
+	  	const data = value.toString('markdown');
+	  	this.setState({project_org_description: data});
+	  	this.setState({org_state: value});
  	  }
 
  	  holyGoalsOnChange = (value) => {
-	  this.setState({project_holy_goals : value});
+	    const data = value.toString('markdown');
+	  	this.setState({project_holy_goals: data});
+	  	this.setState({holy_goals_state: value});
  	  }
 
       onSubmit = (e) => {
@@ -118,7 +136,7 @@ import RichTextEditor from 'react-rte';
                 sponsor_name: sponsor_name,
                 sponsor_website: sponsor_website,
                 project_name: project_name,
-                project_description: desc_state,
+                project_description: project_description,
                 short_description: short_description,
                 project_goals: project_goals,
                 project_needs: project_needs,
@@ -227,11 +245,17 @@ import RichTextEditor from 'react-rte';
           desc_state,
           short_description,
           project_goals,
+          goal_state,
           project_needs,
+          needs_state,
           project_origins,
+          origins_state,
           project_status,
+          status_state,
           project_org_description,
+          org_state,
           project_holy_goals,
+          holy_goals_state,
           project_video,
           project_github,
           project_slack,
@@ -476,7 +500,7 @@ import RichTextEditor from 'react-rte';
 
 
           {/* DESC */}
-          <div className="column is-10">
+          <div className="column is-7">
             <hr />
             <br />
             <label htmlFor="desc_state" className="label is-medium">Describe your project. What problem does this project attempt to solve?</label>
@@ -485,7 +509,6 @@ import RichTextEditor from 'react-rte';
                 <div className="field">
                   <div className="control">
                   <RichTextEditor
-
             		value={desc_state}
                     onChange={this.descOnChange}
           		  />
@@ -497,7 +520,7 @@ import RichTextEditor from 'react-rte';
           </div>
 
       {/* Short_DESC */}
-          <div className="column is-10">
+          <div className="column is-6">
             <hr />
             <br />
             <label htmlFor="short_description" className="label is-medium">Give a brief summary of your project?</label>
@@ -521,15 +544,15 @@ import RichTextEditor from 'react-rte';
           </div>
 
           {/* GOALS */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_goals" className="label is-medium">What are your main goals?</label>
+            <label htmlFor="goal_state" className="label is-medium">What are your main goals?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_goals}
+            		value={goal_state}
                     onChange={this.goalsOnChange}
           		  />
           		     <p className="help">This field is required</p>
@@ -540,15 +563,15 @@ import RichTextEditor from 'react-rte';
           </div>
 
           {/* NEEDS */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_needs" className="label is-medium">What do you need?</label>
+            <label htmlFor="needs_state" className="label is-medium">What do you need?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_needs}
+            		value={needs_state}
                     onChange={this.needOnChange}
           		  />
                     <p className="help">This field is required</p>
@@ -560,15 +583,15 @@ import RichTextEditor from 'react-rte';
 
 
           {/* ORIGIN */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_origins" className="label is-medium">How did this project come about?</label>
+            <label htmlFor="origins_state" className="label is-medium">How did this project come about?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_origins}
+            		value={origins_state}
                     onChange={this.originOnChange}
           		  />
                     <p className="help">This field is required</p>
@@ -579,9 +602,9 @@ import RichTextEditor from 'react-rte';
           </div>
 
           {/* STATUS */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_status" className="label is-medium">
+            <label htmlFor="status_state" className="label is-medium">
               What's the current status of your project?
             </label>
             <div className="field is-horizontal">
@@ -589,7 +612,7 @@ import RichTextEditor from 'react-rte';
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_status}
+            		value={status_state}
                     onChange={this.statusOnChange}
           		  />
                     <p className="help">This field is required</p>
@@ -600,15 +623,15 @@ import RichTextEditor from 'react-rte';
           </div>
 
           {/* ORGANIZATION */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_org_description" className="label is-medium">Tell us about yourself!</label>
+            <label htmlFor="org_state" className="label is-medium">Tell us about yourself!</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_org_description}
+            		value={org_state}
                     onChange={this.orgOnChange}
           		  />
                     <p className="help">This field is required</p>
@@ -619,15 +642,15 @@ import RichTextEditor from 'react-rte';
           </div>
 
           {/* HOLY GOALS */}
-          <div className="column is-10">
+          <div className="column is-7">
             <br/>
-            <label htmlFor="project_holy_goals" className="label is-medium">How does this project further the Kindgom of God?</label>
+            <label htmlFor="holy_goals_state" className="label is-medium">How does this project further the Kindgom of God?</label>
             <div className="field is-horizontal">
               <div className="field-body">
                 <div className="field">
                   <div className="control">
                     <RichTextEditor
-            		value={project_holy_goals}
+            		value={holy_goals_state}
                     onChange={this.holyGoalsOnChange}
           		  />
                     <p className="help">This field is required</p>
